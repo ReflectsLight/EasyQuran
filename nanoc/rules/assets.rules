@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+##
+# Contains rules for images, fonts, etc
+
+##
+# images
+compile "/images/*.svg" do
+  write(item.identifier.to_s)
+end
+
+compile "/images/*.png" do
+  write(item.identifier.to_s)
+end
+
+compile "/favicon.ico" do
+  write(item.identifier.to_s)
+end

@@ -1,0 +1,53 @@
+@import "base/colors";
+@import "base/breakpoints";
+@import "base/icon";
+@import "base/select";
+@import "vendor/tail";
+
+html {
+  height: 100%;
+  body {
+    height: 100%;
+    color: $black;
+    margin: 0;
+    .root {
+      height: 100%;
+    }
+    .ltr {
+      font-family: 'Arial', 'Tahoma', sans-serif;
+      direction: ltr;
+    }
+    .rtl {
+      font-family: 'Arial', 'Tahoma', sans-serif;
+      direction: rtl;
+    }
+    .invisible, .hidden {
+      display: none;
+    }
+    .outline-0 {
+      outline: 0;
+    }
+    .scroll-y {
+      overflow-y: auto;
+    }
+  }
+}
+
+body .root .content.theme {
+  margin: 0 auto;
+  max-width: $breakpoint-md;
+  width: 85%;
+  font-size: medium;
+
+  header {
+    a[data-testid="h1"] {
+      font-size: large;
+    }
+  }
+}
+
+/**
+ * RTL languages
+ */
+body .root .content.theme.rtl {
+}

@@ -1,0 +1,31 @@
+.root .surah-index.content.theme.green {
+  @import "base/breakpoints";
+  @import "themes/green/base/colors";
+
+  ul.body.index a {
+    &:active, &:link, &:visited {
+      color: $primary-color;
+    }
+    span:first-child {
+      border: 1px solid $black;
+      color: $white;
+    }
+  }
+
+  footer {
+    a {
+      &:active, &:link, &:visited {
+        color: $primary-color;
+      }
+      &:hover {
+        font-weight: bold;
+      }
+    }
+    input {
+      border: 1px solid $primary-color;
+      &:focus {
+        outline-color: $primary-color;
+      }
+    }
+  }
+}

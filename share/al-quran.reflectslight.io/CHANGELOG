@@ -1,0 +1,57 @@
+# -*- mode: org -*-
+
+** vNEXT
+
+**** Remove ~kanit-regular.ttf~
+This change falls back onto standard web fonts across all
+languages. This should help decrease bundle size, and save
+time processing the custom font during page load
+
+**** Add src/js/main/vendor.ts
+Add a new entry point that bundles preact, and other third
+party dependencies. Third-party imports are now in a single
+place rather than duplicated throughout app components
+
+**** Reduce bundle size
+Remove build artifacts and features that don't apply on
+KaiOS (eg: opengraph tags)
+
+**** Replace the play|pause icons
+Replace the play and pause icons
+
+**** Remove nanoc-gzip.rb
+Unneccessary for a packaged KaiOS application
+
+**** Remove loaders
+Remove all loaders from ~/src/js/loaders/~, and the postman
+package (~packages/typescript/postman~)
+
+**** KaiOS fork
+Fork a new branch: ~kaios/main~ dedicated to KaiOS
+
+**** Add ~etc/~
+Move a large portion of the website's configuration files to
+the ~/etc~ directory
+
+** v0.9.0
+
+**** Add ~share/al-quran.reflectslight.io/documentation/~
+Replace ~share/doc/al-quran.reflectslight.io~
+
+**** Add new recitation
+Add a new recitation by Hani ar-Rifai
+
+**** Replace ~opengraph.rb~ with ~_opengraph.html.erb~
+Simplify how we render opengraph meta tags
+
+**** Move to nodejs for scss compiler
+Replace the deprecated Ruby scss compiler with the nodejs compiler
+
+**** Add ~audio.base_url~ to nanoc.yaml
+Provide extra flexibility for audio content
+
+**** Rename packages/typescript/Quran/ properties
+Introduce urlName, translitName to Surah objects
+
+**** eslint upgrade
+Migrate to the most recent version of eslint (^9.8)

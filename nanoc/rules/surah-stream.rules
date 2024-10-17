@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+##
+# Contains rules for the the surah stream available
+# at /<locale>/<name>/, /<locale>/<id>/
+
+compile "/json/*/*/{surah,info}.json" do
+  write(item.identifier.to_s)
+end
+
+Ryo.each(name_by_id) do |id, slug|
+  write_file = ->(locale, pathname:) do
+    surah = surahs[locale][id.to_i - 1]
+    context = Ryo.from(locale:, surah_id: surah.id, locales:, surah:, dir: tdata[locale].dir)
+    filter(:erb, locals: {context:})
+    filter(:tidy, exe: tidy)
+    write "/#{locale}/#{pathname}/index.html"
+  end
+  locales.each do |locale|
+    compile "/html/main/surah-stream.html.erb", rep: "/#{locale}/#{slug}/index.html" do
+      instance_exec(locale, pathname: slug, &write_file)
+    end
+    compile "/html/main/surah-stream.html.erb", rep: "/#{locale}/#{id}/index.html" do
+      instance_exec(locale, pathname: id, &write_file)
+    end
+  end
+end
+
+compile "/js/main/surah-stream.tsx" do
+  filter :webpack,
+         argv: ["--config", "etc/webpack.#{buildenv}.js"],
+         depend_on: [
+           "/js/components",
+           "/js/lib",
+           "/js/hooks",
+           "/css"
+         ]
+  write "/js/main/surah-stream.js"
+end

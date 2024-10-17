@@ -1,0 +1,65 @@
+@import "base";
+@import "themes/blue";
+@import "themes/green";
+
+body .root .content.theme {
+  ul.body.index {
+    @media (max-width: $breakpoint-sm) {
+      li, li a {
+        width: 100%;
+      }
+    }
+
+    li.surah a {
+      &:visited, &:active, &:link {
+        text-decoration: none;
+      }
+
+      @media (max-width: $breakpoint-sm) {
+        span.transliterated, span.ayat {
+          display: none;
+        }
+      }
+
+      @media (hover: hover) {
+        &:hover {
+          background: rgba(220, 220, 220, 0.25);
+        }
+      }
+    }
+  }
+
+  footer {
+    /* TODO: Remove footer ? */
+    display: none;
+  }
+}
+
+/**
+ * RTL languages
+ */
+body .root .content.theme.rtl {
+  ul.body.index {
+    li a {
+      span:first-child {
+        border: 1px solid $black;
+        margin-left: 0.5rem;
+      }
+    }
+
+    li.surah {
+      span.transliterated { display: none; }
+    }
+  }
+
+  /* >= $breakpoint-xxl */
+  @media (min-width: $breakpoint-xxl) {
+    ul.body.index {
+      li.surah a {
+        span:last-child {
+          font-size: larger;
+        }
+      }
+    }
+  }
+}

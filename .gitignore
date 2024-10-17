@@ -1,0 +1,12 @@
+node_modules/
+dist/
+/.gems/
+/build/
+/tmp/
+/rake/tasks/deploy.rake
+/packages/**/*.js
+/submodules/
+/crash.log
+/*.core/
+/nanoc.yaml
+/source
