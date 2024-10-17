@@ -97,9 +97,9 @@ installed to build the website from source:
     - Ahmad bin Ali Al-Ajmi
     - Sahl Yassin
     - Hani ar-Rifai
-* Thanks to [@farooqkz](https://github.com/farooqkz) who introduced me to
-[KaiOS](https://www.kaiostech.com/),
-and inspired me to start work on this project
+* Thanks to [@farooqkz](https://github.com/farooqkz): <br>
+  Farooq introduced me to [KaiOS](https://www.kaiostech.com/) development,
+  and the reciter Hani ar-Rifai
 
 ## License
 
