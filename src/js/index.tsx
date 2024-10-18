@@ -52,7 +52,7 @@ const Main = (function () {
           t={t}
         />
         <SurahStream path="/:localeId/:surahId" t={t} />
-        <RandomSurah path="/:locale/random" />
+        <RandomSurah path="/:localeId/random" />
       </Router>
     );
   };
