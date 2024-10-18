@@ -97,8 +97,8 @@ class Surah {
   get ayat(): Ayah[] {
     const ayat = require(`@json/${this.locale}/${this.id}.json`);
     return ayat.map(([id, body]) => {
-      const ms = Quran.durations[this.id-1][id-1] * 1000;
-      return new Ayah({ id, body, ms })
+      const ms = Quran.durations[this.id - 1][id - 1] * 1000;
+      return new Ayah({ id, body, ms });
     });
   }
 }
