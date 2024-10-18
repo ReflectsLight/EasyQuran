@@ -3,23 +3,16 @@ import { ThemeSelect } from "./ThemeSelect";
 import { LanguageSelect } from "./LanguageSelect";
 
 type Props = {
-  isOpen: boolean;
-  setIsOpen: (v: boolean) => void;
   value: string;
   children: JSX.Element[];
   className?: string;
 };
 
-function Select({
-  value,
-  children: options,
-  className,
-  isOpen,
-  setIsOpen,
-}: Props) {
+function Select({ value, children: options, className }: Props) {
+  const [isOpen, setOpen] = useState<boolean>(false);
   const [option, setOption] = useState<JSX.Element | null>(null);
   const sortedOptions = options.sort((n) => (value === n.props.value ? -1 : 1));
-  const close = () => setIsOpen(false);
+  const close = () => setOpen(false);
 
   useEffect(() => {
     document.body.addEventListener("click", close);
@@ -33,7 +26,7 @@ function Select({
   return (
     <div
       className={classNames(
-        "react-select flex flex-col h-full relative",
+        "react-select flex flex-col h-full relative z-10",
         className,
       )}
     >
@@ -44,7 +37,12 @@ function Select({
             <li
               key={key}
               className={classNames({ hidden: isHidden })}
-              onClick={(e) => [e.stopPropagation(), setIsOpen(!isOpen)]}
+              onClick={(e) => {
+                e.stopPropagation();
+                const { ref } = n.props;
+                setOpen(!isOpen);
+                ref?.current?.click();
+              }}
             >
               {n}
             </li>

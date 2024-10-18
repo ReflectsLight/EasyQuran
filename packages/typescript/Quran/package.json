@@ -1,11 +1,13 @@
 {
   "name": "Quran",
   "version": "0.1.0",
-  "description": "The Noble Quran: a programmer's interface",
+  "description": "A programmer's interface to The Noble Quran",
   "main": "dist/index.js",
-  "types": ["dist/index.d.ts"],
+  "types": [
+    "dist/index.d.ts"
+  ],
   "scripts": {
-    "build": "npm exec tsc",
+    "build": "npx webpack --config etc/webpack.config.js",
     "prepare": "npm run build"
   },
   "repository": {
@@ -16,6 +18,7 @@
   "license": "0BSDL",
   "devDependencies": {
     "@types/node": "^22.0",
+    "babel-loader": "^9.2.1",
     "typescript": "^5.5"
   }
 }

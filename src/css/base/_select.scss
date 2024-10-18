@@ -1,22 +1,37 @@
 .root .content.theme {
+  .green {
+    background: #6d765b !important;
+  }
+  .blue {
+    background: #3383C3 !important;
+  }
+
   .react-select {
-    z-index: 2;
     .active {
       cursor: pointer;
     }
   }
 
   .react-select.theme-select {
+    ul li,
+    ul li a {
+      -webkit-tap-highlight-color: transparent;
+    }
     .circle {
-      width: 16px;
-      height: 16px;
-      border-radius: 12px;
+      background: var(--primary-color);
     }
   }
 
   .react-select.language-select {
     li a {
-      border: 1px solid $black;
+      background: var(--primary-color);
+      color: var(--secondary-color);
+      &:active, &:visited, &:link {
+        color: var(--secondary-color);
+      }
+      &:hover {
+        font-weight: bold;
+      }
     }
   }
 }

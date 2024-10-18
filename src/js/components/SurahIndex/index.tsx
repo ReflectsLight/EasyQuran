@@ -21,8 +21,8 @@ export function SurahIndex({ locale, surahs, t }: Props) {
   const rootRef = useRef<HTMLDivElement>(null);
   const activeEl = useMemo(
     () => document.activeElement,
-    [document.activeElement]
-  )
+    [document.activeElement],
+  );
 
   useEffect(() => {
     const onKeyPress = (e) => {
@@ -36,18 +36,11 @@ export function SurahIndex({ locale, surahs, t }: Props) {
     return () => activeEl.removeEventListener("keydown", onKeyPress);
   }, [activeEl, showLangDropdown, showThemeDropdown]);
 
-  useEffect(() => {
-    const el = rootRef.current;
-    if (el) {
-      el.classList.remove("invisible");
-    }
-  }, [rootRef.current, theme]);
-
   return (
     <div
       ref={rootRef}
       className={classNames(
-        "flex flex-col invisible h-full content surah-index theme",
+        "flex flex-col h-full content surah-index theme",
         theme,
         locale.name,
         locale.direction,

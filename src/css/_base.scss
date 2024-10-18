@@ -1,4 +1,3 @@
-@import "base/colors";
 @import "base/breakpoints";
 @import "base/icon";
 @import "base/select";
@@ -8,41 +7,96 @@ html {
   height: 100%;
   body {
     height: 100%;
-    color: $black;
     margin: 0;
+
     .root {
       height: 100%;
     }
+
     .ltr {
-      font-family: 'Arial', 'Tahoma', sans-serif;
+      font-family: "Kanit Regular";
       direction: ltr;
     }
+
     .rtl {
-      font-family: 'Arial', 'Tahoma', sans-serif;
+      font-family: "Cairo Regular", "Arial", "Tahoma", sans-serif;
       direction: rtl;
     }
+
     .invisible, .hidden {
       display: none;
     }
+
     .outline-0 {
       outline: 0;
     }
+
     .scroll-y {
       overflow-y: auto;
+    }
+
+    .font-cairo {
+      font-family: "Cairo Regular";
+    }
+
+    .font-cairo-bold {
+      font-family: "Cairo Bold";
+    }
+
+    .font-amiri {
+      font-family: "Amiri Regular", "Scheherazade", "Arial", sans-serif;
     }
   }
 }
 
 body .root .content.theme {
   margin: 0 auto;
-  max-width: $breakpoint-md;
-  width: 85%;
-  font-size: medium;
+  max-width: $breakpoint-sm;
+  width: 100%;
+  color: var(--color-accent);
+
+  /* <= $breakpoint-sm */
+  @media (max-width: $breakpoint-sm) {
+    width: 85%;
+  }
 
   header {
     a[data-testid="h1"] {
-      font-size: large;
+      background: var(--primary-color);
+      color: var(--secondary-color);
     }
+  }
+
+  ul.body {
+    scrollbar-color: var(--primary-color) var(--secondary-color);
+  }
+
+  .color-primary {
+    color: var(--primary-color);
+  }
+
+  .color-secondary {
+    color: var(--secondary-color) !important;
+  }
+
+  .color-accent {
+    color: var(--accent-color);
+  }
+
+  .background-primary {
+    background: var(--primary-color);
+  }
+
+  .background-secondary {
+    background: var(--secondary-color);
+  }
+
+  .background-accent {
+    background: var(--accent-color);
+  }
+
+  .border-accent {
+    border: 1px solid var(--accent-color);
   }
 }
 
@@ -50,4 +104,14 @@ body .root .content.theme {
  * RTL languages
  */
 body .root .content.theme.rtl {
+  direction: rtl;
+  header a[data-testid="h1"] {
+    font-family: "Cairo Bold";
+  }
+}
+
+html[dir="rtl"] {
+  .font-extrabold {
+    font-family: "Cairo Bold" !important;
+  }
 }

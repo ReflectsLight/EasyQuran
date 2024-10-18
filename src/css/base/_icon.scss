@@ -57,12 +57,21 @@
   .refresh.icon,
   .right-arrow.icon,
   .left-arrow.icon {
+    fill: var(--primary-color);
     height: 16px;
     width: 16px;
   }
 
   .left-arrow.icon {
     transform: rotate(180deg);
+  }
+
+  .pause.icon {
+    g rect {
+      width: 15px;
+      height: 40px;
+      fill: var(--primary-color);
+    }
   }
 
   ul.body.stream span {
@@ -92,7 +101,7 @@
 .root .content.theme.rtl {
   .stalled.icon {
     left: 0px;
-    right: 7px;
+    right: 12px;
   }
 
   ul.body.stream {
@@ -110,5 +119,44 @@
     .play.icon {
       transform: rotate(180deg);
     }
+  }
+}
+
+.content.theme {
+  ul.body.stream li, footer {
+    .play.icon {
+      fill: var(--primary-color);
+      stroke: var(--secondary-color);
+      stroke-width: 2px;
+    }
+
+    .pause.icon {
+      rect {
+        fill: var(--primary-color);
+        stroke: var(--secondary-color);
+        stroke-width: 1px;
+      }
+    }
+
+    .refresh.icon {
+      fill: var(--primary-color);
+    }
+
+    .sound-on.icon, .sound-off.icon {
+      polygon {
+        fill: var(--primary-color);
+        stroke-width: 2;
+      }
+    }
+    .right-arrow.icon,
+    .left-arrow.icon {
+      g {
+        fill: var(--secondary--color);
+      }
+    }
+  }
+
+  .stalled.icon {
+    div { background: var(--secondary-color); }
   }
 }

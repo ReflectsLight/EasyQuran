@@ -5,7 +5,6 @@ source "https://rubygems.org"
 # nanoc
 gem "nanoc", "~> 4.12"
 gem "nanoc-webpack.rb", "~> 0.10"
-gem "nanoc-tidy.rb", "~> 0.8.4"
 
 ##
 # dev

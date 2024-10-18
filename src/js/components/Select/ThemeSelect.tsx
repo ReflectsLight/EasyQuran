@@ -4,28 +4,21 @@ import type { Theme } from "~/hooks/useTheme";
 type Props = {
   theme: string;
   setTheme: (theme: Theme) => void;
-  isOpen: boolean;
-  setIsOpen: (b: boolean) => void;
 };
 
-export function ThemeSelect({ theme, setTheme, isOpen, setIsOpen }: Props) {
+export function ThemeSelect({ theme, setTheme }: Props) {
   const themes: Theme[] = ["blue", "green"];
   return (
-    <Select
-      value={theme}
-      className="theme-select"
-      isOpen={isOpen}
-      setIsOpen={setIsOpen}
-    >
+    <Select value={theme} className="theme-select">
       {themes.map((t, i) => {
         return (
           <Select.Option
             key={i}
             onClick={() => setTheme(t)}
-            className={classNames("block circle mb-1", t)}
+            className="flex justify-end w-10 h-6"
             value={t}
           >
-            <span className="block w-full h-full" />
+            <span className={classNames("rounded w-5 h-5", t)} />
           </Select.Option>
         );
       })}

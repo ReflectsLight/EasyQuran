@@ -1,4 +1,5 @@
 import type { ReactNode, AnchorHTMLAttributes } from "react";
+import { Link } from "preact-router/match";
 type Rest = AnchorHTMLAttributes<HTMLAnchorElement>;
 type Props = {
   value: string;
@@ -6,5 +7,5 @@ type Props = {
 } & Rest;
 
 export function Option({ children, ...rest }: Props) {
-  return <a {...rest}>{children}</a>;
+  return <Link {...rest}>{children}</Link>;
 }

@@ -8,6 +8,7 @@ type Props = {
 };
 
 export function LanguageSelect({ locale, isOpen, setIsOpen }: Props) {
+  const locales = Object.values(Quran.locales);
   return (
     <Select
       value={locale.name}
@@ -15,9 +16,8 @@ export function LanguageSelect({ locale, isOpen, setIsOpen }: Props) {
       isOpen={isOpen}
       setIsOpen={setIsOpen}
     >
-      {Quran.locales.map((l: TLocale, i: number) => {
-        const path = location.pathname;
-        const href = path.replace(`/${locale.name}/`, `/${l.name}/`);
+      {locales.map((l: TLocale, i: number) => {
+        const href = `/${l.name}`;
         return (
           <Select.Option
             key={i}

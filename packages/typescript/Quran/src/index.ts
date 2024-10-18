@@ -36,14 +36,26 @@ class Quran {
   readonly surahs: Surah[];
 
   /**
-   * @returns {Array} The available locales
+   * @returns {Record<string, TLocale>} The available locales
    */
-  static get locales(): TLocale[] {
-    return [
-      {"name": "en", "displayName": "English", "direction": "ltr"},
-      {"name": "ar", "displayName": "العربية", "direction": "rtl"},
-      {"name": "fa", "displayName": "فارسی", "direction": "rtl"}
-    ];
+  static get locales(): Record<string, TLocale> {
+    return {
+      "en": {"name": "en", "displayName": "English", "direction": "ltr"},
+      "ar": {"name": "ar", "displayName": "العربية", "direction": "rtl"},
+      "fa": {"name": "fa", "displayName": "فارسی", "direction": "rtl"}
+    }
+  }
+
+  /**
+   * @returns {Record<string, Surah[]>} The available surahs
+   */
+  static get surahs(): Record<string, Surah[]> {
+    const result: Record<string, Surah[]> = {}
+    const surahs: Record<string, TSurah[]> = require("@json/surahs");
+    for (const locale in surahs) {
+      result[locale] = surahs[locale].map((surah: TSurah) => new Surah(surah));
+    }
+    return result;
   }
 
   constructor(self: TQuran) {
