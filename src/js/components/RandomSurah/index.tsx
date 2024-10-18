@@ -3,7 +3,7 @@ type Props = {
 };
 
 export function RandomSurah({ localeId }: Props) {
-  const randomId = Math.floor(Math.random() * Quran.surahs.length);
+  const randomId = Math.floor(Math.random() * Quran.surahs[localeId].length);
   const href = `/${localeId}/${randomId + 1}`;
   const ref = useRef();
 
