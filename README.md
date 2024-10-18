@@ -6,6 +6,12 @@ website for the mobile operating system
 [KaiOS](https://www.kaiostech.com/).
 The project is still in the early stages of development.
 
+## Screenshots
+
+**SurahIndex.tsx**
+
+![img](/share/al-quran.reflectslight.io/screenshots/240x320_SurahIndex.png)
+
 ## Requirements
 
 The following languages have to be installed to build
