@@ -14,12 +14,11 @@ type Props = {
 
 export function SurahIndex({ locale, surahs, t }: Props) {
   const [activeLocale, setActiveLocale] = useState<TLocale>(locale);
-  const index = surahs[activeLocale.name];
-
   const [theme, setTheme] = useTheme();
   const [showLangDropdown, setShowLangDropdown] = useState<boolean>(false);
   const [showThemeDropdown, setShowThemeDropdown] = useState<boolean>(false);
 
+  const index = surahs[activeLocale.name];
   const rootRef = useRef<HTMLDivElement>(null);
   const activeEl = useMemo(
     () => document.activeElement,
