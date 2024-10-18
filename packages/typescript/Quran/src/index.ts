@@ -4,15 +4,15 @@
 type TAyat = Ayah[];
 
 type TLocale = {
-  readonly name: string,
-  readonly displayName: string,
-  readonly direction: "rtl" | "ltr"
+  readonly name: string;
+  readonly displayName: string;
+  readonly direction: "rtl" | "ltr";
 };
 
 type TQuran = {
   readonly locale: TLocale;
   readonly surahs: Surah[];
-}
+};
 
 type TSurah = {
   readonly id: number;
@@ -26,7 +26,7 @@ type TSurah = {
 type TAyah = {
   readonly id: number;
   readonly body: string;
-}
+};
 
 /**
  * Classes
@@ -40,20 +40,22 @@ class Quran {
    */
   static get locales(): Record<string, TLocale> {
     return {
-      "en": {"name": "en", "displayName": "English", "direction": "ltr"},
-      "ar": {"name": "ar", "displayName": "العربية", "direction": "rtl"},
-      "fa": {"name": "fa", "displayName": "فارسی", "direction": "rtl"}
-    }
+      en: { name: "en", displayName: "English", direction: "ltr" },
+      ar: { name: "ar", displayName: "العربية", direction: "rtl" },
+      fa: { name: "fa", displayName: "فارسی", direction: "rtl" },
+    };
   }
 
   /**
    * @returns {Record<string, Surah[]>} The available surahs
    */
   static get surahs(): Record<string, Surah[]> {
-    const result: Record<string, Surah[]> = {}
+    const result: Record<string, Surah[]> = {};
     const surahs: Record<string, TSurah[]> = require("@json/surahs");
     for (const locale in surahs) {
-      result[locale] = surahs[locale].map((surah: TSurah) => new Surah({...surah, locale}));
+      result[locale] = surahs[locale].map(
+        (surah: TSurah) => new Surah({ ...surah, locale }),
+      );
     }
     return result;
   }
@@ -73,7 +75,7 @@ class Surah {
   readonly locale: string;
   readonly translatedBy: string | null;
 
-  constructor(self: TSurah & {locale: string}) {
+  constructor(self: TSurah & { locale: string }) {
     this.id = self.id;
     this.name = self.name;
     this.urlName = self.urlName;
@@ -85,8 +87,8 @@ class Surah {
   }
 
   get ayat(): Ayah[] {
-    const ayat = require(`@json/${this.locale}/${this.id}.json`)
-    return ayat.map(([id, body]) => new Ayah({id,body}));
+    const ayat = require(`@json/${this.locale}/${this.id}.json`);
+    return ayat.map(([id, body]) => new Ayah({ id, body }));
   }
 }
 
@@ -105,8 +107,4 @@ class Ayah {
 /**
  * Exports
  */
-export {
-  Quran, Surah, Ayah,
-  TQuran, TSurah, TAyah,
-  TAyat, TLocale
-};
+export { Quran, Surah, Ayah, TQuran, TSurah, TAyah, TAyat, TLocale };
