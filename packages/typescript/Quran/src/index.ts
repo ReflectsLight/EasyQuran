@@ -26,6 +26,7 @@ type TSurah = {
 type TAyah = {
   readonly id: number;
   readonly body: string;
+  readonly ms: number;
 };
 
 /**
@@ -60,6 +61,13 @@ class Quran {
     return result;
   }
 
+  /**
+   * @returns {[number[]]} An array of ayah durations
+   */
+  static get durations(): [number[]] {
+    return require("@json/durations");
+  }
+
   constructor(self: TQuran) {
     this.locale = self.locale;
     this.surahs = self.surahs;
@@ -88,19 +96,22 @@ class Surah {
 
   get ayat(): Ayah[] {
     const ayat = require(`@json/${this.locale}/${this.id}.json`);
-    return ayat.map(([id, body]) => new Ayah({ id, body }));
+    return ayat.map(([id, body]) => {
+      const ms = Quran.durations[this.id-1][id-1];
+      return new Ayah({ id, body, ms })
+    });
   }
 }
 
 class Ayah {
   readonly id: number;
   readonly body: string;
-  ms: number;
+  readonly ms: number;
 
   constructor(self: TAyah) {
     this.id = self.id;
     this.body = self.body;
-    this.ms = 0;
+    this.ms = self.ms;
   }
 }
 
