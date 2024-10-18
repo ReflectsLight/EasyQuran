@@ -2,6 +2,7 @@ import { Quran } from "Quran";
 import { T } from "~/lib/t";
 import { SurahIndex } from "~/components/SurahIndex";
 import { SurahStream } from "~/components/SurahStream";
+import { RandomSurah } from "~/components/RandomSurah";
 import { render } from "preact";
 import { useState, useEffect, useMemo, useRef } from "preact/hooks";
 import * as React from "preact/compat";
@@ -51,6 +52,7 @@ const Main = (function () {
           t={t}
         />
         <SurahStream path="/:localeId/:surahId" t={t} />
+        <RandomSurah path="/:locale/random" />
       </Router>
     );
   };
