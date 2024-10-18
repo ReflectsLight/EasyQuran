@@ -34,7 +34,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const [theme, setTheme] = useTheme();
 
   const locale = Quran.locales[localeId];
-  const surah = Quran.surahs[localeId][parseInt(surahId) - 1]
+  const surah = Quran.surahs[localeId][parseInt(surahId) - 1];
   const rootRef = useRef<HTMLElement>(null);
   const audio = useMemo(() => new Audio(), []);
   const readyToRender = stream.length > 0;

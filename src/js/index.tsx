@@ -27,10 +27,31 @@ document.addEventListener("DOMContentLoaded", () => {
     return () => {
       return (
         <Router>
-          <SurahIndex path="/" locale={Quran.locales["en"]} surahs={Quran.surahs["en"]} t={t} />
-	  <SurahIndex path="/en" locale={Quran.locales["en"]} surahs={Quran.surahs["en"]} t={t} />
-	  <SurahIndex path="/ar" locale={Quran.locales["ar"]} surahs={Quran.surahs["ar"]} t={t} />
-	  <SurahStream path="/:localeId/:surahId" t={t} />
+          <SurahIndex
+            path="/"
+            locale={Quran.locales["en"]}
+            surahs={Quran.surahs["en"]}
+            t={t}
+          />
+          <SurahIndex
+            path="/en"
+            locale={Quran.locales["en"]}
+            surahs={Quran.surahs["en"]}
+            t={t}
+          />
+          <SurahIndex
+            path="/ar"
+            locale={Quran.locales["ar"]}
+            surahs={Quran.surahs["ar"]}
+            t={t}
+          />
+          <SurahIndex
+            path="/fa"
+            locale={Quran.locales["fa"]}
+            surahs={Quran.surahs["fa"]}
+            t={t}
+          />
+          <SurahStream path="/:localeId/:surahId" t={t} />
         </Router>
       );
     };

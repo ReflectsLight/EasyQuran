@@ -8,12 +8,11 @@ The project is still in the early stages of development.
 
 ## Requirements
 
-The following languages and tools have to be
-installed to build the website from source:
+The following languages have to be installed to build
+the website from source:
 
 * Ruby 3.2 (or later)
 * NodeJS v18.15 (or later)
-* [tidy-html5](https://github.com/htacg/tidy-html5)
 
 ## Development
 
