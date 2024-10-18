@@ -4,20 +4,22 @@ import { formatNumber, TFunction } from "~/lib/t";
 import { Arrow } from "~/components/Icon";
 import { Head } from "~/components/Head";
 import { LanguageSelect, ThemeSelect } from "~/components/Select";
-import { Filter } from "./Filter";
 import "@css/main/SurahIndex.scss";
 
 type Props = {
   locale: TLocale;
-  surahs: Surah[];
+  surahs: Record<"string", Surah[]>;
   t: TFunction;
 };
 
 export function SurahIndex({ locale, surahs, t }: Props) {
+  const [activeLocale, setActiveLocale] = useState<TLocale>(locale);
+  const index = surahs[activeLocale.name];
+
   const [theme, setTheme] = useTheme();
-  const [index, setIndex] = useState<Surah[]>(surahs);
   const [showLangDropdown, setShowLangDropdown] = useState<boolean>(false);
   const [showThemeDropdown, setShowThemeDropdown] = useState<boolean>(false);
+
   const rootRef = useRef<HTMLDivElement>(null);
   const activeEl = useMemo(
     () => document.activeElement,
@@ -42,15 +44,16 @@ export function SurahIndex({ locale, surahs, t }: Props) {
       className={classNames(
         "flex flex-col h-full content surah-index theme",
         theme,
-        locale.name,
-        locale.direction,
+        activeLocale.name,
+        activeLocale.direction,
       )}
     >
-      <Head title={t(locale, "TheNobleQuran")} locale={locale}>
+      <Head title={t(activeLocale, "TheNobleQuran")} locale={activeLocale}>
         <LanguageSelect
           isOpen={showLangDropdown}
           setIsOpen={setShowLangDropdown}
-          locale={locale}
+          locale={activeLocale}
+          setActiveLocale={setActiveLocale}
         />
         <ThemeSelect
           isOpen={showThemeDropdown}
@@ -63,28 +66,28 @@ export function SurahIndex({ locale, surahs, t }: Props) {
         {index.map((surah, key) => (
           <li
             className={classNames("flex justify-center surah", {
-              "w-full": locale.direction === "ltr",
-              "w-1/2": locale.direction === "rtl",
+              "w-full": activeLocale.direction === "ltr",
+              "w-1/2": activeLocale.direction === "rtl",
             })}
             key={key}
           >
             <a
               className="flex items-center color-primary no-underline rounded w-11/12 h-8"
-              href={`/${locale.name}/${surah.id}/`}
+              href={`/${activeLocale.name}/${surah.id}/`}
             >
               <span className="background-secondary color-white rounded flex w-8 font-extrabold w-5 mr-3 justify-center text-center">
-                {formatNumber(locale, surah.id)}
+                {formatNumber(activeLocale, surah.id)}
               </span>
               <span>{surah.name}</span>
-              {locale.direction === "ltr" && (
+              {activeLocale.direction === "ltr" && (
                 <div className="flex justify-end grow pr-3">
                   <div className="flex flex-col">
                     <span className="transliterated" lang="en">
                       {surah.translitName}
                     </span>
                     <span className="ayat flex justify-end text-sm">
-                      {formatNumber(locale, surah.numberOfAyah)}{" "}
-                      {t(locale, "ayat")}
+                      {formatNumber(activeLocale, surah.numberOfAyah)}{" "}
+                      {t(activeLocale, "ayat")}
                     </span>
                   </div>
                 </div>
@@ -96,23 +99,22 @@ export function SurahIndex({ locale, surahs, t }: Props) {
       <footer className="flex flex-row justify-between mb-5 h-12">
         <a
           className="flex flex-row items-center no-underline"
-          href={`/${locale.name}/random/`}
+          href={`/${activeLocale.name}/random/`}
         >
-          {locale.direction === "ltr" ? (
+          {activeLocale.direction === "ltr" ? (
             <Arrow direction="right" />
           ) : (
             <Arrow direction="left" />
           )}
           <span
             className={classNames({
-              "pl-3": locale.direction === "ltr",
-              "pr-3": locale.direction === "rtl",
+              "pl-3": activeLocale.direction === "ltr",
+              "pr-3": activeLocale.direction === "rtl",
             })}
           >
-            {t(locale, "ChooseRandomChapter")}
+            {t(activeLocale, "ChooseRandomChapter")}
           </span>
         </a>
-        <Filter t={t} locale={locale} surahs={surahs} setIndex={setIndex} />
       </footer>
     </div>
   );

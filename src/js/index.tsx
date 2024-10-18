@@ -30,25 +30,25 @@ document.addEventListener("DOMContentLoaded", () => {
           <SurahIndex
             path="/"
             locale={Quran.locales["en"]}
-            surahs={Quran.surahs["en"]}
+            surahs={Quran.surahs}
             t={t}
           />
           <SurahIndex
             path="/en"
             locale={Quran.locales["en"]}
-            surahs={Quran.surahs["en"]}
+            surahs={Quran.surahs}
             t={t}
           />
           <SurahIndex
             path="/ar"
             locale={Quran.locales["ar"]}
-            surahs={Quran.surahs["ar"]}
+            surahs={Quran.surahs}
             t={t}
           />
           <SurahIndex
             path="/fa"
             locale={Quran.locales["fa"]}
-            surahs={Quran.surahs["fa"]}
+            surahs={Quran.surahs}
             t={t}
           />
           <SurahStream path="/:localeId/:surahId" t={t} />
