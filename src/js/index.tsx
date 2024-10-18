@@ -20,6 +20,7 @@ const exports = {
 Object.assign(window, exports);
 
 document.addEventListener("DOMContentLoaded", () => {
+  console.log(Quran.surahs["en"][0].ayat)
   const Main = (function () {
     const t = T(require("@json/t.json"));
     return () => {

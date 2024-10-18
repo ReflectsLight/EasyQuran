@@ -2,6 +2,11 @@
 
 ** vNEXT
 
+** Add ~Surah.prototype.ayat~
+The ~Surah.prototype.ayat~ getter returns the contents
+of a surah as an array of Ayah objects. The array is
+populated automatically, and on-demand
+
 ** Add ~Quran.surahs~
 The ~Quran.surahs~ getter returns an object where the
 key is the locale name, and the value is an array of

@@ -53,7 +53,7 @@ class Quran {
     const result: Record<string, Surah[]> = {}
     const surahs: Record<string, TSurah[]> = require("@json/surahs");
     for (const locale in surahs) {
-      result[locale] = surahs[locale].map((surah: TSurah) => new Surah(surah));
+      result[locale] = surahs[locale].map((surah: TSurah) => new Surah({...surah, locale}));
     }
     return result;
   }
@@ -70,18 +70,23 @@ class Surah {
   readonly urlName: string;
   readonly translitName: string;
   readonly numberOfAyah: number;
-  readonly ayat: TAyat;
+  readonly locale: string;
   readonly translatedBy: string | null;
 
-  constructor(self: TSurah) {
+  constructor(self: TSurah & {locale: string}) {
     this.id = self.id;
     this.name = self.name;
     this.urlName = self.urlName;
     this.translitName = self.translitName;
     this.numberOfAyah = self.numberOfAyah;
-    this.ayat = [];
     this.translatedBy = self.translatedBy;
+    this.locale = self.locale;
     return this;
+  }
+
+  get ayat(): Ayah[] {
+    const ayat = require(`@json/${this.locale}/${this.id}.json`)
+    return ayat.map(([id, body]) => new Ayah({id,body}));
   }
 }
 
