@@ -12,7 +12,9 @@ The project is still in the early stages of development.
 
 ![img](/share/al-quran.reflectslight.io/screenshots/240x320_SurahIndex.png)
 
-## Requirements
+## Development
+
+### Requirements
 
 The following languages have to be installed to build
 the website from source:
@@ -20,7 +22,7 @@ the website from source:
 * Ruby 3.2 (or later)
 * NodeJS v18.15 (or later)
 
-## Development
+### Examples
 
     # Clone repository
     git clone https://github.com/ReflectsLight/al-quran.reflectslight.io
@@ -42,22 +44,6 @@ the website from source:
     bundle exec rake server
 
 ## Configuration
-
-* **server.base_url** <br>
-  If you plan to host the website on
-  your own domain you should update
-  [nanoc.yaml](nanoc.yaml.sample)
-  first. In certain places
-  links will reference
-  https://al-quran.reflectslight.io
-  instead of using a relative path.
-  For example
-  [/src/sitemap.xml.erb](/src/sitemap.xml.erb)
-  is one such place. Those links can be updated
-  to your own domain by changing the `server.base_url`
-  field in
-  [nanoc.yaml](nanoc.yaml.sample)
-  before running `bundle exec rake nanoc:build`.
 
 * **audio.base_url** <br>
   `audio.base_url` controls what web server serves
