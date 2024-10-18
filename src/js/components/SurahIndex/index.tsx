@@ -70,7 +70,7 @@ export function SurahIndex({ locale, surahs, t }: Props) {
           >
             <a
               className="flex items-center color-primary no-underline rounded w-11/12 h-8"
-              href={`/${locale.name}/${surah.urlName}/index.html`}
+              href={`/${locale.name}/${surah.id}/`}
             >
               <span className="background-secondary color-white rounded flex w-8 font-extrabold w-5 mr-3 justify-center text-center">
                 {formatNumber(locale, surah.id)}

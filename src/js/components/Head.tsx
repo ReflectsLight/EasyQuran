@@ -17,7 +17,7 @@ export function Head({ title, locale, children }: Props) {
         <div className="flex items-center justify-center">
           <a
             data-testid="h1"
-            href={`/${locale.name}/index.html`}
+            href={`/${locale.name}/`}
             className="flex rounded justify-center p-3 m-0 mb-4 w-full no-underline"
           >
             {title}

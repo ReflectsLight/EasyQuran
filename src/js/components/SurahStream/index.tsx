@@ -23,7 +23,7 @@ type Props = {
   t: TFunction;
 };
 
-export function SurahStream({ surah, locale, t }: Props) {
+export function SurahStream({ surahId, localeId, t }: Props) {
   const [stream, setStream] = useState<TAyat>([]);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [audioEnabled, setAudioEnabled] = useState<boolean>(false);
@@ -32,6 +32,9 @@ export function SurahStream({ surah, locale, t }: Props) {
   const [showLangDropdown, setShowLangDropdown] = useState<boolean>(false);
   const [showThemeDropdown, setShowThemeDropdown] = useState<boolean>(false);
   const [theme, setTheme] = useTheme();
+
+  const locale = Quran.locales[localeId];
+  const surah = Quran.surahs[localeId][parseInt(surahId) - 1]
   const rootRef = useRef<HTMLElement>(null);
   const audio = useMemo(() => new Audio(), []);
   const readyToRender = stream.length > 0;
