@@ -64,7 +64,7 @@ export function SurahIndex({ locale, surahs, t }: Props) {
       <ul className="flex flex-wrap body index scroll-y list-none m-0 p-0 w-full h-full">
         {index.map((surah, key) => (
           <li
-            className={classNames("flex justify-center surah", {
+            className={classNames("flex justify-center surah mb-2", {
               "w-full": activeLocale.direction === "ltr",
               "w-1/2": activeLocale.direction === "rtl",
             })}
@@ -74,23 +74,10 @@ export function SurahIndex({ locale, surahs, t }: Props) {
               className="flex items-center color-primary no-underline rounded w-11/12 h-8"
               href={`/${activeLocale.name}/${surah.id}/`}
             >
-              <span className="background-secondary color-white rounded flex w-8 font-extrabold w-5 mr-3 justify-center text-center">
-                {formatNumber(activeLocale, surah.id)}
-              </span>
+	      <span className="background-primary color-secondary ml-2 mr-3 rounded font-extrabold w-10 text-center">
+	        {formatNumber(activeLocale, surah.id)}
+	      </span>
               <span>{surah.name}</span>
-              {activeLocale.direction === "ltr" && (
-                <div className="flex justify-end grow pr-3">
-                  <div className="flex flex-col">
-                    <span className="transliterated" lang="en">
-                      {surah.translitName}
-                    </span>
-                    <span className="ayat flex justify-end text-sm">
-                      {formatNumber(activeLocale, surah.numberOfAyah)}{" "}
-                      {t(activeLocale, "ayat")}
-                    </span>
-                  </div>
-                </div>
-              )}
             </a>
           </li>
         ))}
