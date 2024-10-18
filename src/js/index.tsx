@@ -9,7 +9,7 @@ import classNames from "classnames";
 import { Router } from "preact-router";
 import "core-js";
 
-const exports = {
+const globals = {
   Quran,
   React,
   render,
@@ -19,43 +19,40 @@ const exports = {
   useRef,
   classNames,
 };
-Object.assign(window, exports);
+Object.assign(window, globals);
 
-document.addEventListener("DOMContentLoaded", () => {
-  const Main = (function () {
-    const t = T(require("@json/t.json"));
-    return () => {
-      return (
-        <Router>
-          <SurahIndex
-            path="/"
-            locale={Quran.locales["en"]}
-            surahs={Quran.surahs}
-            t={t}
-          />
-          <SurahIndex
-            path="/en"
-            locale={Quran.locales["en"]}
-            surahs={Quran.surahs}
-            t={t}
-          />
-          <SurahIndex
-            path="/ar"
-            locale={Quran.locales["ar"]}
-            surahs={Quran.surahs}
-            t={t}
-          />
-          <SurahIndex
-            path="/fa"
-            locale={Quran.locales["fa"]}
-            surahs={Quran.surahs}
-            t={t}
-          />
-          <SurahStream path="/:localeId/:surahId" t={t} />
-        </Router>
-      );
-    };
-  })();
-
-  render(<Main />, document.querySelector(".mount"));
-});
+const Main = (function () {
+  const t = T(require("@json/t.json"));
+  return () => {
+    return (
+      <Router>
+        <SurahIndex
+          path="/"
+          locale={Quran.locales["en"]}
+          surahs={Quran.surahs}
+          t={t}
+        />
+        <SurahIndex
+          path="/en"
+          locale={Quran.locales["en"]}
+          surahs={Quran.surahs}
+          t={t}
+        />
+        <SurahIndex
+          path="/ar"
+          locale={Quran.locales["ar"]}
+          surahs={Quran.surahs}
+          t={t}
+        />
+        <SurahIndex
+          path="/fa"
+          locale={Quran.locales["fa"]}
+          surahs={Quran.surahs}
+          t={t}
+        />
+        <SurahStream path="/:localeId/:surahId" t={t} />
+      </Router>
+    );
+  };
+})();
+render(<Main />, document.querySelector(".mount"));

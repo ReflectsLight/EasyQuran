@@ -15,6 +15,11 @@ export function LanguageSelect({
   setActiveLocale,
 }: Props) {
   const locales = Object.values(Quran.locales);
+
+  if (!activeLocale) {
+    return null;
+  }
+
   return (
     <Select
       value={activeLocale.name}

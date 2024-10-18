@@ -52,7 +52,7 @@ export function SurahIndex({ locale, surahs, t }: Props) {
         <LanguageSelect
           isOpen={showLangDropdown}
           setIsOpen={setShowLangDropdown}
-          locale={activeLocale}
+          activeLocale={activeLocale}
           setActiveLocale={setActiveLocale}
         />
         <ThemeSelect
