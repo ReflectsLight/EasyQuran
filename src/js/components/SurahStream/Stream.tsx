@@ -1,5 +1,6 @@
 import type { Surah, Ayah, TAyat, TLocale } from "Quran";
 import { formatNumber, TFunction } from "~/lib/t";
+import { AudioControl } from "~/components/AudioControl";
 
 type Props = {
   locale: TLocale;
@@ -21,8 +22,6 @@ export function Stream({
   const className = endOfStream || isPaused ? ["scroll-y"] : [];
   const ref = useRef<HTMLUListElement>(null);
   const ul = useMemo<JSX.Element>(() => {
-    const ltr = locale.direction === "ltr";
-    const rtl = locale.direction === "rtl";
     return (
       <ul
         lang={locale.name}
@@ -34,19 +33,27 @@ export function Stream({
       >
         {stream.map((ayah: Ayah) => {
           return (
-            <li
-              key={ayah.id}
-              className={classNames("ayah fade", { "mb-1": rtl || ltr })}
-            >
-              <span className="flex h-8 items-center">
-                <span>
+            <li key={ayah.id} className="ayah fade mb-1">
+              <span className="flex h-8 items-center color-primary">
+                <AudioControl
+                  hidden={!(isPaused || endOfStream)}
+                  audio={new Audio()}
+                  surah={surah}
+                  ayah={ayah}
+                  onStatusChange={(status, [, disable]) => {
+                    if (status === "end") {
+                      disable();
+                    }
+                  }}
+                />
+                <span className="color-primary font-extrabold">
                   {t(locale, "surah")} {formatNumber(locale, surah.id)}
                   {t(locale, "comma")} {t(locale, "ayah")}{" "}
                   {formatNumber(locale, ayah.id)} {t(locale, "of")}{" "}
                   {formatNumber(locale, surah.ayat.length)}
                 </span>
               </span>
-              <p className="m-0">{ayah.body}</p>
+              <p className="m-0 mt-1 color-accent text-base">{ayah.body}</p>
             </li>
           );
         })}
