@@ -2,6 +2,12 @@
 
 * vNEXT
 
+** Add ~SurahRedirect~ component
+The ~SurahRedirect~ component redirects from the root path
+to a specific locale (eg ~/en/~). The redirect is based on
+browser preferences, and will fall back onto the English
+locale when there are no matches
+
 ** Embed The Noble Quran within 'Quran' package
 The Noble Quran, and an English + Farsi translation have been
 embedded into the 'Quran' package (see ~packages/typescript/Quran/~).

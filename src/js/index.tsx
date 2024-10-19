@@ -9,6 +9,7 @@ import { Router } from "preact-router";
 /**
  * import: components
  */
+import { SurahRedirect } from "~/components/SurahRedirect";
 import { SurahIndex } from "~/components/SurahIndex";
 import { SurahStream } from "~/components/SurahStream";
 import { RandomSurah } from "~/components/RandomSurah";
@@ -44,7 +45,7 @@ const App = (function () {
   return () => {
     return (
       <Router>
-        <SurahIndex path="/" localeId="en" t={t} />
+        <SurahRedirect path="/" />
         <SurahIndex path="/:localeId" t={t} />
         <SurahStream path="/:localeId/:surahId" t={t} />
         <RandomSurah path="/:localeId/random" />

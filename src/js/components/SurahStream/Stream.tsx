@@ -1,6 +1,5 @@
 import type { Surah, Ayah, TAyat, TLocale } from "Quran";
 import { formatNumber, TFunction } from "~/lib/t";
-import { AudioControl } from "~/components/AudioControl";
 
 type Props = {
   locale: TLocale;
