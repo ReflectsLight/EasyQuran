@@ -35,17 +35,6 @@ export function Stream({
           return (
             <li key={ayah.id} className="ayah fade mb-1">
               <span className="flex h-8 items-center color-primary">
-                <AudioControl
-                  hidden={!(isPaused || endOfStream)}
-                  audio={new Audio()}
-                  surah={surah}
-                  ayah={ayah}
-                  onStatusChange={(status, [, disable]) => {
-                    if (status === "end") {
-                      disable();
-                    }
-                  }}
-                />
                 <span className="color-primary font-extrabold">
                   {t(locale, "surah")} {formatNumber(locale, surah.id)}
                   {t(locale, "comma")} {t(locale, "ayah")}{" "}
