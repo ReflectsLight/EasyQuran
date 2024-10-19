@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import type { Surah, Ayah, TAyat, TLocale } from "Quran";
 import { useTheme } from "~/hooks/useTheme";
 import { AudioControl, TAudioStatus } from "~/components/AudioControl";
@@ -24,6 +23,12 @@ type Props = {
 };
 
 export function SurahStream({ surahId, localeId, t }: Props) {
+  const [locale, setLocale] = useState<TLocale>(
+    Quran.locales[localeId],
+  );
+  const surahs = Quran.surahs[locale.name];
+  const [surah, setSurah] = useState<Surah>(surahs[parseInt(surahId) - 1]);
+
   const [stream, setStream] = useState<TAyat>([]);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [audioEnabled, setAudioEnabled] = useState<boolean>(false);
@@ -33,8 +38,6 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const [showThemeDropdown, setShowThemeDropdown] = useState<boolean>(false);
   const [theme, setTheme] = useTheme();
 
-  const locale = Quran.locales[localeId];
-  const surah = Quran.surahs[localeId][parseInt(surahId) - 1];
   const rootRef = useRef<HTMLElement>(null);
   const audio = useMemo(() => new Audio(), []);
   const readyToRender = stream.length > 0;
@@ -74,6 +77,21 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   }, [activeEl, showLangDropdown, showThemeDropdown]);
 
   useEffect(() => {
+    setSurah(surahs[surahId - 1]);
+  }, [locale.name]);
+
+  useEffect(() => {
+    if (!stream || !stream.length) {
+      return;
+    }
+    if (surah.ayat[0].body === stream[0].body) {
+      return;
+    }
+    const slice = [...surah.ayat].slice(0, stream.length);
+    setStream(slice);
+  }, [surah]);
+
+  useEffect(() => {
     if (!endOfStream) {
       setStream([surah.ayat[0]]);
     }
@@ -90,9 +108,13 @@ export function SurahStream({ surahId, localeId, t }: Props) {
         { hidden: !readyToRender },
       )}
     >
-      <Head title={t(locale, "TheNobleQuran")} locale={locale}>
+      <Head
+        title={t(locale, "TheNobleQuran")}
+        locale={locale}
+      >
         <LanguageSelect
           locale={locale}
+          setLocale={setLocale}
           isOpen={showLangDropdown}
           setIsOpen={setShowLangDropdown}
         />
@@ -104,9 +126,9 @@ export function SurahStream({ surahId, localeId, t }: Props) {
         />
       </Head>
       <Stream
+        locale={locale}
         surah={surah}
         stream={stream}
-        locale={locale}
         endOfStream={endOfStream}
         isPaused={isPaused}
         t={t}

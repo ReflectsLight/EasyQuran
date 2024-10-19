@@ -15,7 +15,7 @@ export function ThemeSelect({ theme, setTheme }: Props) {
           <Select.Option
             key={i}
             onClick={() => setTheme(t)}
-            className="flex justify-end w-10 h-6"
+            className="flex w-10 h-6 justify-end"
             value={t}
           >
             <span className={classNames("rounded w-5 h-5", t)} />

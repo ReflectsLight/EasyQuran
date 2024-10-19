@@ -13,12 +13,12 @@ type Props = {
 };
 
 export function SurahIndex({ locale, surahs, t }: Props) {
-  const [activeLocale, setActiveLocale] = useState<TLocale>(locale);
+  const [locale, setLocale] = useState<TLocale>(locale);
   const [theme, setTheme] = useTheme();
   const [showLangDropdown, setShowLangDropdown] = useState<boolean>(false);
   const [showThemeDropdown, setShowThemeDropdown] = useState<boolean>(false);
 
-  const index = surahs[activeLocale.name];
+  const index = surahs[locale.name];
   const rootRef = useRef<HTMLDivElement>(null);
   const activeEl = useMemo(
     () => document.activeElement,
@@ -43,16 +43,19 @@ export function SurahIndex({ locale, surahs, t }: Props) {
       className={classNames(
         "flex flex-col h-full content surah-index theme",
         theme,
-        activeLocale.name,
-        activeLocale.direction,
+        locale.name,
+        locale.direction,
       )}
     >
-      <Head title={t(activeLocale, "TheNobleQuran")} locale={activeLocale}>
+      <Head
+        title={t(locale, "TheNobleQuran")}
+        locale={locale}
+      >
         <LanguageSelect
           isOpen={showLangDropdown}
           setIsOpen={setShowLangDropdown}
-          activeLocale={activeLocale}
-          setActiveLocale={setActiveLocale}
+          locale={locale}
+          setLocale={setLocale}
         />
         <ThemeSelect
           isOpen={showThemeDropdown}
@@ -65,17 +68,17 @@ export function SurahIndex({ locale, surahs, t }: Props) {
         {index.map((surah, key) => (
           <li
             className={classNames("flex justify-center surah mb-2", {
-              "w-full": activeLocale.direction === "ltr",
-              "w-1/2": activeLocale.direction === "rtl",
+              "w-full": locale.direction === "ltr",
+              "w-1/2": locale.direction === "rtl",
             })}
             key={key}
           >
             <a
               className="flex items-center color-primary no-underline rounded w-11/12 h-8"
-              href={`/${activeLocale.name}/${surah.id}/`}
+              href={`/${locale.name}/${surah.id}/`}
             >
               <span className="background-primary color-secondary ml-2 mr-3 rounded font-extrabold w-10 text-center">
-                {formatNumber(activeLocale, surah.id)}
+                {formatNumber(locale, surah.id)}
               </span>
               <span>{surah.name}</span>
             </a>
@@ -85,20 +88,20 @@ export function SurahIndex({ locale, surahs, t }: Props) {
       <footer className="flex flex-row justify-between mb-5 h-12">
         <a
           className="flex flex-row items-center no-underline"
-          href={`/${activeLocale.name}/random/`}
+          href={`/${locale.name}/random/`}
         >
-          {activeLocale.direction === "ltr" ? (
+          {locale.direction === "ltr" ? (
             <Arrow direction="right" />
           ) : (
             <Arrow direction="left" />
           )}
           <span
             className={classNames({
-              "pl-3": activeLocale.direction === "ltr",
-              "pr-3": activeLocale.direction === "rtl",
+              "pl-3": locale.direction === "ltr",
+              "pr-3": locale.direction === "rtl",
             })}
           >
-            {t(activeLocale, "ChooseRandomChapter")}
+            {t(locale, "ChooseRandomChapter")}
           </span>
         </a>
       </footer>
