@@ -1,7 +1,6 @@
 import type { Surah, Ayah, TAyat, TLocale } from "Quran";
 import { useTheme } from "~/hooks/useTheme";
 import { AudioControl, TAudioStatus } from "~/components/AudioControl";
-import { LanguageSelect, ThemeSelect } from "~/components/Select";
 import { Head } from "~/components/Head";
 import {
   PlayIcon,
@@ -33,46 +32,11 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const [audioEnabled, setAudioEnabled] = useState<boolean>(false);
   const [audioStatus, setAudioStatus] = useState<Maybe<TAudioStatus>>(null);
   const [endOfStream, setEndOfStream] = useState<boolean>(false);
-  const [showLangDropdown, setShowLangDropdown] = useState<boolean>(false);
-  const [showThemeDropdown, setShowThemeDropdown] = useState<boolean>(false);
 
   const rootRef = useRef<HTMLElement>(null);
   const audio = useMemo(() => new Audio(), []);
   const readyToRender = stream.length > 0;
   const ayah: Maybe<Ayah> = stream[stream.length - 1];
-  const activeEl = useMemo(
-    () => document.activeElement,
-    [document.activeElement],
-  );
-
-  useEffect(() => {
-    if (showLangDropdown || showThemeDropdown) {
-      setIsPaused(true);
-    } else {
-      setIsPaused(false);
-    }
-  }, [showLangDropdown, showThemeDropdown]);
-
-  useEffect(() => {
-    const onKeyPress = (e) => {
-      if (e.key === "Backspace") {
-        e.preventDefault();
-        location.href = `/${locale.name}/index.html`;
-      } else if (e.key === "SoftLeft") {
-        setShowLangDropdown(!showLangDropdown);
-      } else if (e.key === "SoftRight") {
-        setShowThemeDropdown(!showThemeDropdown);
-      } else if (e.key === "ArrowLeft") {
-        if (endOfStream) {
-          setEndOfStream(false);
-        } else {
-          setIsPaused(!isPaused);
-        }
-      }
-    };
-    activeEl.addEventListener("keydown", onKeyPress);
-    return () => activeEl.removeEventListener("keydown", onKeyPress);
-  }, [activeEl, showLangDropdown, showThemeDropdown]);
 
   useEffect(() => {
     setSurah(surahs[surahId - 1]);
@@ -108,19 +72,13 @@ export function SurahStream({ surahId, localeId, t }: Props) {
         { hidden: !readyToRender },
       )}
     >
-      <Head title={t(locale, "TheNobleQuran")} locale={locale}>
-        <LanguageSelect
-          locale={locale}
-          setLocale={setLocale}
-          isOpen={showLangDropdown}
-          setIsOpen={setShowLangDropdown}
-        />
-        <ThemeSelect
-          theme={theme}
-          setTheme={setTheme}
-          isOpen={showThemeDropdown}
-          setIsOpen={setShowThemeDropdown}
-        />
+      <Head
+        setLocale={setLocale}
+        locale={locale}
+        setTheme={setTheme}
+        theme={theme}
+      >
+        {t(locale, "TheNobleQuran")}
       </Head>
       <Stream
         locale={locale}

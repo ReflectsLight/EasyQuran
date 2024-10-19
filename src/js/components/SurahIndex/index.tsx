@@ -49,10 +49,6 @@ export function SurahIndex({ localeId, t }: Props) {
         locale={locale}
         setTheme={setTheme}
         theme={theme}
-        showShowLangDropdown={showLangDropdown}
-        showThemeDropdown={showThemeDropdown}
-        setShowLangDropdown={setShowLangDropdown}
-        setShowThemeDropdown={setShowThemeDropdown}
       >
         {t(locale, "TheNobleQuran")}
       </Head>
