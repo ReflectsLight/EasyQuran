@@ -1,18 +1,29 @@
 # -*- mode: org -*-
 
-** vNEXT
+* vNEXT
+
+** Embed The Noble Quran within 'Quran' package
+The Noble Quran, and an English + Farsi translation have been
+embedded into the 'Quran' package (see ~packages/typescript/Quran/~).
+This change makes the 'Quran' package more useful and capable
+than its previous implementation
 
 ** Add ~Surah.prototype.ayat~
 The ~Surah.prototype.ayat~ getter returns the contents
 of a surah as an array of Ayah objects. The array is
 populated automatically, and on-demand
 
+** Add ~Quran.durations~
+The ~Quran.durations~ getter returns an array where
+each element represents the durations of a surah -
+ayah by ayah
+
 ** Add ~Quran.surahs~
 The ~Quran.surahs~ getter returns an object where the
 key is the locale name, and the value is an array of
 Surah objects
 
-** Replace the play|pause icons
+** Replace ~play|pause~ icons
 Replace the play and pause icons
 
 ** Remove nanoc-gzip.rb
