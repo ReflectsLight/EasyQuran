@@ -80,13 +80,15 @@ export function SurahStream({ surahId, localeId, t }: Props) {
 
   useEffect(() => {
     if (!stream || !stream.length) {
+      /* noop */
       return;
-    }
-    if (surah.ayat[0].body === stream[0].body) {
+    } else if (surah.ayat[0].body === stream[0].body) {
+      /* noop */
       return;
+    } else {
+      const slice = [...surah.ayat].slice(0, stream.length);
+      setStream(slice);
     }
-    const slice = [...surah.ayat].slice(0, stream.length);
-    setStream(slice);
   }, [surah]);
 
   useEffect(() => {
