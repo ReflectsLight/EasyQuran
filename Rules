@@ -39,7 +39,9 @@ end
 
 compile("/html/index.html") do
   write("/index.html")
-  locales.each { write("/#{_1}/index.html") }
+  locales.each do |locale|
+    write("/#{locale}/index.html")
+  end
 end
 
 compile("/manifest.webapp") do

@@ -21,6 +21,9 @@ import { T } from "~/lib/t";
 import classNames from "classnames";
 import "core-js";
 
+/**
+ * globals: window
+ */
 const globals = {
   Quran,
   React,
@@ -33,6 +36,9 @@ const globals = {
 };
 Object.assign(window, globals);
 
+/**
+ * app: routes
+ */
 const App = (function () {
   const t = T(require("@json/t.json"));
   return () => {
