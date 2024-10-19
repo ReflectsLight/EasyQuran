@@ -66,14 +66,6 @@
     transform: rotate(180deg);
   }
 
-  .pause.icon {
-    g rect {
-      width: 15px;
-      height: 40px;
-      fill: var(--primary-color);
-    }
-  }
-
   ul.body.stream span {
     .sound-on.icon,
     .sound-off.icon {
@@ -131,7 +123,7 @@
     }
 
     .pause.icon {
-      rect {
+      g {
         fill: var(--primary-color);
         stroke: var(--secondary-color);
         stroke-width: 1px;
