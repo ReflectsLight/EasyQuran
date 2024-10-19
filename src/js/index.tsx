@@ -1,13 +1,24 @@
-import { Quran } from "Quran";
-import { T } from "~/lib/t";
+/**
+ * import: preact
+ */
+import { render } from "preact";
+import * as React from "preact/compat";
+import { useState, useEffect, useMemo, useRef } from "preact/hooks";
+import { Router } from "preact-router";
+
+/**
+ * import: components
+ */
 import { SurahIndex } from "~/components/SurahIndex";
 import { SurahStream } from "~/components/SurahStream";
 import { RandomSurah } from "~/components/RandomSurah";
-import { render } from "preact";
-import { useState, useEffect, useMemo, useRef } from "preact/hooks";
-import * as React from "preact/compat";
+
+/**
+ * import: libs
+ */
+import { Quran } from "Quran";
+import { T } from "~/lib/t";
 import classNames from "classnames";
-import { Router } from "preact-router";
 import "core-js";
 
 const globals = {
