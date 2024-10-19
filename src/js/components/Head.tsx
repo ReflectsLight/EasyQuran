@@ -38,7 +38,7 @@ export function Head({
           <a
             data-testid="h1"
             href={`/${locale.name}/`}
-            className="flex rounded justify-center p-3 m-0 mb-4 w-full no-underline font-semibold color-secondary text-2xl"
+            className="flex rounded justify-center p-3 m-0 mb-4 w-full no-underline font-semibold color-secondary text-1xl"
           >
             {children}
           </a>
