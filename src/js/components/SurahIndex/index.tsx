@@ -3,7 +3,6 @@ import { useTheme } from "~/hooks/useTheme";
 import { formatNumber, TFunction } from "~/lib/t";
 import { Arrow } from "~/components/Icon";
 import { Head } from "~/components/Head";
-import { LanguageSelect, ThemeSelect } from "~/components/Select";
 import "@css/main/SurahIndex.scss";
 
 type Props = {
@@ -45,19 +44,17 @@ export function SurahIndex({ localeId, t }: Props) {
         locale.direction,
       )}
     >
-      <Head title={t(locale, "TheNobleQuran")} locale={locale}>
-        <LanguageSelect
-          isOpen={showLangDropdown}
-          setIsOpen={setShowLangDropdown}
-          locale={locale}
-          setLocale={setLocale}
-        />
-        <ThemeSelect
-          isOpen={showThemeDropdown}
-          setIsOpen={setShowThemeDropdown}
-          theme={theme}
-          setTheme={setTheme}
-        />
+      <Head
+        setLocale={setLocale}
+        locale={locale}
+        setTheme={setTheme}
+        theme={theme}
+        showShowLangDropdown={showLangDropdown}
+        showThemeDropdown={showThemeDropdown}
+        setShowLangDropdown={setShowLangDropdown}
+        setShowThemeDropdown={setShowThemeDropdown}
+      >
+        {t(locale, "TheNobleQuran")}
       </Head>
       <ul className="flex flex-wrap body index scroll-y list-none m-0 p-0 w-full h-full">
         {index.map((surah, key) => (
