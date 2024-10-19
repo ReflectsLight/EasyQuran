@@ -1,4 +1,4 @@
-import type { Surah, TLocale } from "Quran";
+import type { TLocale } from "Quran";
 import { useTheme } from "~/hooks/useTheme";
 import { formatNumber, TFunction } from "~/lib/t";
 import { Arrow } from "~/components/Icon";
@@ -7,18 +7,17 @@ import { LanguageSelect, ThemeSelect } from "~/components/Select";
 import "@css/main/SurahIndex.scss";
 
 type Props = {
-  locale: TLocale;
-  surahs: Record<"string", Surah[]>;
+  localeId: TLocale;
   t: TFunction;
 };
 
-export function SurahIndex({ locale, surahs, t }: Props) {
-  const [locale, setLocale] = useState<TLocale>(locale);
+export function SurahIndex({ localeId, t }: Props) {
   const [theme, setTheme] = useTheme();
+  const [locale, setLocale] = useState<TLocale>(Quran.locales[localeId]);
+  const index = Quran.surahs[locale.name];
   const [showLangDropdown, setShowLangDropdown] = useState<boolean>(false);
   const [showThemeDropdown, setShowThemeDropdown] = useState<boolean>(false);
 
-  const index = surahs[locale.name];
   const rootRef = useRef<HTMLDivElement>(null);
   const activeEl = useMemo(
     () => document.activeElement,
@@ -47,10 +46,7 @@ export function SurahIndex({ locale, surahs, t }: Props) {
         locale.direction,
       )}
     >
-      <Head
-        title={t(locale, "TheNobleQuran")}
-        locale={locale}
-      >
+      <Head title={t(locale, "TheNobleQuran")} locale={locale}>
         <LanguageSelect
           isOpen={showLangDropdown}
           setIsOpen={setShowLangDropdown}

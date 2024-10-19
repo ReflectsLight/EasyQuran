@@ -23,9 +23,8 @@ type Props = {
 };
 
 export function SurahStream({ surahId, localeId, t }: Props) {
-  const [locale, setLocale] = useState<TLocale>(
-    Quran.locales[localeId],
-  );
+  const [theme, setTheme] = useTheme();
+  const [locale, setLocale] = useState<TLocale>(Quran.locales[localeId]);
   const surahs = Quran.surahs[locale.name];
   const [surah, setSurah] = useState<Surah>(surahs[parseInt(surahId) - 1]);
 
@@ -36,7 +35,6 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const [endOfStream, setEndOfStream] = useState<boolean>(false);
   const [showLangDropdown, setShowLangDropdown] = useState<boolean>(false);
   const [showThemeDropdown, setShowThemeDropdown] = useState<boolean>(false);
-  const [theme, setTheme] = useTheme();
 
   const rootRef = useRef<HTMLElement>(null);
   const audio = useMemo(() => new Audio(), []);
@@ -108,10 +106,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
         { hidden: !readyToRender },
       )}
     >
-      <Head
-        title={t(locale, "TheNobleQuran")}
-        locale={locale}
-      >
+      <Head title={t(locale, "TheNobleQuran")} locale={locale}>
         <LanguageSelect
           locale={locale}
           setLocale={setLocale}

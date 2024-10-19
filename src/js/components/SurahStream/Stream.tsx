@@ -40,8 +40,7 @@ export function Stream({
             >
               <span className="flex h-8 items-center">
                 <span>
-                  {t(locale, "surah")}{" "}
-                  {formatNumber(locale, surah.id)}
+                  {t(locale, "surah")} {formatNumber(locale, surah.id)}
                   {t(locale, "comma")} {t(locale, "ayah")}{" "}
                   {formatNumber(locale, ayah.id)} {t(locale, "of")}{" "}
                   {formatNumber(locale, surah.ayat.length)}

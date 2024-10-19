@@ -16,7 +16,8 @@ Nanoc::RuleDSL::CompilerDSL.prepend(Nanoc::Extension::RequireRules)
 
 ##
 # Locals
-buildenv   = ENV["buildenv"] || "development"
+locales  = %w[en fa ar]
+buildenv = ENV["buildenv"] || "development"
 
 ##
 # Rules
@@ -38,6 +39,7 @@ end
 
 compile("/html/index.html") do
   write("/index.html")
+  locales.each { write("/#{_1}/index.html") }
 end
 
 compile("/manifest.webapp") do
