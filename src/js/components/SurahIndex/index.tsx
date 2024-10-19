@@ -14,10 +14,9 @@ type Props = {
 export function SurahIndex({ localeId, t }: Props) {
   const [theme, setTheme] = useTheme();
   const [locale, setLocale] = useState<TLocale>(Quran.locales[localeId]);
-  const index = Quran.surahs[locale.name];
+  const index = useMemo(() => Quran.surahs[locale.name], [locale.name]);
   const [showLangDropdown, setShowLangDropdown] = useState<boolean>(false);
   const [showThemeDropdown, setShowThemeDropdown] = useState<boolean>(false);
-
   const rootRef = useRef<HTMLDivElement>(null);
   const activeEl = useMemo(
     () => document.activeElement,
