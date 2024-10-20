@@ -92,6 +92,12 @@ the website from source:
   Farooq introduced me to [KaiOS](https://www.kaiostech.com/) development,
   and the reciter Hani ar-Rifai
 
+## Sources
+
+* [GitHub](https://github.com/ReflectsLight/al-quran_kaios)
+* [GitLab](https://gitlab.com/0x1eef/al-quran_kaios)
+* [brew.bsd.cafe/@0x1eef](https://brew.bsd.cafe/0x1eef/al-quran_kaios)
+
 ## License
 
 The "source code" is released under the terms of the GPL <br>
