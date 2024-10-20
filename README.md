@@ -25,8 +25,8 @@ the website from source:
 ### Examples
 
     # Clone repository
-    git clone https://github.com/ReflectsLight/al-quran.reflectslight.io
-    cd al-quran.reflectslight.io
+    git clone https://github.com/ReflectsLight/al-quran_kaios
+    cd al-quran_kaios
 
     # Setup build environment
     bin/setup
