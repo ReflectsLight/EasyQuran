@@ -55,22 +55,23 @@ the website from source:
   makes it relatively easy to change the reciter
   at build time, before deploying the website.
 
-  The https://al-quran.reflectslight.io web server
+  The https://audio.al-quran.reflectslight.io endpoint
   provides the following recitations:
 
   - Mishari bin Rashed Alafasy <br>
-  https://al-quran.reflectslight.io/audio/alafasy
+  https://audio.al-quran.reflectslight.io/alafasy
   - Ahmad bin Ali Al-Ajmi <br>
-  https://al-quran.reflectslight.io/audio/alajmi
+  https://audio.al-quran.reflectslight.io/alajmi
   - Sahl Yassin <br>
-  https://al-quran.reflectslight.io/audio/yassin
+  https://audio.al-quran.reflectslight.io/yassin
   - Hani ar-Rifai <br>
-  https://al-quran.reflectslight.io/audio/rifai
+  https://audio.al-quran.reflectslight.io/rifai
 
   **Note**<br>
   Due to their overall size the audio files are the only
   files **not** kept in this repository. The audio files
-  are hosted  by https://al-quran.reflectslight.io instead.
+  are hosted  by https://audio.al-quran.reflectslight.io
+  instead.
 
 ## Thanks
 
