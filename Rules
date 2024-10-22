@@ -38,6 +38,7 @@ compile("/js/index.tsx") do
 end
 
 compile("/html/index.html") do
+  filter(:erb)
   write("/index.html")
   locales.each do |locale|
     write("/#{locale}/index.html")
