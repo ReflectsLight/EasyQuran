@@ -94,8 +94,7 @@ the website from source:
     - Sahl Yassin
     - Hani ar-Rifai
 * Thanks to [@farooqkz](https://github.com/farooqkz): <br>
-  Farooq introduced me to [KaiOS](https://www.kaiostech.com/) development,
-  and the reciter Hani ar-Rifai
+  Farooq introduced me to [KaiOS](https://www.kaiostech.com/) development
 
 ## Sources
 
