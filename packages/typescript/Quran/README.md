@@ -41,6 +41,12 @@ console.log(ayah.text);
 * English
 * Farsi
 
+## Install
+
+`@0x1eef/Quran` is available via npm:
+
+	npm i @0x1eef/Quran
+
 ## Thanks
 
 الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
@@ -48,12 +54,6 @@ console.log(ayah.text);
 * Thanks to the translators:
     - English (The Clear Quran) by Dr. Mustafa Khattab
     - Farsi by Hussain Ansarian
-
-## Install
-
-`@0x1eef/Quran` is available via npm:
-
-	npm i @0x1eef/Quran
 
 ## License
 
