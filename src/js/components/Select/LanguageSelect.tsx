@@ -32,9 +32,9 @@ export function LanguageSelect({
           <Select.Option
             key={i}
             className={classNames(
-              "flex h-5 text-sm w-full items-center justify-center no-underline mb-1 rounded",
+              "flex h-4 text-sm w-full items-center justify-center no-underline rounded pb-1 pt-1 mb-1 border-accent",
               l.direction,
-              l.name === locale.name ? "active" : undefined,
+              l.name === locale.name ? "active font-bold" : undefined,
             )}
             value={l.name}
             onClick={(e: React.ChangeEvent) => [

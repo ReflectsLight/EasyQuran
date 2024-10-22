@@ -15,7 +15,7 @@ export function Head({ locale, theme, setLocale, setTheme, children }: Props) {
   const [showLangDropdown, setShowLangDropdown] = useState<boolean>(false);
   const [showThemeDropdown, setShowThemeDropdown] = useState<boolean>(false);
   return (
-    <header className="flex flex-col h-20 mt-4 mb-2">
+    <header className="flex flex-col h-20 mt-4 mb-4">
       <div className="flex flex-col">
         <div className="flex items-center justify-center">
           <a
