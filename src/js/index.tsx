@@ -17,7 +17,7 @@ import { RandomSurah } from "~/components/RandomSurah";
 /**
  * import: libs
  */
-import { Quran } from "Quran";
+import { Quran } from "@0x1eef/Quran";
 import { T } from "~/lib/t";
 import classNames from "classnames";
 import "core-js";

@@ -1,4 +1,4 @@
-import type { Surah, Ayah, TLocale } from "Quran";
+import type { Surah, Ayah, TLocale } from "@0x1eef/Quran";
 import { formatNumber } from "~/lib/t";
 
 type Maybe<T> = T | null | undefined;

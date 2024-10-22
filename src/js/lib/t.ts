@@ -1,4 +1,4 @@
-import type { TLocale } from "Quran";
+import type { TLocale } from "@0x1eef/Quran";
 
 type PhraseMap<T> = {
   [key: string]: undefined | string | PhraseMap<T>;

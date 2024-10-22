@@ -1,4 +1,4 @@
-import { Quran, TLocale } from "Quran";
+import { Quran, TLocale } from "@0x1eef/Quran";
 import { Select } from "~/components/Select";
 
 type Props = {
