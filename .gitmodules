@@ -1,0 +1,3 @@
+[submodule "packages/typescript/Quran"]
+	path = packages/typescript/Quran
+	url = https://github.com/ReflectsLight/Quran.js
