@@ -5,7 +5,7 @@ to The Noble Quran, alongside various translations.
 
 ## Examples
 
-### Quran.locales
+#### Quran.locales
 
 The `Quran.locales` method provides an object where the
 key is a locale name (such as `en`) and the value is a
@@ -21,7 +21,7 @@ for (locale in Quran.locales) {
 }
 ```
 
-### Quran.surahs
+#### Quran.surahs
 
 The `Quran.surahs` method provides an object where the key
 is a locale name (such as `en`) and the value is a surah
