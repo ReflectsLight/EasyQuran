@@ -99,8 +99,8 @@ the website from source:
 ## Sources
 
 * [GitHub](https://github.com/ReflectsLight/al-quran_kaios)
-* [GitLab](https://gitlab.com/0x1eef/al-quran_kaios)
-* [brew.bsd.cafe/@0x1eef](https://brew.bsd.cafe/0x1eef/al-quran_kaios)
+* [GitLab](https://gitlab.com/ReflectsLight/al-quran_kaios)
+* [brew.bsd.cafe/@0x1eef](https://brew.bsd.cafe/ReflectsLight/al-quran_kaios)
 
 ## License
 
