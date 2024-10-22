@@ -10,7 +10,11 @@ The project is still in the early stages of development.
 
 **SurahIndex.tsx**
 
-![img](/share/al-quran.reflectslight.io/screenshots/240x320_SurahIndex.png)
+![SurahIndex](/share/al-quran.reflectslight.io/screenshots/240x320_SurahIndex.png)
+
+**StreamStream.tsx**
+
+![SurahStream](/share/al-quran.reflectslight.io/screenshots/240x320_SurahStream.png)
 
 ## Development
 
