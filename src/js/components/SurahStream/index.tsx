@@ -1,4 +1,4 @@
-import type { Surah, Ayah, TAyat, TLocale } from "@0x1eef/Quran";
+import type { Surah, Ayah, TAyat, TLocale } from "@0x1eef/quran";
 import { useTheme } from "~/hooks/useTheme";
 import { AudioControl, TAudioStatus } from "~/components/AudioControl";
 import { Head } from "~/components/Head";

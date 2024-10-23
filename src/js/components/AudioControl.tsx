@@ -1,4 +1,4 @@
-import type { Surah, Ayah } from "@0x1eef/Quran";
+import type { Surah, Ayah } from "@0x1eef/quran";
 import { SoundOnIcon, SoundOffIcon } from "~/components/Icon";
 
 export type TAudioStatus = "play" | "pause" | "wait" | "end";

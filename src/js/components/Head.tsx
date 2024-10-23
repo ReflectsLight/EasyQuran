@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { TLocale } from "@0x1eef/Quran";
+import type { TLocale } from "@0x1eef/quran";
 import { Theme } from "~/hooks/useTheme";
 import { LanguageSelect, ThemeSelect } from "~/components/Select";
 

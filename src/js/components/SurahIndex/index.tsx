@@ -1,4 +1,4 @@
-import type { TLocale } from "@0x1eef/Quran";
+import type { TLocale } from "@0x1eef/quran";
 import { useTheme } from "~/hooks/useTheme";
 import { formatNumber, TFunction } from "~/lib/t";
 import { Arrow } from "~/components/Icon";
