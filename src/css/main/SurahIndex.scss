@@ -16,6 +16,10 @@ body .root .content.theme {
         text-decoration: none;
       }
 
+      &:focus {
+        background: rgba(220, 220, 220, 0.25);
+      }
+
       @media (max-width: $breakpoint-sm) {
         span.transliterated, span.ayat {
           display: none;

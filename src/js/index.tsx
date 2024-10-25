@@ -1,7 +1,7 @@
 /**
  * import: preact
  */
-import { render } from "preact";
+import { render, createRef } from "preact";
 import * as React from "preact/compat";
 import { useState, useEffect, useMemo, useRef } from "preact/hooks";
 import { Router } from "preact-router";
@@ -33,6 +33,7 @@ const globals = {
   useEffect,
   useMemo,
   useRef,
+  createRef,
   classNames,
 };
 Object.assign(window, globals);

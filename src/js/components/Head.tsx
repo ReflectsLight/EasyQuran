@@ -12,8 +12,6 @@ type Props = {
 };
 
 export function Head({ locale, theme, setLocale, setTheme, children }: Props) {
-  const [showLangDropdown, setShowLangDropdown] = useState<boolean>(false);
-  const [showThemeDropdown, setShowThemeDropdown] = useState<boolean>(false);
   return (
     <header className="flex flex-col h-20 mt-4 mb-4">
       <div className="flex flex-col">
@@ -27,18 +25,8 @@ export function Head({ locale, theme, setLocale, setTheme, children }: Props) {
           </a>
         </div>
         <nav className="flex flex-row justify-between text-lg">
-          <LanguageSelect
-            isOpen={showLangDropdown}
-            setIsOpen={setShowLangDropdown}
-            setLocale={setLocale}
-            locale={locale}
-          />
-          <ThemeSelect
-            isOpen={showThemeDropdown}
-            setIsOpen={setShowThemeDropdown}
-            theme={theme}
-            setTheme={setTheme}
-          />
+          <LanguageSelect setLocale={setLocale} locale={locale} />
+          <ThemeSelect theme={theme} setTheme={setTheme} />
         </nav>
       </div>
     </header>

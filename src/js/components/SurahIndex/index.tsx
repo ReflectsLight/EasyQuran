@@ -14,29 +14,59 @@ export function SurahIndex({ localeId, t }: Props) {
   const [theme, setTheme] = useTheme();
   const [locale, setLocale] = useState<TLocale>(Quran.locales[localeId]);
   const index = useMemo(() => Quran.surahs[locale.name], [locale.name]);
-  const [showLangDropdown, setShowLangDropdown] = useState<boolean>(false);
-  const [showThemeDropdown, setShowThemeDropdown] = useState<boolean>(false);
-  const rootRef = useRef<HTMLDivElement>(null);
-  const activeEl = useMemo(
-    () => document.activeElement,
-    [document.activeElement],
+  const ulRef = useRef<HTMLUListElement>(null);
+  const refs = useMemo(
+    () => Quran.surahs[locale.name].map(() => createRef()),
+    Quran.surahs.length,
   );
+
+  function getNextRef(e) {
+    const { target } = e;
+    const index = Number(target.getAttribute("data-index"));
+    if (e.key === "ArrowDown") {
+      return refs[index + 1];
+    } else if (e.key === "ArrowUp") {
+      return refs[index - 1];
+    } else {
+      return refs[index];
+    }
+  }
+
+  function getNextScrollTop(e) {
+    const ul = ulRef.current;
+    if (e.key === "ArrowDown") {
+      return ul.scrollTop - 35;
+    } else if (e.key === "ArrowUp") {
+      return ul.scrollTop + 35;
+    } else {
+      return ul.scrollTop;
+    }
+  }
+
+  useEffect(() => {
+    const ref = refs[0];
+    const anchor = ref.current;
+    if (anchor) {
+      anchor.focus();
+    }
+  }, []);
 
   useEffect(() => {
     const onKeyPress = (e) => {
-      if (e.key === "SoftLeft") {
-        setShowLangDropdown(!showLangDropdown);
-      } else if (e.key === "SoftRight") {
-        setShowThemeDropdown(!showThemeDropdown);
-      }
+      const ul = ulRef.current;
+      const anchor = getNextRef(e).current;
+      anchor.focus();
+      ul.scroll({ behavior: "auto" });
+      ul.scrollTop = getNextScrollTop(e);
     };
-    activeEl.addEventListener("keydown", onKeyPress);
-    return () => activeEl.removeEventListener("keydown", onKeyPress);
-  }, [activeEl, showLangDropdown, showThemeDropdown]);
+    refs.forEach((ref) => {
+      const el = ref.current;
+      el.addEventListener("keydown", onKeyPress);
+    });
+  }, [refs]);
 
   return (
     <div
-      ref={rootRef}
       className={classNames(
         "flex flex-col h-full content surah-index theme",
         theme,
@@ -52,7 +82,10 @@ export function SurahIndex({ localeId, t }: Props) {
       >
         {t(locale, "TheNobleQuran")}
       </Head>
-      <ul className="flex flex-wrap body index scroll-y list-none m-0 p-0 w-full h-full">
+      <ul
+        ref={ulRef}
+        className="flex flex-wrap body index scroll-y list-none m-0 p-0 w-full h-full"
+      >
         {index.map((surah, key) => (
           <li
             className={classNames("flex justify-center surah mb-2", {
@@ -62,6 +95,8 @@ export function SurahIndex({ localeId, t }: Props) {
             key={key}
           >
             <a
+              data-index={key}
+              ref={refs[key]}
               className="flex items-center color-primary no-underline rounded w-11/12 h-8"
               href={`/${locale.name}/${surah.id}/`}
             >

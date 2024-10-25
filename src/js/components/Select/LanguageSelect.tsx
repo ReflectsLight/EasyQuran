@@ -2,18 +2,11 @@ import { Quran, TLocale } from "@0x1eef/quran";
 import { Select } from "~/components/Select";
 
 type Props = {
-  isOpen: boolean;
-  setIsOpen: (v: boolean) => void;
   locale: TLocale;
   setLocale: (v: TLocale) => void;
 };
 
-export function LanguageSelect({
-  isOpen,
-  setIsOpen,
-  locale,
-  setLocale,
-}: Props) {
+export function LanguageSelect({ locale, setLocale }: Props) {
   const locales = Object.values(Quran.locales);
 
   if (!locale) {
@@ -21,12 +14,7 @@ export function LanguageSelect({
   }
 
   return (
-    <Select
-      value={locale.name}
-      className="language-select w-20"
-      isOpen={isOpen}
-      setIsOpen={setIsOpen}
-    >
+    <Select value={locale.name} className="language-select w-20">
       {locales.map((l: TLocale, i: number) => {
         return (
           <Select.Option
