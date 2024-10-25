@@ -45,8 +45,8 @@ const App = (function () {
   return () => {
     return (
       <Router>
-        <SurahRedirect path="/" />
-        <SurahIndex path="/:localeId" t={t} />
+        <SurahRedirect path="/index.html" />
+        <SurahIndex path="/:localeId/index.html" t={t} />
         <SurahStream path="/:localeId/:surahId" t={t} />
         <RandomSurah path="/:localeId/random" />
       </Router>

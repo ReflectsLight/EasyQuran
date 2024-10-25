@@ -14,5 +14,5 @@ export function SurahRedirect() {
     }
   }, [ref.current]);
 
-  return <a href={`/${locale}/`} ref={ref}></a>;
+  return <a href={`/${locale}/index.html`} ref={ref}></a>;
 }
