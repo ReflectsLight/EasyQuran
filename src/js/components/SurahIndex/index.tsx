@@ -45,6 +45,16 @@ export function SurahIndex({ localeId, t }: Props) {
     }
   }
 
+  function onKeyPress(e: KeyboardEvent) {
+    const ul = ulRef.current;
+    const anchor = getNextRef(e).current;
+    if (anchor) {
+      anchor.focus();
+      ul.scroll({ behavior: "auto" });
+      ul.scrollTop = getNextScrollTop(e);
+    }
+  }
+
   useEffect(() => {
     const ref = refs[0];
     const anchor = ref.current;
@@ -54,13 +64,6 @@ export function SurahIndex({ localeId, t }: Props) {
   }, []);
 
   useEffect(() => {
-    const onKeyPress = (e: KeyboardEvent) => {
-      const ul = ulRef.current;
-      const anchor = getNextRef(e).current;
-      anchor.focus();
-      ul.scroll({ behavior: "auto" });
-      ul.scrollTop = getNextScrollTop(e);
-    };
     refs.forEach((ref: React.RefObject<HTMLAnchorElement>) => {
       if (ref.current) {
         const el = ref.current;
