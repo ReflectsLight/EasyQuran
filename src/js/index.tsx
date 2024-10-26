@@ -7,14 +7,6 @@ import { useState, useEffect, useMemo, useRef } from "preact/hooks";
 import Router, { Route } from "preact-router";
 
 /**
- * import: components
- */
-import { SurahRedirect } from "~/components/SurahRedirect";
-import { SurahIndex } from "~/components/SurahIndex";
-import { SurahStream } from "~/components/SurahStream";
-import { RandomSurah } from "~/components/RandomSurah";
-
-/**
  * import: libs
  */
 import { Quran } from "@0x1eef/quran";
@@ -34,9 +26,18 @@ const globals = {
   useMemo,
   useRef,
   createRef,
+  forwardRef: React.forwardRef,
   classNames,
 };
 Object.assign(window, globals);
+
+/**
+ * require: components
+ */
+const { SurahRedirect } = require("~/components/SurahRedirect");
+const { SurahIndex } = require("~/components/SurahIndex");
+const { SurahStream } = require("~/components/SurahStream");
+const { RandomSurah } = require("~/components/RandomSurah");
 
 /**
  * app: routes
