@@ -3,7 +3,7 @@
     "description": "Read and listen to The Noble Quran",
     "launch_path": "/index.html",
     "icons": {
-        "128": "/images/favicon-128x128.png"
+        "128": "/images/icon128x128.png"
     },
     "type": "privileged",
     "developer": {

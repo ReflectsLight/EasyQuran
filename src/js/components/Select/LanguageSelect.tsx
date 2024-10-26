@@ -15,13 +15,26 @@ export function LanguageSelect({ locale, setLocale }: Props) {
     return null;
   }
 
-  function onKeyPress(e: KeyboardEvent) {
-    if (e.key === "SoftLeft") {
-      setIsOpen(!isOpen);
+  function findAnchor(e: KeyboardEvent) {
+    if (e.target instanceof HTMLAnchorElement) {
+      const { target } = e;
+      const index = Number(target.getAttribute("data-index"));
+      return refs[index]?.current;
+    } else {
+      return null;
     }
   }
 
   useEffect(() => {
+    function onKeyPress(e: KeyboardEvent) {
+      if (e.key === "SoftLeft") {
+        const anchor = findAnchor(e);
+        if (anchor) {
+          setIsOpen(!isOpen);
+          anchor.focus();
+        }
+      }
+    }
     document.addEventListener("keydown", onKeyPress);
     return () => document.removeEventListener("keydown", onKeyPress);
   }, [isOpen]);
