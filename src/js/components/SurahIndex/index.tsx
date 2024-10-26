@@ -6,7 +6,7 @@ import { Head } from "~/components/Head";
 import "@css/main/SurahIndex.scss";
 
 type Props = {
-  localeId: TLocale;
+  localeId: string;
   t: TFunction;
 };
 
@@ -36,7 +36,9 @@ export function SurahIndex({ localeId, t }: Props) {
 
   function getNextScrollTop(e: KeyboardEvent) {
     const ul = ulRef.current;
-    if (e.key === "ArrowDown") {
+    if (!ul) {
+      return 0;
+    } else if (e.key === "ArrowDown") {
       return ul.scrollTop - 35;
     } else if (e.key === "ArrowUp") {
       return ul.scrollTop + 35;
@@ -47,11 +49,15 @@ export function SurahIndex({ localeId, t }: Props) {
 
   function onKeyPress(e: KeyboardEvent) {
     const ul = ulRef.current;
-    const anchor = getNextRef(e).current;
-    if (anchor) {
-      anchor.focus();
-      ul.scroll({ behavior: "auto" });
-      ul.scrollTop = getNextScrollTop(e);
+    if (!ul) {
+      return;
+    } else {
+      const anchor = getNextRef(e)?.current;
+      if (anchor) {
+        anchor.focus();
+        ul.scroll({ behavior: "auto" });
+        ul.scrollTop = getNextScrollTop(e);
+      }
     }
   }
 

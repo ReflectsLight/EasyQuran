@@ -25,10 +25,10 @@ export function LanguageSelect({ locale, setLocale }: Props) {
               l.name === locale.name ? "active font-bold" : undefined,
             )}
             value={l.name}
-            onClick={(e: React.ChangeEvent) => [
-              e.preventDefault(),
-              setLocale(l),
-            ]}
+            onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+              e.preventDefault();
+              setLocale(l);
+            }}
           >
             {l.displayName}
           </Select.Option>

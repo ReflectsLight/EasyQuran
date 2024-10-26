@@ -4,7 +4,7 @@
 import { render, createRef } from "preact";
 import * as React from "preact/compat";
 import { useState, useEffect, useMemo, useRef } from "preact/hooks";
-import { Router } from "preact-router";
+import Router, { Route } from "preact-router";
 
 /**
  * import: components
@@ -45,13 +45,19 @@ const App = (function () {
   const t = T(require("@json/t.json"));
   return () => {
     return (
+      /* @ts-ignore */
       <Router>
-        <SurahRedirect path="/index.html" />
-        <SurahIndex path="/:localeId/index.html" t={t} />
-        <SurahStream path="/:localeId/:surahId" t={t} />
-        <RandomSurah path="/:localeId/random" />
+	{/* @ts-ignore */}
+        <Route path="/index.html" component={SurahRedirect} />
+	{/* @ts-ignore */}
+        <Route path="/:localeId/index.html" component={SurahIndex} t={t} />
+	{/* @ts-ignore */}
+        <Route path="/:localeId/:surahId" component={SurahStream} t={t} />
+	{/* @ts-ignore */}
+        <Route path="/:localeId/random" component={RandomSurah} />
       </Router>
     );
   };
 })();
-render(<App />, document.querySelector(".mount"));
+
+render(<App />, document.querySelector(".mount")!);

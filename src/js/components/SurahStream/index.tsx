@@ -16,8 +16,8 @@ import "@css/main/SurahStream.scss";
 type Maybe<T> = T | null | undefined;
 
 type Props = {
-  surah: Surah;
-  locale: TLocale;
+  surahId: string;
+  localeId: string;
   t: TFunction;
 };
 
@@ -25,7 +25,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const [theme, setTheme] = useTheme();
   const [locale, setLocale] = useState<TLocale>(Quran.locales[localeId]);
   const surahs = useMemo(() => Quran.surahs[locale.name], [locale.name]);
-  const [surah, setSurah] = useState<Surah>(surahs[parseInt(surahId) - 1]);
+  const [surah, setSurah] = useState<Surah>(surahs[Number(surahId) - 1]);
 
   const [stream, setStream] = useState<TAyat>([]);
   const [isPaused, setIsPaused] = useState<boolean>(false);
@@ -39,7 +39,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const ayah: Maybe<Ayah> = stream[stream.length - 1];
 
   useEffect(() => {
-    setSurah(surahs[surahId - 1]);
+    setSurah(surahs[Number(surahId) - 1]);
   }, [locale.name]);
 
   useEffect(() => {
