@@ -20,19 +20,21 @@ export function SurahIndex({ localeId, t }: Props) {
     Quran.surahs.length,
   );
 
-  function getNextRef(e) {
-    const { target } = e;
-    const index = Number(target.getAttribute("data-index"));
-    if (e.key === "ArrowDown") {
-      return refs[index + 1];
-    } else if (e.key === "ArrowUp") {
-      return refs[index - 1];
-    } else {
-      return refs[index];
+  function getNextRef(e: KeyboardEvent) {
+    if (e.target instanceof HTMLAnchorElement) {
+      const { target } = e;
+      const index = Number(target.getAttribute("data-index"));
+      if (e.key === "ArrowDown") {
+        return refs[index + 1];
+      } else if (e.key === "ArrowUp") {
+        return refs[index - 1];
+      } else {
+        return refs[index];
+      }
     }
   }
 
-  function getNextScrollTop(e) {
+  function getNextScrollTop(e: KeyboardEvent) {
     const ul = ulRef.current;
     if (e.key === "ArrowDown") {
       return ul.scrollTop - 35;
@@ -52,16 +54,18 @@ export function SurahIndex({ localeId, t }: Props) {
   }, []);
 
   useEffect(() => {
-    const onKeyPress = (e) => {
+    const onKeyPress = (e: KeyboardEvent) => {
       const ul = ulRef.current;
       const anchor = getNextRef(e).current;
       anchor.focus();
       ul.scroll({ behavior: "auto" });
       ul.scrollTop = getNextScrollTop(e);
     };
-    refs.forEach((ref) => {
-      const el = ref.current;
-      el.addEventListener("keydown", onKeyPress);
+    refs.forEach((ref: React.RefObject<HTMLAnchorElement>) => {
+      if (ref.current) {
+        const el = ref.current;
+        el.addEventListener("keydown", onKeyPress);
+      }
     });
   }, [refs]);
 
