@@ -33,10 +33,21 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const [audioStatus, setAudioStatus] = useState<Maybe<TAudioStatus>>(null);
   const [endOfStream, setEndOfStream] = useState<boolean>(false);
 
-  const rootRef = useRef<HTMLElement>(null);
   const audio = useMemo(() => new Audio(), []);
-  const readyToRender = stream.length > 0;
   const ayah: Maybe<Ayah> = stream[stream.length - 1];
+
+  function onKeyPress(e: KeyboardEvent) {
+    if (e.key === "Backspace") {
+      e.preventDefault();
+      history.back();
+    }
+  }
+
+  useEffect(() => {
+    const el = document.activeElement;
+    el.addEventListener("keydown", onKeyPress);
+    return () => el.removeEventListener("keydown", onKeyPress);
+  }, []);
 
   useEffect(() => {
     setSurah(surahs[Number(surahId) - 1]);
@@ -63,13 +74,11 @@ export function SurahStream({ surahId, localeId, t }: Props) {
 
   return (
     <article
-      ref={rootRef}
       className={classNames(
         "flex flex-col h-full content theme",
         locale.name,
         locale.direction,
         theme,
-        { hidden: !readyToRender },
       )}
     >
       <Head
