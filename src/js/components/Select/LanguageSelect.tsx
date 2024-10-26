@@ -8,7 +8,8 @@ type Props = {
 
 export function LanguageSelect({ locale, setLocale }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const locales = Object.values(Quran.locales);
+  const locales = useMemo(() => Object.values(Quran.locales), [Quran.locales]);
+  const refs = useMemo(() => locales.map(() => createRef()), [locales]);
 
   if (!locale) {
     return null;
@@ -35,6 +36,8 @@ export function LanguageSelect({ locale, setLocale }: Props) {
       {locales.map((l: TLocale, i: number) => {
         return (
           <Select.Option
+            data-index={i}
+            ref={refs[i]}
             key={i}
             className={classNames(
               "flex h-4 text-sm w-full items-center justify-center no-underline rounded pb-1 pt-1 mb-1 border-accent",

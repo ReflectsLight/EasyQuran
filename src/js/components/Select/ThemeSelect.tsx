@@ -8,7 +8,8 @@ type Props = {
 
 export function ThemeSelect({ theme, setTheme }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const themes: Theme[] = ["blue", "green"];
+  const themes: Theme[] = useMemo(() => ["blue", "green"], []);
+  const refs = useMemo(() => themes.map(() => createRef()), [themes]);
 
   function onKeyPress(e: KeyboardEvent) {
     if (e.key === "SoftRight") {
@@ -31,6 +32,8 @@ export function ThemeSelect({ theme, setTheme }: Props) {
       {themes.map((t, i) => {
         return (
           <Select.Option
+            data-index={i}
+            ref={refs[i]}
             key={i}
             onClick={() => setTheme(t)}
             className="flex w-10 h-6 justify-end"

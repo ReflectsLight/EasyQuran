@@ -6,5 +6,9 @@ type Props = {
 } & Rest;
 
 export function Option({ children, ...rest }: Props) {
-  return <a {...rest}>{children}</a>;
+  return (
+    <a href="#" {...rest}>
+      {children}
+    </a>
+  );
 }
