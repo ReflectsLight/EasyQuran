@@ -4,15 +4,22 @@ import { LanguageSelect } from "./LanguageSelect";
 
 type Props = {
   value: string;
-  children: JSX.Element[];
+  isOpen: boolean;
+  setIsOpen: (v: boolean) => void;
   className?: string;
+  children: JSX.Element[];
 };
 
-function Select({ value, children: options, className }: Props) {
-  const [isOpen, setOpen] = useState<boolean>(false);
+function Select({
+  value,
+  isOpen,
+  setIsOpen,
+  children: options,
+  className,
+}: Props) {
   const [option, setOption] = useState<JSX.Element | null>(null);
   const sortedOptions = options.sort((n) => (value === n.props.value ? -1 : 1));
-  const close = () => setOpen(false);
+  const close = () => setIsOpen(false);
 
   useEffect(() => {
     document.body.addEventListener("click", close);
@@ -40,7 +47,7 @@ function Select({ value, children: options, className }: Props) {
               onClick={(e) => {
                 e.stopPropagation();
                 const { ref } = n.props;
-                setOpen(!isOpen);
+                setIsOpen(!isOpen);
                 ref?.current?.click();
               }}
             >

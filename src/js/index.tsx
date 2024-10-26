@@ -45,15 +45,15 @@ const App = (function () {
   const t = T(require("@json/t.json"));
   return () => {
     return (
-      /* @ts-ignore */
+      /* @ts-expect-error fixme */
       <Router>
-	{/* @ts-ignore */}
+        {/* @ts-expect-error fixme */}
         <Route path="/index.html" component={SurahRedirect} />
-	{/* @ts-ignore */}
+        {/* @ts-expect-error fixme */}
         <Route path="/:localeId/index.html" component={SurahIndex} t={t} />
-	{/* @ts-ignore */}
+        {/* @ts-expect-error fixme */}
         <Route path="/:localeId/:surahId" component={SurahStream} t={t} />
-	{/* @ts-ignore */}
+        {/* @ts-expect-error fixme */}
         <Route path="/:localeId/random" component={RandomSurah} />
       </Router>
     );

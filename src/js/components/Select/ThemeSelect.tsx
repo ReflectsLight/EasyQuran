@@ -7,9 +7,27 @@ type Props = {
 };
 
 export function ThemeSelect({ theme, setTheme }: Props) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const themes: Theme[] = ["blue", "green"];
+
+  function onKeyPress(e: KeyboardEvent) {
+    if (e.key === "SoftRight") {
+      setIsOpen(!isOpen);
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("keydown", onKeyPress);
+    return () => document.removeEventListener("keydown", onKeyPress);
+  }, [isOpen]);
+
   return (
-    <Select value={theme} className="theme-select">
+    <Select
+      isOpen={isOpen}
+      setIsOpen={setIsOpen}
+      value={theme}
+      className="theme-select"
+    >
       {themes.map((t, i) => {
         return (
           <Select.Option

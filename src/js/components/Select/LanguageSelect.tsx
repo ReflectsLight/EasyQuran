@@ -7,14 +7,31 @@ type Props = {
 };
 
 export function LanguageSelect({ locale, setLocale }: Props) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const locales = Object.values(Quran.locales);
 
   if (!locale) {
     return null;
   }
 
+  function onKeyPress(e: KeyboardEvent) {
+    if (e.key === "SoftLeft") {
+      setIsOpen(!isOpen);
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("keydown", onKeyPress);
+    return () => document.removeEventListener("keydown", onKeyPress);
+  }, [isOpen]);
+
   return (
-    <Select value={locale.name} className="language-select w-20">
+    <Select
+      isOpen={isOpen}
+      setIsOpen={setIsOpen}
+      value={locale.name}
+      className="language-select w-20"
+    >
       {locales.map((l: TLocale, i: number) => {
         return (
           <Select.Option
