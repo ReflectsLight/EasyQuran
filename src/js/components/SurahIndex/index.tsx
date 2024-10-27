@@ -3,6 +3,7 @@ import { useTheme } from "~/hooks/useTheme";
 import { formatNumber, TFunction } from "~/lib/t";
 import { Arrow } from "~/components/Icon";
 import { Head } from "~/components/Head";
+import { getNextRef } from "~/lib/utils";
 import "@css/main/SurahIndex.scss";
 
 type Props = {
@@ -19,20 +20,6 @@ export function SurahIndex({ localeId, t }: Props) {
     () => Quran.surahs[locale.name].map(() => createRef()),
     Quran.surahs.length,
   );
-
-  function getNextRef(e: KeyboardEvent) {
-    if (e.target instanceof HTMLAnchorElement) {
-      const { target } = e;
-      const index = Number(target.getAttribute("data-index"));
-      if (e.key === "ArrowDown") {
-        return refs[index + 1];
-      } else if (e.key === "ArrowUp") {
-        return refs[index - 1];
-      } else {
-        return refs[index];
-      }
-    }
-  }
 
   function getNextScrollTop(e: KeyboardEvent) {
     const ul = ulRef.current;
@@ -52,7 +39,7 @@ export function SurahIndex({ localeId, t }: Props) {
     if (!ul) {
       return;
     } else {
-      const anchor = getNextRef(e)?.current;
+      const anchor = getNextRef(e, refs)?.current;
       if (anchor) {
         anchor.focus();
         ul.scroll({ behavior: "auto" });
@@ -67,7 +54,7 @@ export function SurahIndex({ localeId, t }: Props) {
     if (anchor) {
       anchor.focus();
     }
-  }, []);
+  }, [locale.name]);
 
   useEffect(() => {
     refs.forEach((ref: React.RefObject<HTMLAnchorElement>) => {

@@ -1,18 +1,22 @@
 import { Select } from "~/components/Select";
+import type { TLocale } from "@0x1eef/quran";
 import type { Theme } from "~/hooks/useTheme";
+import { useSoftKeys } from "~/hooks/useSoftKeys";
 
 type Props = {
+  locale: TLocale;
   theme: string;
   setTheme: (theme: Theme) => void;
 };
 
-export function ThemeSelect({ theme, setTheme }: Props) {
+export function ThemeSelect({ locale, theme, setTheme }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const themes: Theme[] = useMemo(() => ["blue", "green"], []);
-  const refs = useMemo(() => themes.map(() => createRef()), [themes]);
+  const refs = useMemo(() => themes.map(() => createRef()), []);
+  const { SoftRight } = useSoftKeys(locale);
 
   function onKeyPress(e: KeyboardEvent) {
-    if (e.key === "SoftRight") {
+    if (e.key === SoftRight) {
       setIsOpen(!isOpen);
     }
   }
@@ -20,7 +24,7 @@ export function ThemeSelect({ theme, setTheme }: Props) {
   useEffect(() => {
     document.addEventListener("keydown", onKeyPress);
     return () => document.removeEventListener("keydown", onKeyPress);
-  }, [isOpen]);
+  }, [isOpen, locale.name]);
 
   return (
     <Select

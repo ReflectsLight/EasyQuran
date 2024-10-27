@@ -46,9 +46,7 @@ function Select({
               className={classNames({ hidden: isHidden })}
               onClick={(e) => {
                 e.stopPropagation();
-                const { ref } = n.props;
                 setIsOpen(!isOpen);
-                ref?.current?.click();
               }}
             >
               {n}

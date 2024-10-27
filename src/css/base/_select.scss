@@ -29,7 +29,7 @@
       &:active, &:visited, &:link {
         color: var(--secondary-color);
       }
-      &:hover {
+      &:focus {
         font-weight: bold;
       }
     }

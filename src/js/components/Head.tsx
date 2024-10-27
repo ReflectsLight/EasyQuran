@@ -26,7 +26,7 @@ export function Head({ locale, theme, setLocale, setTheme, children }: Props) {
         </div>
         <nav className="flex flex-row justify-between text-lg">
           <LanguageSelect setLocale={setLocale} locale={locale} />
-          <ThemeSelect theme={theme} setTheme={setTheme} />
+          <ThemeSelect theme={theme} setTheme={setTheme} locale={locale} />
         </nav>
       </div>
     </header>
