@@ -111,7 +111,7 @@ export function SurahIndex({ localeId, t }: Props) {
               data-index={key}
               data-context="index-list-item"
               ref={refs[key]}
-              className="flex items-center color-primary no-underline rounded w-11/12 h-8 index-item"
+              className="flex items-center color-primary no-underline rounded w-11/12 h-8"
               href={`/${locale.name}/${surah.id}/`}
             >
               <span className="flex items-center justify-center h-6 background-primary color-secondary ml-2 mr-3 rounded font-extrabold w-14 text-center">
