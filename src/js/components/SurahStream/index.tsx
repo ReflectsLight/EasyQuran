@@ -10,6 +10,7 @@ import {
 import { Timer } from "~/components/Timer";
 import { TFunction } from "~/lib/t";
 import { Stream } from "./Stream";
+import { route } from "preact-router";
 import "@css/main/SurahStream.scss";
 
 type Maybe<T> = T | null | undefined;
@@ -42,7 +43,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
     function onKeyPress(e: KeyboardEvent) {
       if (e.key === "Backspace") {
         e.preventDefault();
-        history.back();
+        route(`/${locale.name}/index.html`);
       }
     }
     document.addEventListener("keydown", onKeyPress);
