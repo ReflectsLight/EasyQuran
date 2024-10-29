@@ -2,7 +2,7 @@ import type { ReactNode, AnchorHTMLAttributes, ForwardedRef } from "preact/compa
 type Rest = AnchorHTMLAttributes<HTMLAnchorElement>;
 type Props = {
   value: string;
-  children: ReactNode;
+  children?: ReactNode;
 } & Rest;
 
 function Component(props: Props, ref: ForwardedRef<HTMLAnchorElement>) {

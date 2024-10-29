@@ -36,7 +36,7 @@ export function ThemeSelect() {
         const ctx = el?.getAttribute("data-context");
         if (ctx === "theme-select") {
           const anchor = getNextRef(e, refs)?.current;
-          anchor.focus();
+          anchor?.focus();
         }
       }
     }

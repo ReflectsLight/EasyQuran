@@ -45,9 +45,8 @@ export function SurahStream({ surahId, localeId, t }: Props) {
         history.back();
       }
     }
-    const el = document.activeElement;
-    el.addEventListener("keydown", onKeyPress);
-    return () => el.removeEventListener("keydown", onKeyPress);
+    document.addEventListener("keydown", onKeyPress);
+    return () => document.removeEventListener("keydown", onKeyPress);
   }, []);
 
   useEffect(() => {

@@ -62,15 +62,10 @@ const App = (function () {
     const [locale, setLocale] = useLocale();
     return (
       <SettingsContext.Provider value={{ locale, setLocale, theme, setTheme }}>
-        {/* @ts-expect-error fixme */}
         <Router>
-          {/* @ts-expect-error fixme */}
           <Route path="/index.html" component={SurahRedirect} />
-          {/* @ts-expect-error fixme */}
           <Route path="/:localeId/index.html" component={SurahIndex} t={t} />
-          {/* @ts-expect-error fixme */}
           <Route path="/:localeId/:surahId" component={SurahStream} t={t} />
-          {/* @ts-expect-error fixme */}
           <Route path="/:localeId/random" component={RandomSurah} />
         </Router>
       </SettingsContext.Provider>

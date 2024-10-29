@@ -42,7 +42,7 @@ export function LanguageSelect() {
         const ctx = el?.getAttribute("data-context");
         if (ctx === "language-select") {
           const anchor = getNextRef(e, refs)?.current;
-          anchor.focus();
+          anchor?.focus();
         }
       }
     }

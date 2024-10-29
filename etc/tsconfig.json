@@ -10,6 +10,7 @@
     "target": "ES5",
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "jsxImportSource": "preact",
     "jsx": "react-jsx",
     "lib": [ "ES2020", "DOM" ],
     "typeRoots": ["../src/js/types/globals.d.ts", "../node_modules/@types"],
