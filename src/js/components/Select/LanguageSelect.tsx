@@ -6,12 +6,19 @@ import { getNextRef, findActiveElement } from "~/lib/utils";
 export function LanguageSelect() {
   const { locale, setLocale } = useContext(SettingsContext);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const locales = useMemo(() => Object.values(Quran.locales), []);
+  const locales = useMemo(
+    () => sort(locale, Object.values(Quran.locales)),
+    [locale.name],
+  );
   const refs = useMemo(() => locales.map(() => createRef()), []);
   const { SoftLeft } = useSoftKeys(locale);
 
   if (!locale) {
     return null;
+  }
+
+  function sort(locale: TLocale, locales: TLocale[]) {
+    return [locale, ...locales.filter((l) => l.name !== locale.name)];
   }
 
   useEffect(() => {

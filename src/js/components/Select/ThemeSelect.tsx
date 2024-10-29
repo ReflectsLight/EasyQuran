@@ -2,13 +2,18 @@ import { Select } from "~/components/Select";
 import type { Theme } from "~/hooks/useTheme";
 import { useSoftKeys } from "~/hooks/useSoftKeys";
 import { getNextRef, findActiveElement } from "~/lib/utils";
+import { THEMES } from "~/hooks/useTheme";
 
 export function ThemeSelect() {
   const { theme, locale, setTheme } = useContext(SettingsContext);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const themes: Theme[] = useMemo(() => ["blue", "green"], []);
+  const themes: Theme[] = useMemo(() => sort(theme, THEMES), [theme]);
   const refs = useMemo(() => themes.map(() => createRef()), []);
   const { SoftRight } = useSoftKeys(locale);
+
+  function sort(theme: Theme, themes: Theme[]) {
+    return [theme, ...themes.filter((t) => t !== theme)];
+  }
 
   useEffect(() => {
     function onKeyPress(e: KeyboardEvent) {

@@ -1,8 +1,8 @@
 export type Theme = "blue" | "green";
-type Result = [Theme, (t: Theme) => void];
-const THEMES: Theme[] = ["blue", "green"];
-const DEFAULT_THEME = "blue";
+export const THEMES: Theme[] = ["blue", "green"];
+export const DEFAULT_THEME = "blue";
 
+type Result = [Theme, (t: Theme) => void];
 export function useTheme(): Result {
   const cookies = Object.fromEntries(
     document.cookie.split(";").map((e) => e.split("=")),

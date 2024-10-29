@@ -18,7 +18,6 @@ function Select({
   className,
 }: Props) {
   const [option, setOption] = useState<JSX.Element | null>(null);
-  const sortedOptions = options.sort((n) => (value === n.props.value ? -1 : 1));
   const close = () => setIsOpen(false);
 
   useEffect(() => {
@@ -38,7 +37,7 @@ function Select({
       )}
     >
       <ul className="m-0 p-0 list-none text-base h-full mb-5">
-        {sortedOptions.map((n: JSX.Element, key: number) => {
+        {options.map((n: JSX.Element, key: number) => {
           const isHidden = !isOpen && option?.props.value !== n.props.value;
           return (
             <li
