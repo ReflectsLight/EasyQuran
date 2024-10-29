@@ -60,7 +60,7 @@ export function LanguageSelect() {
             className={classNames(
               "flex h-4 text-sm w-full items-center justify-center no-underline rounded pb-1 pt-1 mb-1",
               l.direction,
-              l.name === locale.name ? "active font-bold" : undefined,
+              l.name === locale.name ? "active" : undefined,
             )}
             value={l.name}
             onClick={() => setLocale(l)}

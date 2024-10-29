@@ -16,6 +16,9 @@
     ul li,
     ul li a {
       -webkit-tap-highlight-color: transparent;
+      &:focus {
+        border: 1px solid #444;
+      }
     }
     .circle {
       background: var(--primary-color);
