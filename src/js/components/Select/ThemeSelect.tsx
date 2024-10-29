@@ -1,15 +1,9 @@
 import { Select } from "~/components/Select";
-import type { TLocale } from "@0x1eef/quran";
 import type { Theme } from "~/hooks/useTheme";
 import { useSoftKeys } from "~/hooks/useSoftKeys";
 
-type Props = {
-  locale: TLocale;
-  theme: string;
-  setTheme: (theme: Theme) => void;
-};
-
-export function ThemeSelect({ locale, theme, setTheme }: Props) {
+export function ThemeSelect() {
+  const { theme, locale, setTheme } = useContext(SettingsContext);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const themes: Theme[] = useMemo(() => ["blue", "green"], []);
   const refs = useMemo(() => themes.map(() => createRef()), []);

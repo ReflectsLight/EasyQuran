@@ -1,17 +1,12 @@
 import type { ReactNode } from "react";
-import type { TLocale } from "@0x1eef/quran";
-import { Theme } from "~/hooks/useTheme";
 import { LanguageSelect, ThemeSelect } from "~/components/Select";
 
 type Props = {
-  locale: TLocale;
-  theme: string;
-  setTheme: (t: Theme) => void;
-  setLocale: (t: TLocale) => void;
   children: ReactNode;
 };
 
-export function Head({ locale, theme, setLocale, setTheme, children }: Props) {
+export function Head({ children }: Props) {
+  const { locale } = useContext(SettingsContext);
   return (
     <header className="flex flex-col h-20 mt-4 mb-4">
       <div className="flex flex-col">
@@ -25,8 +20,8 @@ export function Head({ locale, theme, setLocale, setTheme, children }: Props) {
           </a>
         </div>
         <nav className="flex flex-row justify-between text-lg">
-          <LanguageSelect setLocale={setLocale} locale={locale} />
-          <ThemeSelect theme={theme} setTheme={setTheme} locale={locale} />
+          <LanguageSelect />
+          <ThemeSelect />
         </nav>
       </div>
     </header>

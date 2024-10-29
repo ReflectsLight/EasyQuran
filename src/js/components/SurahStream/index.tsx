@@ -1,5 +1,4 @@
-import type { Surah, Ayah, TAyat, TLocale } from "@0x1eef/quran";
-import { useTheme } from "~/hooks/useTheme";
+import type { Surah, Ayah, TAyat } from "@0x1eef/quran";
 import { AudioControl, TAudioStatus } from "~/components/AudioControl";
 import { Head } from "~/components/Head";
 import {
@@ -22,8 +21,7 @@ type Props = {
 };
 
 export function SurahStream({ surahId, localeId, t }: Props) {
-  const [theme, setTheme] = useTheme();
-  const [locale, setLocale] = useState<TLocale>(Quran.locales[localeId]);
+  const { locale, setLocale, theme } = useContext(SettingsContext);
   const surahs = useMemo(() => Quran.surahs[locale.name], [locale.name]);
   const [surah, setSurah] = useState<Surah>(surahs[Number(surahId) - 1]);
 
@@ -36,14 +34,17 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const audio = useMemo(() => new Audio(), []);
   const ayah: Maybe<Ayah> = stream[stream.length - 1];
 
-  function onKeyPress(e: KeyboardEvent) {
-    if (e.key === "Backspace") {
-      e.preventDefault();
-      history.back();
-    }
-  }
+  useEffect(() => {
+    setLocale(Quran.locales[localeId]);
+  }, [localeId]);
 
   useEffect(() => {
+    function onKeyPress(e: KeyboardEvent) {
+      if (e.key === "Backspace") {
+        e.preventDefault();
+        history.back();
+      }
+    }
     const el = document.activeElement;
     el.addEventListener("keydown", onKeyPress);
     return () => el.removeEventListener("keydown", onKeyPress);
@@ -81,14 +82,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
         theme,
       )}
     >
-      <Head
-        setLocale={setLocale}
-        locale={locale}
-        setTheme={setTheme}
-        theme={theme}
-      >
-        {t(locale, "TheNobleQuran")}
-      </Head>
+      <Head>{t(locale, "TheNobleQuran")}</Head>
       <Stream
         locale={locale}
         surah={surah}

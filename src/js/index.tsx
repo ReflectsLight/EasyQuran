@@ -1,9 +1,9 @@
 /**
  * import: preact
  */
-import { render, createRef } from "preact";
-import * as React from "preact/compat";
-import { useState, useEffect, useMemo, useRef } from "preact/hooks";
+import { render, createContext, createRef } from "preact";
+import * as React from "react";
+import { useContext, useState, useEffect, useMemo, useRef } from "preact/hooks";
 import Router, { Route } from "preact-router";
 
 /**
@@ -15,18 +15,31 @@ import classNames from "classnames";
 import "core-js";
 
 /**
+ * import: hooks
+ */
+import { useTheme } from "~/hooks/useTheme";
+import { useLocale } from "~//hooks/useLocale";
+
+/**
+ * context: settings
+ */
+const SettingsContext = createContext({});
+
+/**
  * globals: window
  */
 const globals = {
   Quran,
   React,
   render,
+  useContext,
   useState,
   useEffect,
   useMemo,
   useRef,
   createRef,
   forwardRef: React.forwardRef,
+  SettingsContext,
   classNames,
 };
 Object.assign(window, globals);
@@ -43,20 +56,24 @@ const { RandomSurah } = require("~/components/RandomSurah");
  * app: routes
  */
 const App = (function () {
-  const t = T(require("@json/t.json"));
   return () => {
+    const t = T(require("@json/t.json"));
+    const [theme, setTheme] = useTheme();
+    const [locale, setLocale] = useLocale();
     return (
-      /* @ts-expect-error fixme */
-      <Router>
+      <SettingsContext.Provider value={{ locale, setLocale, theme, setTheme }}>
         {/* @ts-expect-error fixme */}
-        <Route path="/index.html" component={SurahRedirect} />
-        {/* @ts-expect-error fixme */}
-        <Route path="/:localeId/index.html" component={SurahIndex} t={t} />
-        {/* @ts-expect-error fixme */}
-        <Route path="/:localeId/:surahId" component={SurahStream} t={t} />
-        {/* @ts-expect-error fixme */}
-        <Route path="/:localeId/random" component={RandomSurah} />
-      </Router>
+        <Router>
+          {/* @ts-expect-error fixme */}
+          <Route path="/index.html" component={SurahRedirect} />
+          {/* @ts-expect-error fixme */}
+          <Route path="/:localeId/index.html" component={SurahIndex} t={t} />
+          {/* @ts-expect-error fixme */}
+          <Route path="/:localeId/:surahId" component={SurahStream} t={t} />
+          {/* @ts-expect-error fixme */}
+          <Route path="/:localeId/random" component={RandomSurah} />
+        </Router>
+      </SettingsContext.Provider>
     );
   };
 })();

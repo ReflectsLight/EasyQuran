@@ -11,6 +11,7 @@ declare global {
   const useEffect: typeof hooks.useEffect;
   const useRef: typeof hooks.useRef;
   const useMemo: typeof hooks.useMemo;
+  const useContext: typeof hooks.useContext;
   const createRef: typeof preact.createRef;
   const forwardRef: typeof compat.forwardRef;
   const classNames: typeof classn;

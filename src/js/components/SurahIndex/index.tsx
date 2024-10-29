@@ -1,5 +1,3 @@
-import type { TLocale } from "@0x1eef/quran";
-import { useTheme } from "~/hooks/useTheme";
 import { formatNumber, TFunction } from "~/lib/t";
 import { Arrow } from "~/components/Icon";
 import { Head } from "~/components/Head";
@@ -12,8 +10,7 @@ type Props = {
 };
 
 export function SurahIndex({ localeId, t }: Props) {
-  const [theme, setTheme] = useTheme();
-  const [locale, setLocale] = useState<TLocale>(Quran.locales[localeId]);
+  const { theme, locale, setLocale } = useContext(SettingsContext);
   const index = useMemo(() => Quran.surahs[locale.name], [locale.name]);
   const ulRef = useRef<HTMLUListElement>(null);
   const refs = useMemo(
@@ -49,6 +46,10 @@ export function SurahIndex({ localeId, t }: Props) {
   }
 
   useEffect(() => {
+    setLocale(Quran.locales[localeId]);
+  }, [localeId]);
+
+  useEffect(() => {
     const ref = refs[0];
     const anchor = ref.current;
     if (anchor) {
@@ -74,14 +75,7 @@ export function SurahIndex({ localeId, t }: Props) {
         locale.direction,
       )}
     >
-      <Head
-        setLocale={setLocale}
-        locale={locale}
-        setTheme={setTheme}
-        theme={theme}
-      >
-        {t(locale, "TheNobleQuran")}
-      </Head>
+      <Head>{t(locale, "TheNobleQuran")}</Head>
       <ul
         ref={ulRef}
         className="flex flex-wrap body index scroll-y list-none m-0 p-0 w-full h-full"

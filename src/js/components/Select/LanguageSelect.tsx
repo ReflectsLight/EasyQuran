@@ -3,12 +3,8 @@ import { Select } from "~/components/Select";
 import { useSoftKeys } from "~/hooks/useSoftKeys";
 import { getNextRef, findActiveElement } from "~/lib/utils";
 
-type Props = {
-  locale: TLocale;
-  setLocale: (v: TLocale) => void;
-};
-
-export function LanguageSelect({ locale, setLocale }: Props) {
+export function LanguageSelect() {
+  const { locale, setLocale } = useContext(SettingsContext);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const locales = useMemo(() => Object.values(Quran.locales), []);
   const refs = useMemo(() => locales.map(() => createRef()), []);
