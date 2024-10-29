@@ -3,6 +3,15 @@ import * as preact from "preact";
 import * as compat from "preact/compat";
 import * as hooks from "preact/hooks";
 import classn from "classnames";
+import type { Theme } from "~/hooks/useTheme";
+import type { TLocale } from "~/hooks/useLocale";
+
+interface ISettingsContext {
+  theme: Theme;
+  locale: TLocale;
+  setTheme: (t: Theme) => void;
+  setLocale: (l: TLocale) => void;
+}
 
 declare global {
   const Quran: typeof Q;
@@ -15,4 +24,5 @@ declare global {
   const createRef: typeof preact.createRef;
   const forwardRef: typeof compat.forwardRef;
   const classNames: typeof classn;
+  const SettingsContext: preact.PreactContext<ISettingsContext>;
 }
