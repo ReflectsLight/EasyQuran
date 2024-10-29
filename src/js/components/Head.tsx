@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from "preact/compat";
 import { LanguageSelect, ThemeSelect } from "~/components/Select";
 
 type Props = {

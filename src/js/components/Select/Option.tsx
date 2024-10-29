@@ -1,4 +1,4 @@
-import type { ReactNode, AnchorHTMLAttributes, ForwardedRef } from "react";
+import type { ReactNode, AnchorHTMLAttributes, ForwardedRef } from "preact/compat";
 type Rest = AnchorHTMLAttributes<HTMLAnchorElement>;
 type Props = {
   value: string;

@@ -2,7 +2,7 @@
  * import: preact
  */
 import { render, createContext, createRef } from "preact";
-import * as React from "react";
+import * as React from "preact/compat";
 import { useContext, useState, useEffect, useMemo, useRef } from "preact/hooks";
 import Router, { Route } from "preact-router";
 
