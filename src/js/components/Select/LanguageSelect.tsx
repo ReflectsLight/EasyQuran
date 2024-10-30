@@ -4,7 +4,7 @@ import { useSoftKeys } from "~/hooks/useSoftKeys";
 import { getNextRef, getContext, findActiveElement } from "~/lib/utils";
 
 export function LanguageSelect() {
-  const { locale, setLocale } = useContext(SettingsContext);
+  const { locale, theme, setLocale } = useContext(SettingsContext);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const locales = useMemo(
     () => sort(locale, Object.values(Quran.locales)),
@@ -40,7 +40,7 @@ export function LanguageSelect() {
     }
     document.addEventListener("keydown", onKeyPress);
     return () => document.removeEventListener("keydown", onKeyPress);
-  }, [isOpen, locale.name]);
+  }, [isOpen, theme, locale.name]);
 
   return (
     <Select
