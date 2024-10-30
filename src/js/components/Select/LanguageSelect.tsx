@@ -1,6 +1,6 @@
 import { Quran, TLocale } from "@0x1eef/quran";
 import { Select } from "~/components/Select";
-import { useSoftKeys } from "~/hooks/useSoftKeys";
+import { useLocaleKeys } from "~/hooks/useLocaleKeys";
 import { getNextRef, getContext, findActiveElement } from "~/lib/utils";
 
 export function LanguageSelect() {
@@ -11,7 +11,7 @@ export function LanguageSelect() {
     [locale.name],
   );
   const refs = useMemo(() => locales.map(() => createRef()), []);
-  const { SoftLeft } = useSoftKeys(locale);
+  const { SoftLeft } = useLocaleKeys(locale);
 
   if (!locale) {
     return null;

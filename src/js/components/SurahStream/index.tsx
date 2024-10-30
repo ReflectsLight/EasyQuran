@@ -12,6 +12,7 @@ import { TFunction } from "~/lib/t";
 import { Stream } from "./Stream";
 import { route } from "preact-router";
 import "@css/main/SurahStream.scss";
+import { useLocaleKeys } from "~/hooks/useLocaleKeys";
 
 type Maybe<T> = T | null | undefined;
 
@@ -25,7 +26,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const { locale, setLocale, theme } = useContext(SettingsContext);
   const surahs = useMemo(() => Quran.surahs[locale.name], [locale.name]);
   const [surah, setSurah] = useState<Surah>(surahs[Number(surahId) - 1]);
-
+  const { ArrowRight } = useLocaleKeys();
   const [stream, setStream] = useState<TAyat>([]);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [audioEnabled, setAudioEnabled] = useState<boolean>(false);
@@ -44,6 +45,8 @@ export function SurahStream({ surahId, localeId, t }: Props) {
       if (e.key === "Backspace") {
         e.preventDefault();
         route(`/${locale.name}/index.html`);
+      } else if (e.key === ArrowRight) {
+        setIsPaused(!isPaused);
       }
     }
     document.addEventListener("keydown", onKeyPress);
