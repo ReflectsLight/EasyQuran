@@ -2,7 +2,6 @@ import type { Surah, Ayah, TAyat, TLocale } from "@0x1eef/quran";
 import { formatNumber, TFunction } from "~/lib/t";
 
 type Props = {
-  locale: TLocale;
   surah: Surah;
   stream: TAyat;
   endOfStream: boolean;
@@ -11,13 +10,13 @@ type Props = {
 };
 
 export function Stream({
-  locale,
   surah,
   stream,
   endOfStream,
   isPaused,
   t,
 }: Props) {
+  const { theme, locale } = useContext(SettingsContext);
   const className = endOfStream || isPaused ? ["scroll-y"] : [];
   const ulRef = useRef<HTMLUListElement>(null);
   const ul = useMemo<JSX.Element>(() => {
@@ -55,7 +54,7 @@ export function Stream({
       el.focus();
       el.scrollTop = el.scrollHeight;
     }
-  }, [stream.length]);
+  }, [theme, locale.name, stream.length]);
 
   return ul;
 }

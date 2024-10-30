@@ -87,7 +87,6 @@ export function SurahStream({ surahId, localeId, t }: Props) {
     >
       <Head>{t(locale, "TheNobleQuran")}</Head>
       <Stream
-        locale={locale}
         surah={surah}
         stream={stream}
         endOfStream={endOfStream}
