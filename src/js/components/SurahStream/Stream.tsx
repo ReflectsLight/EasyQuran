@@ -19,7 +19,7 @@ export function Stream({
   t,
 }: Props) {
   const className = endOfStream || isPaused ? ["scroll-y"] : [];
-  const ref = useRef<HTMLUListElement>(null);
+  const ulRef = useRef<HTMLUListElement>(null);
   const ul = useMemo<JSX.Element>(() => {
     return (
       <ul
@@ -28,7 +28,7 @@ export function Stream({
           "body stream scroll-y list-none p-0 m-0 h-5/6",
           ...className,
         )}
-        ref={ref}
+        ref={ulRef}
       >
         {stream.map((ayah: Ayah) => {
           return (
@@ -50,9 +50,8 @@ export function Stream({
   }, [stream, isPaused, endOfStream]);
 
   useEffect(() => {
-    const el = ref.current;
+    const el = ulRef.current;
     if (el) {
-      el.focus();
       el.scrollTop = el.scrollHeight;
     }
   }, [stream.length]);
