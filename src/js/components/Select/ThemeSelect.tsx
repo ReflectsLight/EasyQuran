@@ -1,7 +1,7 @@
 import { Select } from "~/components/Select";
 import type { Theme } from "~/hooks/useTheme";
 import { useSoftKeys } from "~/hooks/useSoftKeys";
-import { getNextRef, findActiveElement } from "~/lib/utils";
+import { getNextRef, getContext, findActiveElement } from "~/lib/utils";
 import { THEMES } from "~/hooks/useTheme";
 
 export function ThemeSelect() {
@@ -16,33 +16,25 @@ export function ThemeSelect() {
   }
 
   useEffect(() => {
-    function onKeyPress(e: KeyboardEvent) {
-      if (e.key === SoftRight) {
+    function onKeyPress(event: KeyboardEvent) {
+      if (event.key === SoftRight) {
         const anchor = findActiveElement({ context: "theme-select", refs });
-        if (anchor) {
-          setIsOpen(!isOpen);
-          anchor.focus();
+        anchor?.focus();
+        setIsOpen(!isOpen);
+      } else {
+        const context = getContext(event);
+        if (context === "theme-select") {
+          event.stopImmediatePropagation();
+          if (["ArrowUp", "ArrowDown"].indexOf(event.key) >= 0) {
+            const anchor = getNextRef(event, refs)?.current;
+            anchor?.focus();
+          }
         }
       }
     }
     document.addEventListener("keydown", onKeyPress);
     return () => document.removeEventListener("keydown", onKeyPress);
-  }, [isOpen, locale.name]);
-
-  useEffect(() => {
-    function onKeyPress(e: KeyboardEvent) {
-      if (["ArrowUp", "ArrowDown"].indexOf(e.key) >= 0) {
-        const el = document.activeElement;
-        const ctx = el?.getAttribute("data-context");
-        if (ctx === "theme-select") {
-          const anchor = getNextRef(e, refs)?.current;
-          anchor?.focus();
-        }
-      }
-    }
-    document.addEventListener("keydown", onKeyPress);
-    return () => document.removeEventListener("keydown", onKeyPress);
-  }, [theme]);
+  }, [isOpen, theme, locale.name]);
 
   return (
     <Select

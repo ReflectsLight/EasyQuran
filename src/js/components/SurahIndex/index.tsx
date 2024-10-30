@@ -1,7 +1,7 @@
 import { formatNumber, TFunction } from "~/lib/t";
 import { Arrow } from "~/components/Icon";
 import { Head } from "~/components/Head";
-import { getNextRef } from "~/lib/utils";
+import { getNextRef, getContext } from "~/lib/utils";
 import "@css/main/SurahIndex.scss";
 
 type Props = {
@@ -15,7 +15,7 @@ export function SurahIndex({ localeId, t }: Props) {
   const ulRef = useRef<HTMLUListElement>(null);
   const refs = useMemo(
     () => Quran.surahs[locale.name].map(() => createRef()),
-    Quran.surahs.length,
+    [],
   );
 
   function getNextScrollTop(e: KeyboardEvent) {
@@ -31,20 +31,6 @@ export function SurahIndex({ localeId, t }: Props) {
     }
   }
 
-  function onKeyPress(e: KeyboardEvent) {
-    const ul = ulRef.current;
-    if (!ul) {
-      return;
-    } else {
-      const anchor = getNextRef(e, refs)?.current;
-      if (anchor) {
-        anchor.focus();
-        ul.scroll({ behavior: "auto" });
-        ul.scrollTop = getNextScrollTop(e);
-      }
-    }
-  }
-
   useEffect(() => {
     setLocale(Quran.locales[localeId]);
   }, [localeId]);
@@ -55,16 +41,27 @@ export function SurahIndex({ localeId, t }: Props) {
     if (anchor) {
       anchor.focus();
     }
-  }, [locale.name]);
+  }, [locale.name, theme]);
 
   useEffect(() => {
-    refs.forEach((ref: React.RefObject<HTMLAnchorElement>) => {
-      if (ref.current) {
-        const el = ref.current;
-        el.addEventListener("keydown", onKeyPress);
+    function onKeyPress(event: KeyboardEvent) {
+      const context = getContext(event);
+      if (context === "surah-index") {
+        event.stopImmediatePropagation();
+        if (["ArrowUp", "ArrowDown"].indexOf(event.key) >= 0) {
+          const ul = ulRef.current;
+          const anchor = getNextRef(event, refs)?.current;
+          if (ul && anchor) {
+            anchor.focus();
+            ul.scroll({ behavior: "auto" });
+            ul.scrollTop = getNextScrollTop(event);
+          }
+        }
       }
-    });
-  }, [refs]);
+    }
+    document.addEventListener("keydown", onKeyPress);
+    return () => document.removeEventListener("keydown", onKeyPress);
+  }, [locale.name, theme]);
 
   return (
     <div
@@ -90,7 +87,7 @@ export function SurahIndex({ localeId, t }: Props) {
           >
             <a
               data-index={key}
-              data-context="index-list-item"
+              data-context="surah-index"
               ref={refs[key]}
               className="flex items-center color-primary no-underline rounded w-11/12 h-8"
               href={`/${locale.name}/${surah.id}/`}

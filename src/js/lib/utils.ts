@@ -1,6 +1,15 @@
 type Refs = React.RefObject<HTMLAnchorElement>[];
 type FindProps = { context: string; refs: Refs };
 
+export function getContext(e: KeyboardEvent) {
+  const { target } = e;
+  if (target instanceof Element) {
+    return target.getAttribute("data-context");
+  } else {
+    return null;
+  }
+}
+
 export function getNextRef(e: KeyboardEvent, refs: Refs) {
   const { target } = e;
   const isAnchor = target instanceof HTMLAnchorElement;

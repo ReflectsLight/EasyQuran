@@ -1,7 +1,7 @@
 import { Quran, TLocale } from "@0x1eef/quran";
 import { Select } from "~/components/Select";
 import { useSoftKeys } from "~/hooks/useSoftKeys";
-import { getNextRef, findActiveElement } from "~/lib/utils";
+import { getNextRef, getContext, findActiveElement } from "~/lib/utils";
 
 export function LanguageSelect() {
   const { locale, setLocale } = useContext(SettingsContext);
@@ -22,33 +22,25 @@ export function LanguageSelect() {
   }
 
   useEffect(() => {
-    function onKeyPress(e: KeyboardEvent) {
-      if (e.key === SoftLeft) {
+    function onKeyPress(event: KeyboardEvent) {
+      if (event.key === SoftLeft) {
         const anchor = findActiveElement({ context: "language-select", refs });
-        if (anchor) {
-          setIsOpen(!isOpen);
-          anchor.focus();
+        anchor?.focus();
+        setIsOpen(!isOpen);
+      } else {
+        const context = getContext(event);
+        if (context === "language-select") {
+          event.stopImmediatePropagation();
+          if (["ArrowUp", "ArrowDown"].indexOf(event.key) >= 0) {
+            const anchor = getNextRef(event, refs)?.current;
+            anchor?.focus();
+          }
         }
       }
     }
     document.addEventListener("keydown", onKeyPress);
     return () => document.removeEventListener("keydown", onKeyPress);
-  }, [isOpen]);
-
-  useEffect(() => {
-    function onKeyPress(e: KeyboardEvent) {
-      if (["ArrowUp", "ArrowDown"].indexOf(e.key) >= 0) {
-        const el = document.activeElement;
-        const ctx = el?.getAttribute("data-context");
-        if (ctx === "language-select") {
-          const anchor = getNextRef(e, refs)?.current;
-          anchor?.focus();
-        }
-      }
-    }
-    document.addEventListener("keydown", onKeyPress);
-    return () => document.removeEventListener("keydown", onKeyPress);
-  }, [locale.name]);
+  }, [isOpen, locale.name]);
 
   return (
     <Select
