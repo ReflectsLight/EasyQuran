@@ -52,6 +52,7 @@ export function Stream({
   useEffect(() => {
     const el = ulRef.current;
     if (el) {
+      el.focus();
       el.scrollTop = el.scrollHeight;
     }
   }, [stream.length]);
