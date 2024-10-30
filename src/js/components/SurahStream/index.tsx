@@ -26,7 +26,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const { locale, setLocale, theme } = useContext(SettingsContext);
   const surahs = useMemo(() => Quran.surahs[locale.name], [locale.name]);
   const [surah, setSurah] = useState<Surah>(surahs[Number(surahId) - 1]);
-  const { ArrowRight } = useLocaleKeys();
+  const { ArrowRight } = useLocaleKeys(locale);
   const [stream, setStream] = useState<TAyat>([]);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [audioEnabled, setAudioEnabled] = useState<boolean>(false);
