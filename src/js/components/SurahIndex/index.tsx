@@ -48,7 +48,6 @@ export function SurahIndex({ localeId, t }: Props) {
       debug("SurahIndex.tsx", "onKeyPress", event.key);
       const context = getContext(event);
       if (context === "surah-index") {
-	event.stopImmediatePropagation();
         if (["ArrowUp", "ArrowDown"].indexOf(event.key) >= 0) {
           const ul = ulRef.current;
           const anchor = getNextRef(event, refs)?.current;
@@ -57,6 +56,7 @@ export function SurahIndex({ localeId, t }: Props) {
             ul.scroll({ behavior: "auto" });
             ul.scrollTop = getNextScrollTop(event);
           }
+          event.stopImmediatePropagation();
         } else {
           debug("SurahIndex.tsx", "onKeyPress", "ignore");
         }
