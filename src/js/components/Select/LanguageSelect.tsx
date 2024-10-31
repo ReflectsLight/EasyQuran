@@ -1,7 +1,7 @@
 import { Quran, TLocale } from "@0x1eef/quran";
 import { Select } from "~/components/Select";
 import { useLocaleKeys } from "~/hooks/useLocaleKeys";
-import { getNextRef, getContext, findActiveElement } from "~/lib/utils";
+import { debug, getNextRef, getContext, findActiveElement } from "~/lib/utils";
 
 export function LanguageSelect() {
   const { locale, theme, setLocale } = useContext(SettingsContext);
@@ -23,6 +23,7 @@ export function LanguageSelect() {
 
   useEffect(() => {
     function onKeyPress(event: KeyboardEvent) {
+      debug("LanguageSelect.tsx", "onKeyPress", event.key);
       if (event.key === SoftLeft) {
         const anchor = findActiveElement({ context: "language-select", refs });
         anchor?.focus();
@@ -35,6 +36,8 @@ export function LanguageSelect() {
             const anchor = getNextRef(event, refs)?.current;
             anchor?.focus();
           }
+        } else {
+          debug("LanguageSelect.tsx", "onKeyPress", "ignore");
         }
       }
     }

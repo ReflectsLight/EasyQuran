@@ -1,7 +1,7 @@
 import { formatNumber, TFunction } from "~/lib/t";
 import { Arrow } from "~/components/Icon";
 import { Head } from "~/components/Head";
-import { getNextRef, getContext } from "~/lib/utils";
+import { debug, getNextRef, getContext } from "~/lib/utils";
 import "@css/main/SurahIndex.scss";
 
 type Props = {
@@ -45,9 +45,10 @@ export function SurahIndex({ localeId, t }: Props) {
 
   useEffect(() => {
     function onKeyPress(event: KeyboardEvent) {
+      debug("SurahIndex.tsx", "onKeyPress", event.key);
       const context = getContext(event);
       if (context === "surah-index") {
-        event.stopImmediatePropagation();
+	event.stopImmediatePropagation();
         if (["ArrowUp", "ArrowDown"].indexOf(event.key) >= 0) {
           const ul = ulRef.current;
           const anchor = getNextRef(event, refs)?.current;
@@ -56,7 +57,11 @@ export function SurahIndex({ localeId, t }: Props) {
             ul.scroll({ behavior: "auto" });
             ul.scrollTop = getNextScrollTop(event);
           }
+        } else {
+          debug("SurahIndex.tsx", "onKeyPress", "ignore");
         }
+      } else {
+        debug("SurahIndex.tsx", "onKeyPress", "ignore");
       }
     }
     document.addEventListener("keydown", onKeyPress);

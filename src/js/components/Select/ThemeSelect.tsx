@@ -1,7 +1,7 @@
 import { Select } from "~/components/Select";
 import type { Theme } from "~/hooks/useTheme";
 import { useLocaleKeys } from "~/hooks/useLocaleKeys";
-import { getNextRef, getContext, findActiveElement } from "~/lib/utils";
+import { debug, getNextRef, getContext, findActiveElement } from "~/lib/utils";
 import { THEMES } from "~/hooks/useTheme";
 
 export function ThemeSelect() {
@@ -17,6 +17,7 @@ export function ThemeSelect() {
 
   useEffect(() => {
     function onKeyPress(event: KeyboardEvent) {
+      debug("ThemeSelect.tsx", "onKeyPress", event.key);
       if (event.key === SoftRight) {
         const anchor = findActiveElement({ context: "theme-select", refs });
         anchor?.focus();
@@ -29,6 +30,8 @@ export function ThemeSelect() {
             const anchor = getNextRef(event, refs)?.current;
             anchor?.focus();
           }
+        } else {
+          debug("ThemeSelect.tsx", "onKeyPress", "ignore");
         }
       }
     }

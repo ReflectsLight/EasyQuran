@@ -9,13 +9,7 @@ type Props = {
   t: TFunction;
 };
 
-export function Stream({
-  surah,
-  stream,
-  endOfStream,
-  isPaused,
-  t,
-}: Props) {
+export function Stream({ surah, stream, endOfStream, isPaused, t }: Props) {
   const { theme, locale } = useContext(SettingsContext);
   const className = endOfStream || isPaused ? ["scroll-y"] : [];
   const ulRef = useRef<HTMLUListElement>(null);
