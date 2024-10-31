@@ -36,3 +36,9 @@ export function findActiveElement({ context, refs }: FindProps) {
     return null;
   }
 }
+
+export function debug(...messages: string[]) {
+  if (buildenv === "development") {
+    console.debug(...messages);
+  }
+}

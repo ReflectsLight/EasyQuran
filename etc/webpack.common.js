@@ -1,4 +1,7 @@
-const path = require("path");
+const path    = require("path");
+const webpack = require("webpack");
+const process = require("process");
+
 module.exports = (env, argv) => {
   return  {
     devtool: "source-map",
@@ -43,7 +46,11 @@ module.exports = (env, argv) => {
         }
       ],
     },
-    plugins: [],
+    plugins: [
+      new webpack.DefinePlugin({
+	"buildenv": JSON.stringify(process.env.buildenv),
+      }),
+    ],
     optimization: {}
   }
 };

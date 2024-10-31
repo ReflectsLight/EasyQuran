@@ -25,4 +25,5 @@ declare global {
   const forwardRef: typeof compat.forwardRef;
   const classNames: typeof classn;
   const SettingsContext: preact.PreactContext<ISettingsContext>;
+  const buildenv: string;
 }
