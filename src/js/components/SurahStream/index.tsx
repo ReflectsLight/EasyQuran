@@ -26,7 +26,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const { locale, setLocale, theme } = useContext(SettingsContext);
   const surahs = useMemo(() => Quran.surahs[locale.name], [locale.name]);
   const [surah, setSurah] = useState<Surah>(surahs[Number(surahId) - 1]);
-  const { ArrowRight } = useLocaleKeys(locale);
+  const { ArrowLeft } = useLocaleKeys(locale);
   const [stream, setStream] = useState<TAyat>([]);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [audioEnabled, setAudioEnabled] = useState<boolean>(false);
@@ -45,13 +45,13 @@ export function SurahStream({ surahId, localeId, t }: Props) {
       if (e.key === "Backspace") {
         e.preventDefault();
         route(`/${locale.name}/index.html`);
-      } else if (e.key === ArrowRight) {
+      } else if (e.key === ArrowLeft) {
         setIsPaused(!isPaused);
       }
     }
     document.addEventListener("keydown", onKeyPress);
     return () => document.removeEventListener("keydown", onKeyPress);
-  }, []);
+  }, [locale.name, theme, isPaused]);
 
   useEffect(() => {
     setSurah(surahs[Number(surahId) - 1]);
