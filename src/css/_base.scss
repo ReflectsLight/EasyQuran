@@ -52,13 +52,8 @@ html {
 body .root .content.theme {
   margin: 0 auto;
   max-width: $breakpoint-sm;
-  width: 100%;
+  width: 90%;
   color: var(--color-accent);
-
-  /* <= $breakpoint-sm */
-  @media (max-width: $breakpoint-sm) {
-    width: 85%;
-  }
 
   header {
     a[data-testid="h1"] {
