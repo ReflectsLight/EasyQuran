@@ -126,7 +126,6 @@ export function SurahStream({ surahId, localeId, t }: Props) {
           })}
         >
           <Timer
-            locale={locale}
             surah={surah}
             ayah={ayah}
             isPaused={isPaused}

@@ -4,7 +4,6 @@ import { formatNumber } from "~/lib/t";
 type Maybe<T> = T | null | undefined;
 
 type Props = {
-  locale: TLocale;
   surah: Surah;
   ayah: Maybe<Ayah>;
   isPaused: boolean;
@@ -14,7 +13,6 @@ type Props = {
 };
 
 export function Timer({
-  locale,
   surah,
   ayah,
   isPaused,
@@ -22,6 +20,7 @@ export function Timer({
   audioStatus,
   onComplete,
 }: Props) {
+  const { locale } = useContext(SettingsContext);
   const [ms, setMs] = useState<number | null>(null);
   const isStalled = audioStatus === "wait";
 
