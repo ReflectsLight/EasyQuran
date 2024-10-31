@@ -46,12 +46,16 @@ export function SurahStream({ surahId, localeId, t }: Props) {
         e.preventDefault();
         route(`/${locale.name}/index.html`);
       } else if (e.key === ArrowLeft) {
-        setIsPaused(!isPaused);
+        if (endOfStream) {
+          setEndOfStream(false);
+        } else {
+          setIsPaused(!isPaused);
+        }
       }
     }
     document.addEventListener("keydown", onKeyPress);
     return () => document.removeEventListener("keydown", onKeyPress);
-  }, [locale.name, theme, isPaused]);
+  }, [locale.name, theme, endOfStream, isPaused]);
 
   useEffect(() => {
     setSurah(surahs[Number(surahId) - 1]);
@@ -145,7 +149,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
         </span>
         {audioStatus === "wait" && <StalledIcon />}
         <span className={classNames({ hidden: !endOfStream })}>
-          <RefreshIcon onClick={() => [setEndOfStream(false)]} />
+          <RefreshIcon />
         </span>
       </footer>
     </article>
