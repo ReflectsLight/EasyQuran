@@ -1,4 +1,4 @@
-import type { Surah, Ayah, TAyat, TLocale } from "@0x1eef/quran";
+import type { Surah, Ayah, TAyat } from "@0x1eef/quran";
 import { formatNumber, TFunction } from "~/lib/t";
 
 type Props = {
