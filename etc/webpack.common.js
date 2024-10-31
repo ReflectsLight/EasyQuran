@@ -48,7 +48,7 @@ module.exports = (env, argv) => {
     },
     plugins: [
       new webpack.DefinePlugin({
-	"buildenv": JSON.stringify(process.env.buildenv),
+        "buildenv": JSON.stringify(process.env.buildenv),
       }),
     ],
     optimization: {}
