@@ -14,12 +14,10 @@ html {
     }
 
     .ltr {
-      font-family: "Kanit Regular";
       direction: ltr;
     }
 
     .rtl {
-      font-family: "Cairo Regular", "Arial", "Tahoma", sans-serif;
       direction: rtl;
     }
 
@@ -33,18 +31,6 @@ html {
 
     .scroll-y {
       overflow-y: auto;
-    }
-
-    .font-cairo {
-      font-family: "Cairo Regular";
-    }
-
-    .font-cairo-bold {
-      font-family: "Cairo Bold";
-    }
-
-    .font-amiri {
-      font-family: "Amiri Regular", "Scheherazade", "Arial", sans-serif;
     }
   }
 }
@@ -103,13 +89,4 @@ body .root .content.theme {
  */
 body .root .content.theme.rtl {
   direction: rtl;
-  header a[data-testid="h1"] {
-    font-family: "Cairo Bold";
-  }
-}
-
-html[dir="rtl"] {
-  .font-extrabold {
-    font-family: "Cairo Bold" !important;
-  }
 }
