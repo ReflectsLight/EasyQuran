@@ -9,9 +9,9 @@ The project is still in the early stages of development.
 
 ## Demo
 
-<p align="center">
-<video controls height=500 src="https://github.com/0x1eef/0x1eef.github.io/raw/refs/heads/main/v/KaiOS_alquran_app.mp4"></video>
-</p>
+For a demo please [see the demo video](https://0x1eef.github.io/v/KaiOS_alquran_app.mp4).
+It is not always the most recent snapshot of the application,
+but generally gives an idea of the current state of the project.
 
 ## Development
 
