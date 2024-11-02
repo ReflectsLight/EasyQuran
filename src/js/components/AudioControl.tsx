@@ -21,10 +21,10 @@ export function AudioControl({ audio, surah, ayah, hidden }: Props) {
     function onKeyPress(event: KeyboardEvent) {
       const context = getContext(event);
       if (context === "surah-stream") {
-	if (event.key === "Enter") {
+        if (event.key === "Enter") {
           event.stopImmediatePropagation();
           setEnabled(!enabled);
-	}
+        }
       }
     }
     document.addEventListener("keydown", onKeyPress);
