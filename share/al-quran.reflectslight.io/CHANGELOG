@@ -2,50 +2,6 @@
 
 * vNEXT
 
-** Add ~SurahRedirect~ component
-The ~SurahRedirect~ component redirects from the root path
-to a specific locale (eg ~/en/~). The redirect is based on
-browser preferences, and will fall back onto the English
-locale when there are no matches
-
-** Embed The Noble Quran within 'Quran' package
-The Noble Quran, and an English + Farsi translation have been
-embedded into the 'Quran' package (see ~packages/typescript/Quran/~).
-This change makes the 'Quran' package more useful and capable
-than its previous implementation
-
-** Add ~Surah.prototype.ayat~
-The ~Surah.prototype.ayat~ getter returns the contents
-of a surah as an array of Ayah objects. The array is
-populated automatically, and on-demand
-
-** Add ~Quran.durations~
-The ~Quran.durations~ getter returns an array where
-each element represents the durations of a surah -
-ayah by ayah
-
-** Add ~Quran.surahs~
-The ~Quran.surahs~ getter returns an object where the
-key is the locale name, and the value is an array of
-Surah objects
-
-** Replace ~play|pause~ icons
-Replace the play and pause icons
-
-** Remove nanoc-gzip.rb
-Unneccessary for a packaged KaiOS application
-
-** Remove loaders
-Remove all loaders from ~/src/js/loaders/~, and the postman
-package (~packages/typescript/postman~)
-
-** Replace multiple entry points with a single entry point
-The ~/src/js/main/*~ directory - which previously contained
-multiple entry points - has been reduced to a single entry
-point: ~/src/js/index.tsx~
-
-** Redesign as a Single Page Application (SPA)
-The previous approach where we generated a HTML file
-for every surah in each language has been replaced by
-a Single Page Application (SPA) that is more suitable
-for KaiOS.
+** First release
+The first release has been made from a fork of the
+https://al-quran.reflectslight.io website
