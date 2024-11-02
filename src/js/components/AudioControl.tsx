@@ -90,12 +90,8 @@ export function AudioControl({
 
   return (
     <>
-      {enabled && (
-        <SoundOnIcon onClick={() => [setEnabled(false), pause(audio)]} />
-      )}
-      {!enabled && (
-        <SoundOffIcon onClick={() => [setEnabled(true), play(audio)]} />
-      )}
+      {enabled && <SoundOnIcon />}
+      {!enabled && <SoundOffIcon />}
     </>
   );
 }

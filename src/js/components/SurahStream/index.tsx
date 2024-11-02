@@ -98,12 +98,8 @@ export function SurahStream({ surahId, localeId, t }: Props) {
         t={t}
       />
       <footer className="flex justify-between items-center h-16">
-        {!endOfStream && isPaused && (
-          <PlayIcon onClick={() => setIsPaused(false)} />
-        )}
-        {!endOfStream && !isPaused && (
-          <PauseIcon onClick={() => setIsPaused(true)} />
-        )}
+        {!endOfStream && isPaused && <PlayIcon />}
+        {!endOfStream && !isPaused && <PauseIcon />}
         <span
           className={classNames("sound-box flex flex-col items-end w-16", {
             hidden: endOfStream,
@@ -135,7 +131,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
             isPaused={isPaused}
             audio={audio}
             audioStatus={audioStatus}
-            onComplete={(surah, ayah) => {
+            onComplete={(surah: Surah, ayah: Ayah) => {
               const layah = surah.ayat[surah.ayat.length - 1];
               if (!layah || !ayah) {
                 return;

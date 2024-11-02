@@ -1,11 +1,6 @@
-type Props = {
-  onClick: () => void;
-};
-
-export function PlayIcon({ onClick }: Props) {
+export function PlayIcon() {
   return (
     <svg
-      onClick={onClick}
       version="1.1"
       id="Capa_1"
       xmlns="http://www.w3.org/2000/svg"
@@ -41,10 +36,9 @@ export function PlayIcon({ onClick }: Props) {
   );
 }
 
-export function PauseIcon({ onClick }: Props) {
+export function PauseIcon() {
   return (
     <svg
-      onClick={onClick}
       height="512"
       className="pause icon"
       viewBox="0 0 32 32"
@@ -58,13 +52,12 @@ export function PauseIcon({ onClick }: Props) {
   );
 }
 
-export function SoundOnIcon({ onClick }: Props) {
+export function SoundOnIcon() {
   return (
     <svg
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid meet"
       className="sound-on icon"
-      onClick={onClick}
     >
       <g>
         <polygon
@@ -94,13 +87,12 @@ export function SoundOnIcon({ onClick }: Props) {
   );
 }
 
-export function SoundOffIcon({ onClick }: Props) {
+export function SoundOffIcon() {
   return (
     <svg
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid meet"
       className="sound-off icon"
-      onClick={onClick}
     >
       <g>
         <polygon
@@ -136,10 +128,9 @@ export function SoundOffIcon({ onClick }: Props) {
   );
 }
 
-export function RefreshIcon({ onClick }: Props) {
+export function RefreshIcon() {
   return (
     <svg
-      onClick={onClick}
       className="refresh icon"
       x="0px"
       y="0px"
