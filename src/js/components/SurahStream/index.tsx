@@ -83,7 +83,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   return (
     <article
       className={classNames(
-        "flex flex-col h-full content theme",
+        "flex flex-col h-full content theme stream",
         locale.name,
         locale.direction,
         theme,

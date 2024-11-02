@@ -56,7 +56,7 @@ export function SurahIndex({ localeId, t }: Props) {
   return (
     <div
       className={classNames(
-        "flex flex-col h-full content surah-index theme",
+        "flex flex-col h-full content index theme",
         theme,
         locale.name,
         locale.direction,
