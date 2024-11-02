@@ -2,19 +2,16 @@
 
 This repository contains a port of the
 [al-quran.reflectslight.io](https://al-quran.reflectslight.io)
-website for the mobile operating system
-[KaiOS](https://www.kaiostech.com/).
+website as a packaged
+[KaiOS](https://www.kaiostech.com/)
+application.
 The project is still in the early stages of development.
 
-## Screenshots
+## Demo
 
-**SurahIndex.tsx**
-
-![SurahIndex](/share/al-quran.reflectslight.io/screenshots/240x320_SurahIndex.png)
-
-**SurahStream.tsx**
-
-![SurahStream](/share/al-quran.reflectslight.io/screenshots/240x320_SurahStream.png)
+<p align="center">
+<video controls height=500 src="https://github.com/0x1eef/0x1eef.github.io/raw/refs/heads/main/v/KaiOS_alquran_app.mp4"></video>
+</p>
 
 ## Development
 
