@@ -8,25 +8,15 @@ type Props = {
   ayah: Maybe<Ayah>;
   isPaused: boolean;
   audio: HTMLAudioElement;
-  audioStatus: Maybe<string>;
   onComplete: (surah: Surah, ayah: Ayah) => void;
 };
 
-export function Timer({
-  surah,
-  ayah,
-  isPaused,
-  audio,
-  audioStatus,
-  onComplete,
-}: Props) {
+export function Timer({ surah, ayah, isPaused, audio, onComplete }: Props) {
   const { locale } = useContext(SettingsContext);
   const [ms, setMs] = useState<number | null>(null);
-  const isStalled = audioStatus === "wait";
 
   function getMs() {
-    const fallback =
-      audioStatus === null || audioStatus === "pause" || isNaN(audio.duration);
+    const fallback = audio.paused || isNaN(audio.duration);
     if (fallback) {
       console.info("timer: length determined by ayah.ms");
       return ayah?.ms || 0;
@@ -43,13 +33,13 @@ export function Timer({
   }, [ayah?.id]);
 
   useEffect(() => {
-    if (audioStatus === "play") {
+    if (!audio.paused) {
       setMs(getMs());
     }
-  }, [audioStatus]);
+  }, [audio.paused]);
 
   useEffect(() => {
-    const noop = !ayah || typeof ms !== "number" || isStalled || isPaused;
+    const noop = !ayah || typeof ms !== "number" || isPaused;
     if (noop) {
       return;
     } else if (ms <= 0) {
@@ -58,11 +48,7 @@ export function Timer({
       const tid = setTimeout(() => setMs(ms - 100), 100);
       return () => clearTimeout(tid);
     }
-  }, [isStalled, isPaused, ms]);
-
-  if (isStalled) {
-    return null;
-  }
+  }, [isPaused, ms]);
 
   return (
     <div className="timer font-extrabold text-base w-10 flex justify-end color-primary">

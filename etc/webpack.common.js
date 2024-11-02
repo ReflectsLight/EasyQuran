@@ -49,6 +49,7 @@ module.exports = (env, argv) => {
     plugins: [
       new webpack.DefinePlugin({
         "buildenv": JSON.stringify(process.env.buildenv),
+        "audioBaseUrl": JSON.stringify(process.env.audio_base_url),
       }),
     ],
     optimization: {}

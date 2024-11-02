@@ -26,4 +26,5 @@ declare global {
   const classNames: typeof classn;
   const SettingsContext: preact.PreactContext<ISettingsContext>;
   const buildenv: string;
+  const audioBaseUrl: string;
 }

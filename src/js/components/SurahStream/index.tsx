@@ -1,5 +1,5 @@
 import type { Surah, Ayah, TAyat } from "@0x1eef/quran";
-import { AudioControl, TAudioStatus } from "~/components/AudioControl";
+import { AudioControl } from "~/components/AudioControl";
 import { Head } from "~/components/Head";
 import {
   PlayIcon,
@@ -13,8 +13,7 @@ import { Stream } from "./Stream";
 import { route } from "preact-router";
 import "@css/main/SurahStream.scss";
 import { useLocaleKeys } from "~/hooks/useLocaleKeys";
-
-type Maybe<T> = T | null | undefined;
+import { debug } from "~/lib/utils";
 
 type Props = {
   surahId: string;
@@ -29,37 +28,44 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const { ArrowLeft } = useLocaleKeys(locale);
   const [stream, setStream] = useState<TAyat>([]);
   const [isPaused, setIsPaused] = useState<boolean>(false);
-  const [audioEnabled, setAudioEnabled] = useState<boolean>(false);
-  const [audioStatus, setAudioStatus] = useState<Maybe<TAudioStatus>>(null);
   const [endOfStream, setEndOfStream] = useState<boolean>(false);
 
   const audio = useMemo(() => new Audio(), []);
-  const ayah: Maybe<Ayah> = stream[stream.length - 1];
+  const ayah: Ayah = stream[stream.length - 1] || surah.ayat[0];
 
   useEffect(() => {
     setLocale(Quran.locales[localeId]);
   }, [localeId]);
 
   useEffect(() => {
-    function onKeyPress(e: KeyboardEvent) {
-      if (e.key === "Backspace") {
-        e.preventDefault();
+    setSurah(surahs[Number(surahId) - 1]);
+  }, [locale.name]);
+
+  useEffect(() => {
+    if (!endOfStream) {
+      setStream([surah.ayat[0]]);
+    }
+  }, [endOfStream]);
+
+  useEffect(() => {
+    function onKeyPress(event: KeyboardEvent) {
+      debug("SurahSteam.tsx", "onKeyPress", event.key);
+      if (event.key === "Backspace") {
+        event.preventDefault();
         route(`/${locale.name}/index.html`);
-      } else if (e.key === ArrowLeft) {
+      } else if (event.key === ArrowLeft) {
         if (endOfStream) {
           setEndOfStream(false);
         } else {
           setIsPaused(!isPaused);
         }
+      } else {
+        debug("SurahStream.tsx", "onKeyPress", "ignore");
       }
     }
     document.addEventListener("keydown", onKeyPress);
     return () => document.removeEventListener("keydown", onKeyPress);
   }, [locale.name, theme, endOfStream, isPaused]);
-
-  useEffect(() => {
-    setSurah(surahs[Number(surahId) - 1]);
-  }, [locale.name]);
 
   useEffect(() => {
     if (!stream || !stream.length) {
@@ -73,12 +79,6 @@ export function SurahStream({ surahId, localeId, t }: Props) {
       setStream(slice);
     }
   }, [surah]);
-
-  useEffect(() => {
-    if (!endOfStream) {
-      setStream([surah.ayat[0]]);
-    }
-  }, [endOfStream]);
 
   return (
     <article
@@ -110,19 +110,11 @@ export function SurahStream({ surahId, localeId, t }: Props) {
             surah={surah}
             ayah={ayah}
             hidden={endOfStream}
-            enabled={audioEnabled}
-            setEnabled={setAudioEnabled}
-            onStatusChange={(status) => {
-              if (status === "end") {
-                setAudioEnabled(false);
-              }
-              setAudioStatus(status);
-            }}
           />
         </span>
         <span
           className={classNames({
-            hidden: endOfStream || audioStatus === "wait",
+            hidden: endOfStream,
           })}
         >
           <Timer
@@ -130,7 +122,6 @@ export function SurahStream({ surahId, localeId, t }: Props) {
             ayah={ayah}
             isPaused={isPaused}
             audio={audio}
-            audioStatus={audioStatus}
             onComplete={(surah: Surah, ayah: Ayah) => {
               const layah = surah.ayat[surah.ayat.length - 1];
               if (!layah || !ayah) {
@@ -143,7 +134,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
             }}
           />
         </span>
-        {audioStatus === "wait" && <StalledIcon />}
+        {false && <StalledIcon />}
         <span className={classNames({ hidden: !endOfStream })}>
           <RefreshIcon />
         </span>

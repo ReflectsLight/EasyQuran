@@ -5,6 +5,12 @@
 body .root .content.theme.stream {
   ul.body.stream {
     scrollbar-gutter: stable;
+    li {
+      &:focus {
+        outline: none;
+      }
+    }
+
     li.ayah.fade {
       @keyframes FadeIn {
         0% { opacity: 0;}
@@ -14,14 +20,6 @@ body .root .content.theme.stream {
         100% { opacity: 1; }
       }
       animation: FadeIn 1s;
-    }
-  }
-}
-
-body .root .content.theme.rtl {
-  ul.body.stream {
-    li.ayah p {
-      width: 100%;
     }
   }
 }
