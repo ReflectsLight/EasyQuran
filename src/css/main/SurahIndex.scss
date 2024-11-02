@@ -3,8 +3,8 @@
 @import "themes/green";
 
 body .root .content.theme {
+  max-height: 95%;
   ul.body.index {
-    max-height: 95%;
     li, li a {
       color: var(--accent-color);
       @media (max-width: $breakpoint-sm) {
