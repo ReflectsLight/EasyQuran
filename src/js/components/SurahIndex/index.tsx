@@ -1,5 +1,4 @@
 import { formatNumber, TFunction } from "~/lib/t";
-import { Arrow } from "~/components/Icon";
 import { Head } from "~/components/Head";
 import { debug, getNextRef, getContext } from "~/lib/utils";
 import "@css/main/SurahIndex.scss";
@@ -17,19 +16,6 @@ export function SurahIndex({ localeId, t }: Props) {
     () => Quran.surahs[locale.name].map(() => createRef()),
     [],
   );
-
-  function getNextScrollTop(e: KeyboardEvent) {
-    const ul = ulRef.current;
-    if (!ul) {
-      return 0;
-    } else if (e.key === "ArrowDown") {
-      return ul.scrollTop - 35;
-    } else if (e.key === "ArrowUp") {
-      return ul.scrollTop + 35;
-    } else {
-      return ul.scrollTop;
-    }
-  }
 
   useEffect(() => {
     setLocale(Quran.locales[localeId]);
@@ -54,7 +40,6 @@ export function SurahIndex({ localeId, t }: Props) {
           if (ul && anchor) {
             anchor.focus();
             ul.scroll({ behavior: "auto" });
-            ul.scrollTop = getNextScrollTop(event);
           }
           event.stopImmediatePropagation();
         } else {
@@ -80,7 +65,7 @@ export function SurahIndex({ localeId, t }: Props) {
       <Head>{t(locale, "TheNobleQuran")}</Head>
       <ul
         ref={ulRef}
-        className="flex flex-wrap body index scroll-y list-none m-0 p-0 w-full h-full"
+        className="flex flex-wrap body index list-none m-0 p-0 w-full h-full overflow-hidden"
       >
         {index.map((surah, key) => (
           <li
@@ -105,26 +90,6 @@ export function SurahIndex({ localeId, t }: Props) {
           </li>
         ))}
       </ul>
-      <footer className="flex flex-row justify-between mb-5 h-12">
-        <a
-          className="flex flex-row items-center no-underline"
-          href={`/${locale.name}/random/`}
-        >
-          {locale.direction === "ltr" ? (
-            <Arrow direction="right" />
-          ) : (
-            <Arrow direction="left" />
-          )}
-          <span
-            className={classNames({
-              "pl-3": locale.direction === "ltr",
-              "pr-3": locale.direction === "rtl",
-            })}
-          >
-            {t(locale, "ChooseRandomChapter")}
-          </span>
-        </a>
-      </footer>
     </div>
   );
 }

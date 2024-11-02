@@ -4,6 +4,7 @@
 
 body .root .content.theme {
   ul.body.index {
+    max-height: 95%;
     li, li a {
       color: var(--accent-color);
       @media (max-width: $breakpoint-sm) {
