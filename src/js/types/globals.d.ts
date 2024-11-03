@@ -7,8 +7,8 @@ import type { Theme } from "~/hooks/useTheme";
 import type { TLocale } from "~/hooks/useLocale";
 
 type WakeLock = {
-  unlock: () => void
-}
+  unlock: () => void;
+};
 
 interface ISettingsContext {
   theme: Theme;
@@ -19,7 +19,7 @@ interface ISettingsContext {
 
 declare global {
   interface Navigator {
-    requestWakeLock: (t: string) => WakeLock
+    requestWakeLock: (t: string) => WakeLock;
   }
 
   const Quran: typeof Q;

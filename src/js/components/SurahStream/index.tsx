@@ -38,10 +38,10 @@ export function SurahStream({ surahId, localeId, t }: Props) {
       /* Prevent screen dim */
       const lock = navigator.requestWakeLock("screen");
       return () => {
-	debug("SurahStream.tsx", "requestWakeLock", "freeLock");
-	/* Restore screen dim */
-	lock.unlock();
-      }
+        debug("SurahStream.tsx", "requestWakeLock", "freeLock");
+        /* Restore screen dim */
+        lock.unlock();
+      };
     }
   }, [localeId]);
 
