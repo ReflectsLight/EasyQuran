@@ -10,18 +10,19 @@ The project is still in the early stages of development.
 ## Demo
 
 For a demo please [see the demo video](https://0x1eef.github.io/v/KaiOS_alquran_app.mp4).
-It is not always the most recent snapshot of the application,
-but generally gives an idea of the current state of the project.
+The demo video won't always be based on the most recent version
+of the app but it should give you a good idea of how the app works
 
 ## Development
 
 ### Requirements
 
-The following languages have to be installed to build
-the website from source:
+The following language runtimes are required to build the website
+from source:
 
 * Ruby 3.2 (or later)
 * NodeJS v18.15 (or later)
+
 
 ### Examples
 
@@ -44,35 +45,40 @@ the website from source:
     # Start web server
     bundle exec rake server
 
-## Configuration
+### Configuration
 
-* **audio.base_url** <br>
+**audio.base_url** <br>
   `audio.base_url` controls what web server serves
-  audio content.
-  [The default](https://audio.al-quran.reflectslight.io/rifai)
-  works out of the box. The URL for an audio file is
-  resolved by joining `audio.base_url` and
-  `/<surahid>/<ayahid>.mp3`. The `audio.base_url` option
-  makes it relatively easy to change the reciter
-  at build time, before deploying the website.
+	audio content.
+[The default](https://audio.al-quran.reflectslight.io/rifai)
+works out of the box. The URL for an audio file is
+resolved by joining `audio.base_url` and
+`/<surahid>/<ayahid>.mp3`. The `audio.base_url` option
+makes it relatively easy to change the reciter
+at build time, before building the application.
 
-  The https://audio.al-quran.reflectslight.io endpoint
-  provides the following recitations:
+The https://audio.al-quran.reflectslight.io endpoint
+provides the following recitations:
 
-  - Mishari bin Rashed Alafasy <br>
-  https://audio.al-quran.reflectslight.io/alafasy
-  - Ahmad bin Ali Al-Ajmi <br>
-  https://audio.al-quran.reflectslight.io/alajmi
-  - Sahl Yassin <br>
-  https://audio.al-quran.reflectslight.io/yassin
-  - Hani ar-Rifai <br>
-  https://audio.al-quran.reflectslight.io/rifai
+- Mishari bin Rashed Alafasy <br>
+	https://audio.al-quran.reflectslight.io/alafasy
+- Ahmad bin Ali Al-Ajmi <br>
+	https://audio.al-quran.reflectslight.io/alajmi
+- Sahl Yassin <br>
+	https://audio.al-quran.reflectslight.io/yassin
+- Hani ar-Rifai <br>
+	https://audio.al-quran.reflectslight.io/rifai
 
-  **Note**<br>
-  Due to their overall size the audio files are the only
-  files **not** kept in this repository. The audio files
-  are hosted  by https://audio.al-quran.reflectslight.io
-  instead.
+Due to their overall size the audio files are the only
+files **not** kept in this repository. The audio files
+are hosted  by https://audio.al-quran.reflectslight.io
+instead.
+
+## Install
+
+In the future I hope that the application could be easily available
+through KaiOS store(s), but for now the application is only available
+via side-loading the application onto a KaiOS device.
 
 ## Thanks
 
