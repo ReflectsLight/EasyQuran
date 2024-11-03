@@ -29,9 +29,21 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const [stream, setStream] = useState<TAyat>([]);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [endOfStream, setEndOfStream] = useState<boolean>(false);
-
   const audio = useMemo(() => new Audio(), []);
   const ayah: Ayah = stream[stream.length - 1] || surah.ayat[0];
+
+  useEffect(() => {
+    if (navigator.requestWakeLock) {
+      debug("SurahStream.tsx", "requestWakeLock", "acquireLock");
+      /* Prevent screen dim */
+      const lock = navigator.requestWakeLock("screen");
+      return () => {
+	debug("SurahStream.tsx", "requestWakeLock", "freeLock");
+	/* Restore screen dim */
+	lock.unlock();
+      }
+    }
+  }, [localeId]);
 
   useEffect(() => {
     setLocale(Quran.locales[localeId]);

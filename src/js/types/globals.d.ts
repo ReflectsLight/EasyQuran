@@ -6,6 +6,10 @@ import classn from "classnames";
 import type { Theme } from "~/hooks/useTheme";
 import type { TLocale } from "~/hooks/useLocale";
 
+type WakeLock = {
+  unlock: () => void
+}
+
 interface ISettingsContext {
   theme: Theme;
   locale: TLocale;
@@ -14,6 +18,10 @@ interface ISettingsContext {
 }
 
 declare global {
+  interface Navigator {
+    requestWakeLock: (t: string) => WakeLock
+  }
+
   const Quran: typeof Q;
   const render: typeof preact.render;
   const useState: typeof hooks.useState;
