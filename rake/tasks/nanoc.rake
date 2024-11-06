@@ -27,6 +27,14 @@ namespace :nanoc do
     exit
   end
 
+  desc "Compress the build directory (as a zip file)"
+  task :zip, %i[buildenv] => %i[setenv nanoc:build] do |t, args|
+    parent = File.dirname(nanoc.output_dir)
+    child = File.basename(nanoc.output_dir)
+    zipfile = File.join(Dir.getwd, "tmp", "al-quran.KaiOS.#{ENV['buildenv']}-build.zip")
+    Dir.chdir(parent) { sh "zip #{zipfile} -r #{child}" }
+  end
+
   task :setenv, %i[buildenv] do |t, args|
     ENV["SASS_PATH"] = File.join(dirs.content, "css")
     ENV["audio_base_url"] = nanoc.audio.base_url
