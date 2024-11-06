@@ -1,5 +1,5 @@
 {
-    "name": "The Noble Quran",
+    "name": "Quran",
     "description": "Read and listen to The Noble Quran",
     "launch_path": "/index.html",
     "icons": {
@@ -13,7 +13,7 @@
     "default_locale": "en",
     "locales": {
         "en": {
-            "name": "The Noble Quran",
+            "name": "Quran",
             "description": "Read and listen to The Noble Quran"
         }
     },
