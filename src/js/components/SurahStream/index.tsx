@@ -31,19 +31,21 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const [endOfStream, setEndOfStream] = useState<boolean>(false);
   const audio = useMemo(() => new Audio(), []);
   const ayah: Ayah = stream[stream.length - 1] || surah.ayat[0];
+  let screenLock = null;
 
   useEffect(() => {
-    if (navigator.requestWakeLock) {
-      debug("SurahStream.tsx", "requestWakeLock", "acquireLock");
-      /* Prevent screen dim */
-      const lock = navigator.requestWakeLock("screen");
-      return () => {
-        debug("SurahStream.tsx", "requestWakeLock", "freeLock");
-        /* Restore screen dim */
-        lock.unlock();
-      };
+    if (isPaused || endOfStream) {
+      return;
     }
-  }, [localeId]);
+    /* Prevent screen light dimming */
+    debug("SurahStream.tsx", "useEffect", "ObtainScreenLock");
+    screenLock = navigator?.requestWakeLock("screen");
+    return () => {
+      /* Return to screen light dimming */
+      debug("SurahStream.tsx", "useEffect", "FreeScreenLock");
+      screenLock?.unlock();
+    };
+  }, [isPaused, endOfStream]);
 
   useEffect(() => {
     setLocale(Quran.locales[localeId]);
