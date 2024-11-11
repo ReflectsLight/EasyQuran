@@ -33,15 +33,15 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const ayah: Ayah = stream[stream.length - 1] || surah.ayat[0];
 
   useEffect(() => {
-    if (isPaused || endOfStream) {
+    if (!navigator.requestWakeLock || isPaused || endOfStream) {
       return;
     }
     /* Prevent screen light dimming */
-    const screenLock = navigator?.requestWakeLock("screen");
+    const screenLock = navigator.requestWakeLock("screen");
     debug("SurahStream.tsx", "useEffect", "ObtainScreenLock");
     return () => {
       /* Return to screen light dimming */
-      screenLock?.unlock();
+      screenLock.unlock();
       debug("SurahStream.tsx", "useEffect", "FreeScreenLock");
     };
   }, [isPaused, endOfStream]);
