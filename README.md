@@ -1,14 +1,15 @@
+<p align="center">
+الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+</p>
+
 ## About
 
 This repository contains a port of the
 [al-quran.reflectslight.io](https://al-quran.reflectslight.io)
-website as a packaged
+website as a native
 [KaiOS](https://www.kaiostech.com/)
 application.
 The project is still in the early stages of development.
-
-## Demo
-
 For a demo please [see the demo video](https://0x1eef.github.io/v/KaiOS_alquran_app.mp4).
 The demo video won't always be based on the most recent version
 of the app but it should give you a good idea of how the app works
@@ -78,23 +79,28 @@ In the future I hope that the application could be easily available
 through KaiOS store(s), but for now the application is only available
 via side-loading the application onto a KaiOS device.
 
-## Thanks
+## Credit
 
-الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+**Translations**
 
-* Thanks to the graphic artists:
-	- [RefreshIcon](/src/js/components/Icon.tsx)
-      by
-      [Muhammad Haq](https://freeicons.io/profile/823)
-* Thanks to the translators:
-    - English (The Clear Quran) by Dr. Mustafa Khattab
-    - Farsi by Hussain Ansarian
-* Thanks to the reciters:
-    - Mishari bin Rashed Alafasy
-    - Ahmad bin Ali Al-Ajmi
-    - Sahl Yassin
-    - Hani ar-Rifai
-* Thanks to [@farooqkz](https://github.com/farooqkz): <br>
+* English (The Clear Quran) by Dr. Mustafa Khattab
+* Farsi by Hussain Ansarian
+
+**Recitations**
+
+* Mishari bin Rashed Alafasy
+* Ahmad bin Ali Al-Ajmi
+* Sahl Yassin
+* Hani ar-Rifai
+
+**Misc**
+
+* Credit to the graphic artists:
+  * [RefreshIcon](/src/js/components/Icon.tsx)
+  by
+  [Muhammad Haq](https://freeicons.io/profile/823)
+
+* Credit to [@farooqkz](https://github.com/farooqkz): <br>
   Farooq introduced me to [KaiOS](https://www.kaiostech.com/) development
 
 ## Sources
