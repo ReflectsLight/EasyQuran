@@ -97,11 +97,9 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   useEffect(() => {
     const onStall = () => setAudioIsStalled(true);
     const onResume = () => setAudioIsStalled(false);
-    audio.addEventListener("waiting", onStall);
     audio.addEventListener("stalled", onStall);
     audio.addEventListener("playing", onResume);
     return () => {
-      audio.removeEventListener("waiting", onStall);
       audio.removeEventListener("stalled", onStall);
       audio.removeEventListener("playing", onResume);
     }
