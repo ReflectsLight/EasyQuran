@@ -14,7 +14,7 @@ export function AudioControl({ audio, surah, ayah, hidden }: Props) {
 
   useEffect(() => {
     audio.src = `${audioBaseUrl}/${surah.id}/${ayah.id}.mp3`;
-    debug("AudioControl.tsx", "ChangeAudioSource", audio.src);
+    debug("AudioControl.tsx", "useEffect", "ChangeAudioSource", audio.src);
   }, [ayah.id]);
 
   useEffect(() => {
@@ -28,8 +28,12 @@ export function AudioControl({ audio, surah, ayah, hidden }: Props) {
       }
     }
     document.addEventListener("keydown", onKeyPress);
-    return () => document.removeEventListener("keydown", onKeyPress);
-  }, [ayah.id]);
+    debug("AudioControl.tsx", "useEffect", "AddKeyDownEvent");
+    return () => {
+      document.removeEventListener("keydown", onKeyPress);
+      debug("AudioControl.tsx", "useEffect", "RemoveKeyDownEvent");
+    }
+  }, [ayah.id, enabled]);
 
   useEffect(() => {
     if (enabled) {
