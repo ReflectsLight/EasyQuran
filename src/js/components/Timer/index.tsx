@@ -56,7 +56,7 @@ export function Timer({
       const tid = setTimeout(() => setMs(ms - 100), 100);
       return () => clearTimeout(tid);
     }
-  }, [isPaused, ms]);
+  }, [isPaused, audioIsStalled, ms]);
 
   return (
     <div className="timer font-extrabold text-base w-10 flex justify-end color-primary">

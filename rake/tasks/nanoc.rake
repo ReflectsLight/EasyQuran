@@ -31,7 +31,8 @@ namespace :nanoc do
   task :zip, %i[buildenv] => %i[setenv nanoc:build] do |t, args|
     parent = File.dirname(nanoc.output_dir)
     child = File.basename(nanoc.output_dir)
-    zipfile = File.join(Dir.getwd, "tmp", "al-quran.KaiOS.#{ENV['buildenv']}-build.zip")
+    revhead = `git rev-parse --short HEAD`.chomp
+    zipfile = File.join(Dir.getwd, "tmp", "al-quran.KaiOS.#{ENV['buildenv']}-#{revhead}.zip")
     Dir.chdir(parent) { sh "zip #{zipfile} -r #{child}" }
   end
 
