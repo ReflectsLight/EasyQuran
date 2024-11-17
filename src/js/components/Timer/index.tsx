@@ -1,3 +1,4 @@
+import { AudioState } from "~/components/AudioControl";
 import type { Surah, Ayah } from "@0x1eef/quran";
 import { formatNumber } from "~/lib/t";
 
@@ -8,7 +9,7 @@ type Props = {
   ayah: Maybe<Ayah>;
   isPaused: boolean;
   audio: HTMLAudioElement;
-  audioIsStalled: boolean;
+  audioState: AudioState;
   onComplete: (surah: Surah, ayah: Ayah) => void;
 };
 
@@ -17,7 +18,7 @@ export function Timer({
   ayah,
   isPaused,
   audio,
-  audioIsStalled,
+  audioState,
   onComplete,
 }: Props) {
   const { locale } = useContext(SettingsContext);
@@ -47,7 +48,12 @@ export function Timer({
   }, [audio.paused]);
 
   useEffect(() => {
-    const noop = !ayah || typeof ms !== "number" || isPaused || audioIsStalled;
+    const noop =
+      !ayah ||
+      typeof ms !== "number" ||
+      isPaused ||
+      audioState === AudioState.Stalled ||
+      audioState === AudioState.Waiting;
     if (noop) {
       return;
     } else if (ms <= 0) {
@@ -56,7 +62,7 @@ export function Timer({
       const tid = setTimeout(() => setMs(ms - 100), 100);
       return () => clearTimeout(tid);
     }
-  }, [isPaused, audioIsStalled, ms]);
+  }, [isPaused, audioState, ms]);
 
   return (
     <div className="timer font-extrabold text-base w-10 flex justify-end color-primary">

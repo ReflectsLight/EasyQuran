@@ -9,6 +9,13 @@ type Props = {
   hidden: boolean;
 };
 
+export enum AudioState {
+  Playing,
+  Paused,
+  Waiting,
+  Stalled,
+}
+
 export function AudioControl({ audio, surah, ayah, hidden }: Props) {
   const [enabled, setEnabled] = useState<boolean>(false);
 

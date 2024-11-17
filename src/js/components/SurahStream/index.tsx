@@ -1,5 +1,5 @@
 import type { Surah, Ayah, TAyat } from "@0x1eef/quran";
-import { AudioControl } from "~/components/AudioControl";
+import { AudioControl, AudioState } from "~/components/AudioControl";
 import { Head } from "~/components/Head";
 import {
   PlayIcon,
@@ -29,9 +29,16 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const [stream, setStream] = useState<TAyat>([]);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [endOfStream, setEndOfStream] = useState<boolean>(false);
-  const [audioIsStalled, setAudioIsStalled] = useState<boolean>(false);
-  const audio = useMemo(() => new Audio(), []);
   const ayah: Ayah = stream[stream.length - 1] || surah.ayat[0];
+  const audio = useMemo(() => new Audio(), []);
+  const [audioState, setAudioState] = useState<AudioState>(AudioState.Paused);
+  const showStalledIcon = useMemo(() => {
+    if (audioState === AudioState.Waiting) {
+      return audio.currentTime > 0;
+    } else {
+      return audioState === AudioState.Stalled;
+    }
+  }, [audioState]);
 
   useEffect(() => {
     if (!navigator.requestWakeLock || isPaused || endOfStream) {
@@ -95,14 +102,20 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   }, [surah]);
 
   useEffect(() => {
-    const onStall = () => setAudioIsStalled(true);
-    const onResume = () => setAudioIsStalled(false);
+    const onPause = () => setAudioState(AudioState.Paused);
+    const onWait = () => setAudioState(AudioState.Waiting);
+    const onStall = () => setAudioState(AudioState.Stalled);
+    const onResume = () => setAudioState(AudioState.Playing);
+    audio.addEventListener("pause", onPause);
+    audio.addEventListener("waiting", onWait);
     audio.addEventListener("stalled", onStall);
     audio.addEventListener("playing", onResume);
     return () => {
+      audio.removeEventListener("pause", onPause);
+      audio.removeEventListener("waiting", onWait);
       audio.removeEventListener("stalled", onStall);
       audio.removeEventListener("playing", onResume);
-    }
+    };
   }, [audio.src]);
 
   return (
@@ -139,7 +152,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
         </span>
         <span
           className={classNames({
-            hidden: endOfStream || audioIsStalled,
+            hidden: endOfStream || showStalledIcon,
           })}
         >
           <Timer
@@ -147,7 +160,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
             ayah={ayah}
             isPaused={isPaused}
             audio={audio}
-            audioIsStalled={audioIsStalled}
+            audioState={audioState}
             onComplete={(surah: Surah, ayah: Ayah) => {
               const layah = surah.ayat[surah.ayat.length - 1];
               if (!layah || !ayah) {
@@ -160,7 +173,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
             }}
           />
         </span>
-        {audioIsStalled && <StalledIcon />}
+        {showStalledIcon && <StalledIcon />}
         <span className={classNames({ hidden: !endOfStream })}>
           <RefreshIcon />
         </span>
