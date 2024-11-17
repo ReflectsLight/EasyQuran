@@ -1,15 +1,23 @@
 import type { Surah, Ayah } from "@0x1eef/quran";
 import { SoundOnIcon, SoundOffIcon } from "~/components/Icon";
 import { debug, getContext } from "~/lib/utils";
+import { AudioState } from "~/hooks/useAudio";
 
 type Props = {
   audio: HTMLAudioElement;
+  audioState: AudioState;
   surah: Surah;
   ayah: Ayah;
   hidden: boolean;
 };
 
-export function AudioControl({ audio, surah, ayah, hidden }: Props) {
+export function AudioControl({
+  audio,
+  audioState,
+  surah,
+  ayah,
+  hidden,
+}: Props) {
   const [enabled, setEnabled] = useState<boolean>(false);
 
   useEffect(() => {
@@ -42,6 +50,12 @@ export function AudioControl({ audio, surah, ayah, hidden }: Props) {
       audio.pause();
     }
   }, [ayah.id, enabled]);
+
+  useEffect(() => {
+    if (audioState === AudioState.Error) {
+      setEnabled(false);
+    }
+  }, [audioState]);
 
   if (hidden) {
     return null;

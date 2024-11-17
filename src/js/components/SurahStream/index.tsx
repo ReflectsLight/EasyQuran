@@ -121,6 +121,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
         >
           <AudioControl
             audio={audio}
+            audioState={audioState}
             surah={surah}
             ayah={ayah}
             hidden={endOfStream}
