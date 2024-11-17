@@ -32,7 +32,7 @@ export function AudioControl({ audio, surah, ayah, hidden }: Props) {
     return () => {
       document.removeEventListener("keydown", onKeyPress);
       debug("AudioControl.tsx", "useEffect", "RemoveKeyDownEvent");
-    }
+    };
   }, [ayah.id, enabled]);
 
   useEffect(() => {

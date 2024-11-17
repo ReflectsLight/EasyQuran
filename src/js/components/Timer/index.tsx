@@ -8,10 +8,18 @@ type Props = {
   ayah: Maybe<Ayah>;
   isPaused: boolean;
   audio: HTMLAudioElement;
+  audioIsStalled: boolean;
   onComplete: (surah: Surah, ayah: Ayah) => void;
 };
 
-export function Timer({ surah, ayah, isPaused, audio, onComplete }: Props) {
+export function Timer({
+  surah,
+  ayah,
+  isPaused,
+  audio,
+  audioIsStalled,
+  onComplete,
+}: Props) {
   const { locale } = useContext(SettingsContext);
   const [ms, setMs] = useState<number | null>(null);
 
@@ -39,7 +47,7 @@ export function Timer({ surah, ayah, isPaused, audio, onComplete }: Props) {
   }, [audio.paused]);
 
   useEffect(() => {
-    const noop = !ayah || typeof ms !== "number" || isPaused;
+    const noop = !ayah || typeof ms !== "number" || isPaused || audioIsStalled;
     if (noop) {
       return;
     } else if (ms <= 0) {

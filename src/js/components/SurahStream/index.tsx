@@ -29,6 +29,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const [stream, setStream] = useState<TAyat>([]);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [endOfStream, setEndOfStream] = useState<boolean>(false);
+  const [audioIsStalled, setAudioIsStalled] = useState<boolean>(false);
   const audio = useMemo(() => new Audio(), []);
   const ayah: Ayah = stream[stream.length - 1] || surah.ayat[0];
 
@@ -93,6 +94,19 @@ export function SurahStream({ surahId, localeId, t }: Props) {
     }
   }, [surah]);
 
+  useEffect(() => {
+    const onStall = () => setAudioIsStalled(true);
+    const onResume = setAudioIsStalled(false);
+    audio.addEventListener("waiting", onStall);
+    audio.addEventListener("stalled", onStall);
+    audio.addEventListener("playing", onResume);
+    return () => {
+      audio.removeEventListener("waiting", onStall);
+      audio.removeEventListener("stalled", onStall);
+      audio.removeEventListener("playing", onResume);
+    }
+  }, [audio.src]);
+
   return (
     <article
       className={classNames(
@@ -127,7 +141,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
         </span>
         <span
           className={classNames({
-            hidden: endOfStream,
+            hidden: endOfStream || audioIsStalled,
           })}
         >
           <Timer
@@ -135,6 +149,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
             ayah={ayah}
             isPaused={isPaused}
             audio={audio}
+            audioIsStalled={audioIsStalled}
             onComplete={(surah: Surah, ayah: Ayah) => {
               const layah = surah.ayat[surah.ayat.length - 1];
               if (!layah || !ayah) {
@@ -147,7 +162,7 @@ export function SurahStream({ surahId, localeId, t }: Props) {
             }}
           />
         </span>
-        {false && <StalledIcon />}
+        {audioIsStalled && <StalledIcon />}
         <span className={classNames({ hidden: !endOfStream })}>
           <RefreshIcon />
         </span>
