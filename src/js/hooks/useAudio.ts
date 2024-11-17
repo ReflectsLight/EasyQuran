@@ -7,8 +7,8 @@ export enum AudioState {
 }
 
 export function useAudio() {
-  const audio = useMemo(() => new Audio(), []);
   const [audioState, setAudioState] = useState<AudioState>(AudioState.Paused);
+  const audio = useMemo(() => new Audio(), []);
   const showStalledIcon = useMemo(() => {
     if (audioState === AudioState.Waiting) {
       return audio.currentTime > 0;
