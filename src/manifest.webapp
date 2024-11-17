@@ -10,12 +10,16 @@
         "name": "0x1eef",
         "url": "http://al-quran.reflectslight.io"
     },
-    "default_locale": "en",
+    "default_locale": "en-US",
     "locales": {
-        "en": {
+        "en-US": {
             "name": "Quran",
             "description": "Read and listen to The Noble Quran"
-        }
+        },
+	"en-GB": {
+	    "name": "Quran",
+            "description": "Read and listen to The Noble Quran"
+	}
     },
     "permissions": {
         "systemXHR": {},
