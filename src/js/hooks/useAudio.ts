@@ -1,13 +1,13 @@
 export enum AudioState {
-  Playing,
-  Paused,
-  Waiting,
-  Stalled,
-  Error,
+  Playing = "Playing",
+  Paused  = "Paused",
+  Waiting = "Waiting",
+  Stalled = "Stalled",
+  Error   = "Error",
 }
 
 export function useAudio() {
-  const [audioState, setAudioState] = useState<AudioState>(AudioState.Paused);
+  const [audioState, setAudioState] = useState<keyof typeof AudioState>(AudioState.Paused);
   const audio = useMemo(() => new Audio(), []);
   const showStalledIcon = useMemo(() => {
     if (audioState === AudioState.Waiting) {

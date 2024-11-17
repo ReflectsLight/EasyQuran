@@ -2,9 +2,10 @@ import { Quran as Q } from "@0x1eef/quran";
 import * as preact from "preact";
 import * as compat from "preact/compat";
 import * as hooks from "preact/hooks";
-import classn from "classnames";
+import classnames from "classnames";
 import type { Theme } from "~/hooks/useTheme";
 import type { TLocale } from "~/hooks/useLocale";
+import { AudioState as audiostate } from "~/hooks/useAudio";
 
 type WakeLock = {
   unlock: () => void;
@@ -31,8 +32,9 @@ declare global {
   const useContext: typeof hooks.useContext;
   const createRef: typeof preact.createRef;
   const forwardRef: typeof compat.forwardRef;
-  const classNames: typeof classn;
+  const classNames: typeof classnames;
   const SettingsContext: preact.PreactContext<ISettingsContext>;
   const buildenv: string;
   const audioBaseUrl: string;
+  const AudioState: typeof audiostate;
 }

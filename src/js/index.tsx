@@ -18,7 +18,8 @@ import "core-js";
  * import: hooks
  */
 import { useTheme } from "~/hooks/useTheme";
-import { useLocale } from "~//hooks/useLocale";
+import { useLocale } from "~/hooks/useLocale";
+import { AudioState } from "~/hooks/useAudio";
 
 /**
  * context: settings
@@ -41,6 +42,7 @@ const globals = {
   forwardRef: React.forwardRef,
   SettingsContext,
   classNames,
+  AudioState,
 };
 Object.assign(window, globals);
 

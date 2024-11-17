@@ -1,4 +1,3 @@
-import { AudioState } from "~/hooks/useAudio";
 import type { Surah, Ayah } from "@0x1eef/quran";
 import { formatNumber } from "~/lib/t";
 
@@ -9,7 +8,7 @@ type Props = {
   ayah: Maybe<Ayah>;
   isPaused: boolean;
   audio: HTMLAudioElement;
-  audioState: AudioState;
+  audioState: keyof typeof AudioState;
   onComplete: (surah: Surah, ayah: Ayah) => void;
 };
 
