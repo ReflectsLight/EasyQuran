@@ -1,5 +1,5 @@
 import type { Surah, Ayah, TAyat } from "@0x1eef/quran";
-import { AudioControl, AudioState } from "~/components/AudioControl";
+import { AudioControl } from "~/components/AudioControl";
 import { Head } from "~/components/Head";
 import {
   PlayIcon,
@@ -11,9 +11,10 @@ import { Timer } from "~/components/Timer";
 import { TFunction } from "~/lib/t";
 import { Stream } from "./Stream";
 import { route } from "preact-router";
-import "@css/main/SurahStream.scss";
 import { useLocaleKeys } from "~/hooks/useLocaleKeys";
+import { useAudio } from "~/hooks/useAudio";
 import { debug } from "~/lib/utils";
+import "@css/main/SurahStream.scss";
 
 type Props = {
   surahId: string;
@@ -29,16 +30,8 @@ export function SurahStream({ surahId, localeId, t }: Props) {
   const [stream, setStream] = useState<TAyat>([]);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [endOfStream, setEndOfStream] = useState<boolean>(false);
+  const { audio, audioState, showStalledIcon } = useAudio();
   const ayah: Ayah = stream[stream.length - 1] || surah.ayat[0];
-  const audio = useMemo(() => new Audio(), []);
-  const [audioState, setAudioState] = useState<AudioState>(AudioState.Paused);
-  const showStalledIcon = useMemo(() => {
-    if (audioState === AudioState.Waiting) {
-      return audio.currentTime > 0;
-    } else {
-      return audioState === AudioState.Stalled;
-    }
-  }, [audioState]);
 
   useEffect(() => {
     if (!navigator.requestWakeLock || isPaused || endOfStream) {
@@ -100,23 +93,6 @@ export function SurahStream({ surahId, localeId, t }: Props) {
       setStream(slice);
     }
   }, [surah]);
-
-  useEffect(() => {
-    const onPause = () => setAudioState(AudioState.Paused);
-    const onWait = () => setAudioState(AudioState.Waiting);
-    const onStall = () => setAudioState(AudioState.Stalled);
-    const onResume = () => setAudioState(AudioState.Playing);
-    audio.addEventListener("pause", onPause);
-    audio.addEventListener("waiting", onWait);
-    audio.addEventListener("stalled", onStall);
-    audio.addEventListener("playing", onResume);
-    return () => {
-      audio.removeEventListener("pause", onPause);
-      audio.removeEventListener("waiting", onWait);
-      audio.removeEventListener("stalled", onStall);
-      audio.removeEventListener("playing", onResume);
-    };
-  }, [audio.src]);
 
   return (
     <article

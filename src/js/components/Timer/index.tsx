@@ -1,4 +1,4 @@
-import { AudioState } from "~/components/AudioControl";
+import { AudioState } from "~/hooks/useAudio";
 import type { Surah, Ayah } from "@0x1eef/quran";
 import { formatNumber } from "~/lib/t";
 
