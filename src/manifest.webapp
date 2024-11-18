@@ -19,6 +19,10 @@
     "en-GB": {
       "name": "Quran",
       "description": "Read and listen to The Noble Quran"
+    },
+    "ar-SA": {
+      "name": "القُرْآنُ",
+      "description": "قِراءَةٌ وَ اسْتِماعُ الَّى القُرْآنِ الكَريمِ"
     }
   },
   "permissions": {
