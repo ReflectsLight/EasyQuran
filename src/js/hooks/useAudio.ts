@@ -9,24 +9,22 @@ export enum AudioState {
 export type AudioStateKey = keyof typeof AudioState;
 
 export function useAudio() {
-  const [audioState, setAudioState] = useState<AudioStateKey>(
-    AudioState.Paused,
-  );
+  const [state, setState] = useState<AudioStateKey>(AudioState.Paused);
   const audio = useMemo(() => new Audio(), []);
   const showStalledIcon = useMemo(() => {
-    if (audioState === AudioState.Waiting) {
+    if (state === AudioState.Waiting) {
       return audio.currentTime > 0;
     } else {
-      return audioState === AudioState.Stalled;
+      return state === AudioState.Stalled;
     }
-  }, [audioState]);
+  }, [state]);
 
   useEffect(() => {
-    const onPause = () => setAudioState(AudioState.Paused);
-    const onWait = () => setAudioState(AudioState.Waiting);
-    const onStall = () => setAudioState(AudioState.Stalled);
-    const onResume = () => setAudioState(AudioState.Playing);
-    const onError = () => setAudioState(AudioState.Error);
+    const onPause = () => setState(AudioState.Paused);
+    const onWait = () => setState(AudioState.Waiting);
+    const onStall = () => setState(AudioState.Stalled);
+    const onResume = () => setState(AudioState.Playing);
+    const onError = () => setState(AudioState.Error);
     audio.addEventListener("pause", onPause);
     audio.addEventListener("waiting", onWait);
     audio.addEventListener("stalled", onStall);
@@ -41,5 +39,5 @@ export function useAudio() {
     };
   }, [audio.src]);
 
-  return { audio, audioState, showStalledIcon };
+  return { audio, audioState: state, showStalledIcon };
 }
