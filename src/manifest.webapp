@@ -3,13 +3,13 @@
   "description": "Read and listen to The Noble Quran",
   "launch_path": "/index.html",
   "icons": {
-		"128": "/images/icon128x128.png"
-	},
-	"type": "privileged",
-	"developer": {
-	  "name": "0x1eef",
-	  "url": "http://al-quran.reflectslight.io"
-	},
+    "128": "/images/icon128.png"
+  },
+  "type": "privileged",
+  "developer": {
+    "name": "0x1eef",
+    "url": "http://al-quran.reflectslight.io"
+  },
   "default_locale": "en-US",
   "locales": {
     "en-US": {
