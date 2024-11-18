@@ -1,4 +1,5 @@
 import type { Surah, Ayah } from "@0x1eef/quran";
+import type { AudioStateKey } from "~/hooks/useAudio";
 import { formatNumber } from "~/lib/t";
 
 type Maybe<T> = T | null | undefined;
@@ -8,7 +9,7 @@ type Props = {
   ayah: Maybe<Ayah>;
   isPaused: boolean;
   audio: HTMLAudioElement;
-  audioState: keyof typeof AudioState;
+  audioState: AudioStateKey;
   onComplete: (surah: Surah, ayah: Ayah) => void;
 };
 

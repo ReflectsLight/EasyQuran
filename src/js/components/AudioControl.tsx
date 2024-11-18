@@ -1,10 +1,11 @@
 import type { Surah, Ayah } from "@0x1eef/quran";
 import { SoundOnIcon, SoundOffIcon } from "~/components/Icon";
 import { debug, getContext } from "~/lib/utils";
+import type { AudioStateKey } from "~/hooks/useAudio";
 
 type Props = {
   audio: HTMLAudioElement;
-  audioState: keyof typeof AudioState;
+  audioState: AudioStateKey;
   surah: Surah;
   ayah: Ayah;
   hidden: boolean;
