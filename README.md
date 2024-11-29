@@ -10,7 +10,7 @@ website as a native
 [KaiOS](https://www.kaiostech.com/)
 application.
 The project is still in the early stages of development.
-For a demo please [see the demo video](https://al-quran.reflectslight.io/x/v/al-quran.KaiOS/2024.11.19.mp4).
+For a demo please [see the demo video](https://al-quran.reflectslight.io/x/v/EasyQuran/2024.11.19.mp4).
 The demo video won't always be based on the most recent version
 of the app but it should give you a good idea of how the app works
 
