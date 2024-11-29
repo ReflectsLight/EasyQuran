@@ -27,8 +27,8 @@ from source:
 ### Examples
 
     # Clone repository
-    git clone https://github.com/ReflectsLight/al-quran.KaiOS
-    cd al-quran.KaiOS
+    git clone https://github.com/ReflectsLight/EasyQuran
+    cd EasyQuran
 
     # Setup build environment
     bin/setup
@@ -105,9 +105,9 @@ via side-loading the application onto a KaiOS device.
 
 ## Sources
 
-* [github.com/@ReflectsLight](https://github.com/ReflectsLight/al-quran.KaiOS)
-* [gitlab.com/@ReflectsLight](https://gitlab.com/ReflectsLight/al-quran.KaiOS)
-* [brew.bsd.cafe/@ReflectsLight](https://brew.bsd.cafe/ReflectsLight/al-quran.KaiOS)
+* [github.com/@ReflectsLight](https://github.com/ReflectsLight/EasyQuran)
+* [gitlab.com/@ReflectsLight](https://gitlab.com/ReflectsLight/EasyQuran)
+* [brew.bsd.cafe/@ReflectsLight](https://brew.bsd.cafe/ReflectsLight/EasyQuran)
 
 ## License
 
