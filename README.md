@@ -4,7 +4,7 @@
 
 ## About
 
-This repository contains a port of the
+EasyQuran is a port of the
 [al-quran.reflectslight.io](https://al-quran.reflectslight.io)
 website as a native
 [KaiOS](https://www.kaiostech.com/)
