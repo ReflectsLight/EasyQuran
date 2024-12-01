@@ -1,5 +1,5 @@
 {
-  "name": "EasyQuran",
+  "name": "Quran",
   "description": "Read and listen to The Noble Quran",
   "launch_path": "/index.html",
   "icons": {
@@ -13,11 +13,11 @@
   "default_locale": "en-US",
   "locales": {
     "en-US": {
-      "name": "EasyQuran",
+      "name": "Quran",
       "description": "Read and listen to The Noble Quran"
     },
     "en-GB": {
-      "name": "EasyQuran",
+      "name": "Quran",
       "description": "Read and listen to The Noble Quran"
     },
     "ar-SA": {
