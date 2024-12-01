@@ -32,7 +32,7 @@ namespace :nanoc do
     parent = File.dirname(nanoc.output_dir)
     child = File.basename(nanoc.output_dir)
     revhead = `git rev-parse --short HEAD`.chomp
-    zipfile = File.join(Dir.getwd, "tmp", "al-quran.KaiOS.#{ENV['buildenv']}-#{revhead}.zip")
+    zipfile = File.join(Dir.getwd, "tmp", "EasyQuran.#{ENV['buildenv']}.#{revhead}.zip")
     Dir.chdir(parent) { sh "zip #{zipfile} -r #{child}" }
   end
 
