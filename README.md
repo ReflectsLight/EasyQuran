@@ -75,9 +75,10 @@ instead.
 
 ## Install
 
-In the future I hope that the application could be easily available
-through KaiOS store(s), but for now the application is only available
-via side-loading the application onto a KaiOS device.
+The EasyQuran application is available on the
+[bananahacker's store](https://store.bananahackers.net/#easyquran).
+Alternatively, the application can be side-loaded after cloning the
+repository and building from source.
 
 ## Credit
 
