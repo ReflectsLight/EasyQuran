@@ -108,6 +108,7 @@ repository and building from source.
 
 * [github.com/@ReflectsLight](https://github.com/ReflectsLight/EasyQuran)
 * [gitlab.com/@ReflectsLight](https://gitlab.com/ReflectsLight/EasyQuran)
+* [codeberg.org/@ReflectsLight](https://codeberg.org/ReflectsLight/EasyQuran)
 * [brew.bsd.cafe/@ReflectsLight](https://brew.bsd.cafe/ReflectsLight/EasyQuran)
 
 ## License
